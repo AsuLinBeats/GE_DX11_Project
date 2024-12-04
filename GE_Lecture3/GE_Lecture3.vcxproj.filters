@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Example">
+      <UniqueIdentifier>{f3b929e8-c56a-43ca-982f-f68c905ef971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Junkyard">
+      <UniqueIdentifier>{5325ec17-3bf9-467a-af5e-274ababd70d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Bazaar">
+      <UniqueIdentifier>{a54a4c3d-92b8-48ec-b3ad-3ac03b500b7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Bazaar\NewFilter1">
+      <UniqueIdentifier>{e9c2a3c3-f222-4b3e-af3f-88d5812ef907}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -22,6 +34,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,9 +65,6 @@
     <ClInclude Include="GameApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="constant_buffer_mgt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="geometry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -68,9 +80,6 @@
     <ClInclude Include="camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="anime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,6 +87,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,55 +123,2643 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Textures\Assorted1\bazaar\Models\riiveayqx.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\rlctbdhqx.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\tgmsdc0fa.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\tltvai3fa.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\tlwlachjw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\tlzleaihw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\ueihbhefa.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\ueqfdi0ga.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\ukqpfhsaw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\vd4kbcljw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\vdsicd0jw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\veujfawjw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\vewlad1iw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\vfvjccaqx.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\vhnmbdcs.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\vhnofbds.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\vlrjcdc.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\wldidao.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\wldjacu.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\wlkiecl.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\wmfiaaldw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcondhk.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcxodhv.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcxodjn.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcxoead.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcxoec2.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcxoed3.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcxoeek.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xcylcc0.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xd0pbbt.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdggege.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdghefg.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdgjfjk.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdhhddo.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdhhdfp.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdhlbde.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdhlbij.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdhlccu.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdhlcfc.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjhbig.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjkbcy.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjladd.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjldi0.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjlfbl.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjlfcw.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjlfdx.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdjmdc1.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdwjafm.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdwkajr.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdwkber.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdwkbin.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdwlcar.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdyibgr.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xdyjaex.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xehlfh1.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xelkaan.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xelvejo.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xemiagp.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xemmcdc.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xemmcdz.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xemnbiu.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xesjeay.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xetncfm.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xetodbs.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xf0kahv.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfelabr.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfihaa0.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfihcfn.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfiheex.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfpkdfc.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfpkdhe.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfthfgf.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xftjbbv.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfxfeao.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xfxibbe.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xhllfcq.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xhllfjb.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xhtobeb.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xihlde1.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xiihday.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xiiiajn.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xj0kbig.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xj1iehq.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\xkjoadyqx.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\yccqdcq.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
+    <None Include="Textures\Assorted1\bazaar\Models\yexjfhk.gem">
+      <Filter>Resource Files\Bazaar</Filter>
+    </None>
     <None Include="acacia.gem">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Example</Filter>
     </None>
     <None Include="acacia_003.gem">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="TRex.gem">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Example</Filter>
     </None>
     <None Include="pine.gem">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Example</Filter>
+    </None>
+    <None Include="TRex.gem">
+      <Filter>Resource Files\Example</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\teraccgda.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\teufceuda.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\tewscfuda.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\tl1rbitfa.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\tlomdibiw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\tlzkdilva.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\udmkdejqx.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\ufghbgyfa.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\ui1maewga.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\uiujbcxva.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vb1kfhv.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vb1lafx.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vdjkbfmiw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vdqidbfiw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vgyieacaw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vh2mecws_lod2.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vizqehw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vj1tfaj.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vj1wdcq.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vj2meecs_lod2.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\vktifj1ga.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wclhfco.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wclicd1.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wclida0.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wclidiw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcliee1.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcliegz.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wclifak.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wclifde.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcliffv.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wclifiq.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcljagy.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcljbdb_lod2.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcljcaa.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcljdbi_lod2.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcljdev.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcljea1.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcljejz.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoaas.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoadt.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoagh.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoahp.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoaje.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoca1.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvocea.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvocfe.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvocfz.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvodba.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvodcw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvodee.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvodge.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvodhd.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvodih.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoef3.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoefi.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoegp.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wcvoeht.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdkkaar.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdklears.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdkmabe.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdktaj0aw_lod2.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdlifhrs.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdljaaqbw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdljebz.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdlkaces.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdlmaco.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdlmdexbw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdlmdgebw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdlmfbbaw.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdlnah1aw_lod2.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\wdqqeae.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xdcgdbrh.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xdcgdgbh.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xf3mfak.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xf3pbgi.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xf3pbjy.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xf3pcdc.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xf4fdex.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xh2kbey.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xiwcfassc.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xkzhcih.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="Textures\Assorted2\junkyard\Models\xkzlae1.gem">
+      <Filter>Resource Files\Junkyard</Filter>
+    </None>
+    <None Include="teraccgda.gem">
+      <Filter>Resource Files\Example</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Textures\bark09.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
-    <Image Include="Textures\bark09_normal.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
-    <Image Include="Textures\bark09_roughness.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
-    <Image Include="Textures\pine branch_Normal.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
-    <Image Include="Textures\pine branch_Roughness.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\rlctbdhqx_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
-    <Image Include="Textures\pine2_bark09_0_metallic.bmp">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\rlctbdhqx_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
-    <Image Include="Textures\pine2_pine branch_2_metallic.bmp">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\rlctbdhqx_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
-    <Image Include="Textures\pine2_stump01_1_metallic.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Textures\pine branch.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="Textures\Assorted1\bazaar\Textures\rlctbdhqx_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
     <Image Include="Textures\stump01.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
     <Image Include="Textures\stump01_normal.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
     <Image Include="Textures\stump01_roughness.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Bazaar</Filter>
     </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tgmsdc0fa_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tgmsdc0fa_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tgmsdc0fa_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tgmsdc0fa_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tltvai3fa_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tltvai3fa_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tltvai3fa_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tltvai3fa_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlwlachjw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlwlachjw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlwlachjw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlwlachjw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlzleaihw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlzleaihw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlzleaihw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\tlzleaihw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueihbhefa_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueihbhefa_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueihbhefa_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueihbhefa_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueqfdi0ga_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueqfdi0ga_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueqfdi0ga_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ueqfdi0ga_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ukqpfhsaw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ukqpfhsaw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ukqpfhsaw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\ukqpfhsaw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vd4kbcljw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vd4kbcljw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vd4kbcljw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vd4kbcljw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vdsicd0jw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vdsicd0jw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vdsicd0jw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vdsicd0jw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\veujfawjw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\veujfawjw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\veujfawjw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\veujfawjw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vewlad1iw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vewlad1iw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vewlad1iw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vewlad1iw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vfvjccaqx_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vfvjccaqx_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vfvjccaqx_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vfvjccaqx_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnmbdcs_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnmbdcs_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnmbdcs_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnmbdcs_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnofbds_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnofbds_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnofbds_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vhnofbds_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vlrjcdc_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vlrjcdc_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vlrjcdc_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\vlrjcdc_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldidao_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldidao_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldidao_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldidao_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldidao_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldjacu_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldjacu_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldjacu_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldjacu_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wldjacu_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wlkiecl_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wlkiecl_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wlkiecl_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wlkiecl_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wmfiaaldw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wmfiaaldw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wmfiaaldw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\wmfiaaldw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcondhk_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcondhk_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcondhk_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcondhk_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcondhk_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodhv_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodhv_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodhv_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodhv_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodjn_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodjn_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodjn_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxodjn_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoead_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoead_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoead_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoead_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoec2_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoec2_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoec2_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoec2_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoed3_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoed3_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoed3_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoed3_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoeek_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoeek_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoeek_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcxoeek_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcylcc0_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcylcc0_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcylcc0_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xcylcc0_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xd0pbbt_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xd0pbbt_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xd0pbbt_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xd0pbbt_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdggege_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdggege_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdggege_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdggege_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdggege_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdghefg_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdghefg_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdghefg_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdghefg_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdghefg_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdgjfjk_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdgjfjk_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdgjfjk_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdgjfjk_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhddo_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhddo_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhddo_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhddo_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhddo_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhdfp_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhdfp_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhdfp_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhdfp_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhhdfp_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbde_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbde_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbde_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbde_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbij_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbij_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbij_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlbij_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlccu_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlccu_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlccu_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlccu_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlcfc_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlcfc_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlcfc_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdhlcfc_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjhbig_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjhbig_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjhbig_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjhbig_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjkbcy_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjkbcy_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjkbcy_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjkbcy_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjladd_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjladd_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjladd_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjladd_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjldi0_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjldi0_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjldi0_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjldi0_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfbl_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfbl_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfbl_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfbl_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfcw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfcw_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfcw_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfcw_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfdx_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfdx_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfdx_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjlfdx_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjmdc1_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjmdc1_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjmdc1_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdjmdc1_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwjafm_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwjafm_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwjafm_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwjafm_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkajr_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkajr_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkajr_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkajr_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkber_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkber_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkber_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkber_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkbin_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkbin_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkbin_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwkbin_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwlcar_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwlcar_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwlcar_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdwlcar_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyibgr_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyibgr_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyibgr_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyibgr_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyjaex_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyjaex_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyjaex_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xdyjaex_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xehlfh1_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xehlfh1_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xehlfh1_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xehlfh1_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelkaan_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelkaan_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelkaan_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelkaan_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelkaan_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelvejo_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelvejo_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelvejo_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xelvejo_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemiagp_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemiagp_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemiagp_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemiagp_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdc_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdc_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdc_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdc_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdz_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdz_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdz_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemmcdz_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemnbiu_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemnbiu_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemnbiu_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xemnbiu_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xesjeay_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xesjeay_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xesjeay_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xesjeay_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetncfm_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetncfm_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetncfm_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetncfm_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetodbs_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetodbs_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetodbs_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xetodbs_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xf0kahv_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xf0kahv_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xf0kahv_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xf0kahv_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfelabr_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfelabr_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfelabr_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfelabr_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihaa0_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihaa0_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihaa0_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihaa0_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihcfn_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihcfn_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihcfn_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfihcfn_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfiheex_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfiheex_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfiheex_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfiheex_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdfc_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdfc_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdfc_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdfc_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdfc_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdhe_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdhe_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdhe_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfpkdhe_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfthfgf_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfthfgf_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfthfgf_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfthfgf_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xftjbbv_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xftjbbv_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xftjbbv_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xftjbbv_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxfeao_2K_Basecolor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxfeao_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxfeao_2K_Metalness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxfeao_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxfeao_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxibbe_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxibbe_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxibbe_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xfxibbe_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfcq_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfcq_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfcq_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfcq_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfjb_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfjb_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfjb_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhllfjb_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhtobeb_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhtobeb_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhtobeb_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xhtobeb_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xihlde1_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xihlde1_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xihlde1_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xihlde1_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiihday_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiihday_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiihday_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiihday_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiiiajn_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiiiajn_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiiiajn_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xiiiajn_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj0kbig_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj0kbig_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj0kbig_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj0kbig_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj1iehq_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj1iehq_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj1iehq_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xj1iehq_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xkjoadyqx_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xkjoadyqx_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xkjoadyqx_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\xkjoadyqx_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yccqdcq_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yccqdcq_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yccqdcq_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yccqdcq_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yexjfhk_2K_BaseColor.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yexjfhk_2K_Gloss.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yexjfhk_2K_Normal.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\Assorted1\bazaar\Textures\yexjfhk_2K_Roughness.jpg">
+      <Filter>Resource Files\Bazaar</Filter>
+    </Image>
+    <Image Include="Textures\bark09.png">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\bark09_normal.png">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\bark09_roughness.png">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\pine branch.png">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\pine branch_Normal.png">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\pine branch_Roughness.png">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\pine2_bark09_0_metallic.bmp">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\pine2_pine branch_2_metallic.bmp">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\pine2_stump01_1_metallic.bmp">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teraccgda_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teraccgda_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teraccgda_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teraccgda_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teufceuda_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teufceuda_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teufceuda_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\teufceuda_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tewscfuda_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tewscfuda_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tewscfuda_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tewscfuda_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tl1rbitfa_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tl1rbitfa_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tl1rbitfa_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tl1rbitfa_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlomdibiw_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlomdibiw_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlomdibiw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlomdibiw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlzkdilva_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlzkdilva_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlzkdilva_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\tlzkdilva_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\udmkdejqx_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\udmkdejqx_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\udmkdejqx_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\udmkdejqx_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ufghbgyfa_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ufghbgyfa_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ufghbgyfa_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ufghbgyfa_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ui1maewga_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ui1maewga_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ui1maewga_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\ui1maewga_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\uiujbcxva_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\uiujbcxva_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\uiujbcxva_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\uiujbcxva_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1kfhv_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1kfhv_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1kfhv_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1kfhv_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1lafx_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1lafx_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1lafx_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vb1lafx_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdjkbfmiw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdjkbfmiw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdjkbfmiw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdjkbfmiw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdqidbfiw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdqidbfiw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdqidbfiw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vdqidbfiw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vgyieacaw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vgyieacaw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vgyieacaw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vgyieacaw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vh2mecws_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vh2mecws_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vh2mecws_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vh2mecws_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vizqehw_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vizqehw_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vizqehw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vizqehw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1tfaj_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1tfaj_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1tfaj_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1tfaj_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1wdcq_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1wdcq_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1wdcq_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj1wdcq_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj2meecs_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj2meecs_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj2meecs_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vj2meecs_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vktifj1ga_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vktifj1ga_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vktifj1ga_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\vktifj1ga_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclhfco_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclhfco_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclhfco_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclhfco_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclicd1_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclicd1_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclicd1_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclicd1_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclida0_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclida0_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclida0_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclida0_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclidiw_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclidiw_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclidiw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclidiw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliee1_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliee1_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliee1_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliee1_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliegz_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliegz_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliegz_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliegz_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifak_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifak_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifak_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifak_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifde_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifde_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifde_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifde_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliffv_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliffv_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliffv_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcliffv_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifiq_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifiq_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifiq_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wclifiq_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljagy_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljagy_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljagy_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljagy_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljbdb_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljbdb_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljbdb_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljbdb_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljcaa_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljcaa_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljcaa_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljcaa_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdbi_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdbi_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdbi_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdbi_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdev_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdev_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdev_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljdev_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljea1_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljea1_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljea1_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljea1_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljejz_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljejz_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljejz_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcljejz_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaas_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaas_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaas_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaas_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoadt_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoadt_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoadt_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoadt_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoagh_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoagh_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoagh_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoagh_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoahp_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoahp_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoahp_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoahp_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaje_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaje_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaje_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoaje_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoca1_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoca1_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoca1_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoca1_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocea_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocea_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocea_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocea_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfe_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfe_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfe_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfe_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfz_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfz_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfz_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvocfz_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodba_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodba_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodba_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodba_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodcw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodcw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodcw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodcw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodee_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodee_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodee_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodee_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodge_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodge_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodge_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodge_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodhd_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodhd_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodhd_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodhd_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodih_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodih_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodih_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvodih_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoef3_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoef3_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoef3_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoef3_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoefi_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoefi_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoefi_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoefi_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoegp_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoegp_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoegp_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoegp_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoeht_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoeht_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoeht_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wcvoeht_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkkaar_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkkaar_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkkaar_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkkaar_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdklears_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdklears_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdklears_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdklears_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkmabe_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkmabe_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkmabe_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdkmabe_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdktaj0aw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdktaj0aw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdktaj0aw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdktaj0aw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlifhrs_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlifhrs_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlifhrs_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlifhrs_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljaaqbw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljaaqbw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljaaqbw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljaaqbw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljebz_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljebz_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljebz_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdljebz_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlkaces_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlkaces_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlkaces_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlkaces_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmaco_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmaco_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmaco_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmaco_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdexbw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdexbw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdexbw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdexbw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdgebw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdgebw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdgebw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmdgebw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmfbbaw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmfbbaw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmfbbaw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlmfbbaw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlnah1aw_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlnah1aw_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlnah1aw_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdlnah1aw_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdqqeae_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdqqeae_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdqqeae_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\wdqqeae_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdbrh_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdbrh_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdbrh_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdbrh_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdgbh_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdgbh_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdgbh_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdgbh_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xdcgdgbh_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3mfak_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3mfak_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3mfak_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3mfak_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3mfak_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbgi_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbgi_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbgi_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbgi_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbjy_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbjy_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbjy_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pbjy_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pcdc_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pcdc_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pcdc_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pcdc_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf3pcdc_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf4fdex_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf4fdex_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf4fdex_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf4fdex_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xf4fdex_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xh2kbey_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xh2kbey_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xh2kbey_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xh2kbey_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xh2kbey_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xiwcfassc_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xiwcfassc_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xiwcfassc_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xiwcfassc_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzhcih_2K_Basecolor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzhcih_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzhcih_2K_Metalness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzhcih_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzhcih_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzlae1_2K_BaseColor.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzlae1_2K_Gloss.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzlae1_2K_Normal.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="Textures\Assorted2\junkyard\Models\xkzlae1_2K_Roughness.jpg">
+      <Filter>Resource Files\Junkyard</Filter>
+    </Image>
+    <Image Include="teraccgda_2K_BaseColor.jpg">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="teraccgda_2K_Gloss.jpg">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="teraccgda_2K_Normal.jpg">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="teraccgda_2K_Roughness.jpg">
+      <Filter>Resource Files\Example</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GE_DX11_project.rc">
+      <Filter>Resource Files\Example</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

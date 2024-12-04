@@ -308,10 +308,7 @@ public:
         //compileVs(vsd, core);
         //compilePs(psd, core);
         loadAnimationVS(core, vsd);
-        //loadVS(core, vsd);
         loadPS(core, psd);
-        // send shader to gpu(graphic queue)
-
     }
 
     void initStatic(std::string vsdfilenames, std::string psdfilenames, DXCore* core) {
@@ -323,7 +320,12 @@ public:
         //loadAnimationVS(core, vsd);
         loadVS(core, vsd);
         loadPS(core, psd);
-        // send shader to gpu(graphic queue)
+    }
 
+    void init2D(std::string vsdfilenames, std::string psdfilenames, DXCore* core) {
+        std::string vsd = LoadShaderFromFile(vsdfilenames);
+        std::string psd = LoadShaderFromFile(psdfilenames);
+        compileVs(vsd, core);
+        compilePs(psd, core);
     }
 };

@@ -26,17 +26,6 @@ struct AnimationFrame
 	std::vector<Vec3> scales;
 };
 
-//struct ANIMATED_VERTEX
-//{
-//	// Not efficient
-//	Vec3 pos;
-//	Vec3 normal;
-//	Vec3 tangent;
-//	float tu;
-//	float tv;
-//	unsigned int bonesIDs[4];
-//	float boneWeights[4];
-//};
 
 class AnimationSequence
 {

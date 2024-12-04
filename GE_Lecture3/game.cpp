@@ -9,6 +9,10 @@
 #include"anime.h"
 #include<string>
 #include"Texture.h"
+// Game related
+#include"camera.h"
+#include"GamesEngineeringBase.h"
+#include"Character.h"
 
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
 	Window win;
@@ -23,12 +27,16 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	Matrix planeWorld;
 	Matrix vp;
 	Cube cube;
+	Cube skyBox;
 	Sphere sphere;
 	Meshes tree;
 	AnimationInstance instance;
 	Meshes pine;
+	Meshes junk;
 	TextureManager textureManager;
-
+	TextureManager textureManager1;
+	Camera camera(20,0.1f,100);
+	GamesEngineeringBase::SoundManager bgms;
 	// Mesh mesh;
 	// loading dinas;
 	float t = 0.f;
@@ -40,16 +48,23 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore);
 	textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
 	//tri.init(dxcore); // 2D example
-	plane.init(dxcore);
-	cube.init(dxcore);
+
+	plane.init(dxcore); // USE THIS AS PLAYER'S MODEL
+	skyBox.init(dxcore);
+	//cube.init(dxcore);
 	//sphere.init(dxcore, 30, 50, 3);
 	tree.initWithoutTexture("acacia_003.gem",dxcore);
 	instance.init("TRex.gem", dxcore); // vertices and animation for dina
-	pine.init("pine.gem", dxcore, &textureManager);
+	// pine.init("pine.gem", dxcore, &textureManager);
 	
-	//dina.init("TRex.gem", dxcore);
+	junk.init("teraccgda.gem", dxcore, &textureManager);
+
+	// dina.init("TRex.gem", dxcore);
 	// dinas.loadAnimation3D("TRex.gem", dxcore);
 	// planeWorld.translation(1, 2, 1);
+	Vec3 from = Vec3(11, 5, 11);
+	Vec3 object = Vec3(0.0f, 0.0f, 0.0f);
+	Vec3 up = Vec3(0.0f, 1.0f, 0.0f);
 	while (true)
 	{
 		dxcore.Clear();
@@ -58,52 +73,88 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 
 		t += dt;
 		// camera control
-		float fov = 20;
-		float nearPlane = 0.1f;
-		float farPlane = 100.f;
 
-		Vec3 from = Vec3(11*cos(t), 5, 11*sin(t));
-		Vec3 object = Vec3(0.0f, 0.0f, 0.0f);
-		Vec3 up = Vec3(0.0f, 1.0f, 0.0f);
 
-		Matrix lookAtMatrix = vp.lookAt(from, object, up);
-		Matrix perspProjMatrix = vp1.PerPro(1.f, 1.f, 20.f, 100.f, 0.1f);
-		Matrix resultMatrix = lookAtMatrix * perspProjMatrix; // Check here for type issues
+		float speed = 10.f;
+		Vec3 forward = (object - from).normalise();  // Camera's local forward direction
+		Vec3 right = (up.Cross(forward).normalise()); // Camera's local right direction
+		Vec3 cameraUp = forward.Cross(right);    // Recompute camera's local up
+
+		if (GetAsyncKeyState('W') & 0x8000) from += forward * speed * dt; // Forward
+		if (GetAsyncKeyState('S') & 0x8000) from -= forward * speed * dt; // Backward
+
+		if (GetAsyncKeyState('A') & 0x8000) object += right*speed * dt; // Left
+		if (GetAsyncKeyState('D') & 0x8000) object -= right * speed * dt; // Right
+
+		// mouse control
+		if (GetAsyncKeyState('J') & 0x8000) object += cameraUp*speed * dt; // Right
+		if (GetAsyncKeyState('K') & 0x8000) object -= cameraUp*speed * dt; // Right
+
+
+		camera.setPostion(from);
+		camera.setRotation(object);
+
+		// 检测键盘输入与鼠标输入,然后调用move或者setposition
+		
+		Matrix lookAt = camera.updateCameraMat();
+		Matrix perspProj = camera.updateProjectionMat();
+		Matrix resultMatrix = lookAt * perspProj;
+
+		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		Matrix w5;
+		w5 = Matrix::scaling(Vec3(20,20,20));
+		skyBox.updateWorld(w5, shad, dxcore);
+		skyBox.draw(&dxcore);
+
+
+
 
 		Matrix w;
 		w = Matrix::scaling(Vec3(10, 10, 10));
 		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
 		shad.apply(&dxcore);
 		plane.draw(&shad, &dxcore);
-
+		
 
 		// Working animation example
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		Matrix w1;
-		instance.update("Run", dt);
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", instance.matrices);
-		w1 = Matrix::translation(Vec3(2, 0, 0));
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationShad.apply(&dxcore);
-		instance.draw(&dxcore);
+		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+		//Matrix w1;
+		//instance.update("Run", dt);
+		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", instance.matrices);
+		//w1 = Matrix::translation(Vec3(2, 0, 0));
+		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationShad.apply(&dxcore);
+		//instance.draw(&dxcore);
 
+		// 用一个列表存下场景内部所有的模型以及位置等参数,然后调用他们
 
 		// Working example for texture map
 		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		Matrix w2;
-		w2 = Matrix::scaling(Vec3(0.01f, 0.01f, 0.01f));
-		pine.updateWorld(w2, textureShad, dxcore);
-		// w2 = Matrix::translation(Vec3(5, 0, 0));
-		pine.updateWorld(w2, textureShad, dxcore);
-		pine.drawTexture(&dxcore, textureShad,&textureManager);
+		w2 = Matrix::scaling(Vec3(0.05f, 0.05f, 0.05f));
+		//pine.updateWorld(w2, textureShad, dxcore);
+		//// w2 = Matrix::translation(Vec3(5, 0, 0));
+		//pine.drawTexture(&dxcore, textureShad,&textureManager);
+		
+		junk.updateWorld(w2, textureShad, dxcore);
+
+		junk.drawTexture(&dxcore, textureShad, &textureManager);
+
 
 		//! WORKING STATIC EXAMPLE
 		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		Matrix w3;
-		w3 = Matrix::scaling(Vec3(0.01f, 0.01f, 0.01f));
+		//Matrix temp;
+		//Matrix test2;
+		//w3 = Matrix::scaling(Vec3(0.01f, 0.01f, 0.01f));
+		//tree.updateWorld(w3, shad, dxcore);
+		//temp = Matrix::translation(Vec3(10, 0, 0));
+		//w3 = w3 * temp;
+		//tree.updateWorld(w3, shad, dxcore);
+
+		w3 = w3.worldTrans(Vec3(0.01f, 0.01f, 0.01f), Vec3(), Vec3(10, 0, 0));
 		tree.updateWorld(w3, shad, dxcore);
-		w3 = Matrix::translation(Vec3(5, 0, 0));
 		tree.draw(&dxcore);
 
 		// working example: cube

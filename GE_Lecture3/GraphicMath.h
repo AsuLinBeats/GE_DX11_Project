@@ -392,9 +392,6 @@ public:
 		return mat;
 	}
 
-
-
-
 	static Matrix translation(const float x, const float y, const float z) {
 		Matrix mat;
 		mat.a[0][3] = x;
@@ -422,6 +419,7 @@ public:
 		mat.m[6] = -sint;
 		mat.m[9] = sint;
 		mat.m[10] = cost;
+		return mat;
 	}
 
 	static Matrix rotationY(const float theta) {
@@ -431,9 +429,9 @@ public:
 
 		mat.m[0] = cost;
 		mat.m[2] = sint;
-		mat.m[9] = -sint;
-		mat.m[11] = cost;
-
+		mat.m[8] = -sint;
+		mat.m[10] = cost;
+		return mat;
 	}
 
 	static Matrix rotationZ(const float theta) {
@@ -445,9 +443,21 @@ public:
 		mat.m[1] = -sint;
 		mat.m[4] = sint;
 		mat.m[5] = cost;
-
+		return mat;
 	}
 
+	static Matrix worldTrans(Vec3 scaling, Vec3 rotation, Vec3 translation) {
+		Matrix scale;
+		scale = scale.scaling(scaling);
+		Matrix rotate;
+		rotate = rotate.rotationX(rotation.x);
+		rotate = rotate.rotationY(rotation.y);
+		rotate = rotate.rotationZ(rotation.z);
+		Matrix translate;
+		translate = translate.translation(translation);
+
+		return scale * rotate * translate;
+	}
 	Matrix mul1(const Matrix& matrix) const
 	{
 		Matrix ret;
