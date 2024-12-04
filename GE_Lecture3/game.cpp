@@ -1,4 +1,5 @@
 #include<iostream>
+#include<fstream>
 #include"window.h"
 #include"DXCore.h"
 // able to also use windows.h
@@ -13,6 +14,24 @@
 #include"camera.h"
 #include"GamesEngineeringBase.h"
 #include"Character.h"
+
+std::vector<std::string> loadMeshFileNames(const std::string& filePath) {
+	std::vector<std::string> meshFiles;
+	std::ifstream file(filePath);
+	if (!file.is_open()) {
+		std::cerr << "Error: Could not open file: " << filePath << std::endl;
+		return meshFiles;
+	}
+
+	std::string line;
+	while (std::getline(file, line)) {
+		if (!line.empty()) {
+			meshFiles.push_back(line);
+		}
+	}
+	file.close();
+	return meshFiles;
+}
 
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
 	Window win;
@@ -36,6 +55,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	Meshes pine;
 	Meshes junk;
 	Meshes bamboo;
+	Meshes enemySolider;
+
 	TextureManager textureManager;
 	TextureManager textureManager1;
 	Camera camera(20,0.1f,100);
@@ -51,6 +72,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore);
 	textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
 	//tri.init(dxcore); // 2D example
+
+	enemySolider.init("Soldier1.gem", dxcore, &textureManager);
 	tkp.init("tkpmbcnjw.gem", dxcore, &textureManager);
 	plane.init(dxcore); // USE THIS AS PLAYER'S MODEL
 	skyBox.init(dxcore);
@@ -69,6 +92,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	Vec3 from = Vec3(11, 5, 11);
 	Vec3 object = Vec3(0.0f, 0.0f, 0.0f);
 	Vec3 up = Vec3(0.0f, 1.0f, 0.0f);
+
+	std::string filePath = "C:/Users/Davi/source/GE_DX11_Project/GE_Lecture3/Textures/Assorted1/bazaar/Models/filelist1.txt";
+	std::vector<std::string> meshFiles = loadMeshFileNames(filePath);
+
+
 	while (true)
 	{
 		dxcore.Clear();
@@ -105,6 +133,24 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		Matrix perspProj = camera.updateProjectionMat();
 		Matrix resultMatrix = lookAt * perspProj;
 
+
+		//for (unsigned i = 0; i < 86; i++) {
+		//	// Tester, to load the mesh and confirm their appearance
+		//	Meshes meshes;
+		//	meshes.init(meshFiles[i], dxcore, &textureManager);
+
+		//	textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		//	Matrix w2;
+
+		//	w2 = Matrix::worldTrans(Vec3(0.03, 0.03, 0.03), Vec3(0, 0, 0), Vec3(0+i, 0, 0+i));
+		//	meshes.updateWorld(w2, textureShad, dxcore);
+
+		//	meshes.drawTexture(&dxcore, textureShad, &textureManager);
+		//}
+
+
+
+
 		//  skybox
 		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		Matrix w5;
@@ -113,7 +159,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		skyBox.draw(&dxcore);
 		//TODO Attatch textures for skybox
 
-
+		// TODO velocity should be -9.8 for players and enemies, others is unchange
+		// TODO 
 
 
 		Matrix w;
@@ -145,9 +192,9 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//pine.drawTexture(&dxcore, textureShad,&textureManager);
 
 		w2 = Matrix::worldTrans(Vec3(0.03, 0.03, 0.03), Vec3(0, 0, 0), Vec3(0, 0, 0));
-		junk.updateWorld(w2, textureShad, dxcore);
+		enemySolider.updateWorld(w2, textureShad, dxcore);
 
-		junk.drawTexture(&dxcore, textureShad, &textureManager);
+		enemySolider.drawTexture(&dxcore, textureShad, &textureManager);
 
 		w2 = Matrix::worldTrans(Vec3(0.3, 0.3, 0.3), Vec3(0, 0, 0), Vec3(7, 0, 0));
 		tkp.updateWorld(w2, textureShad, dxcore);

@@ -645,6 +645,9 @@
     <None Include="bamboo.gem">
       <Filter>Resource Files\Example</Filter>
     </None>
+    <None Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Models\Soldier1.gem">
+      <Filter>Resource Files\Bazaar\NewFilter1</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_BaseColor.jpg">
@@ -2779,6 +2782,18 @@
     </Image>
     <Image Include="teraccgda_2K_Roughness.png">
       <Filter>Resource Files\Example</Filter>
+    </Image>
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Diffuse.png">
+      <Filter>Resource Files\Bazaar\NewFilter1</Filter>
+    </Image>
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Gloss.png">
+      <Filter>Resource Files\Bazaar\NewFilter1</Filter>
+    </Image>
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Normal.png">
+      <Filter>Resource Files\Bazaar\NewFilter1</Filter>
+    </Image>
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Specular.png">
+      <Filter>Resource Files\Bazaar\NewFilter1</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

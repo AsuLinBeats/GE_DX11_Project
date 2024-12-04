@@ -337,6 +337,7 @@
     <None Include="Textures\Assorted2\junkyard\Models\xiwcfassc.gem" />
     <None Include="Textures\Assorted2\junkyard\Models\xkzhcih.gem" />
     <None Include="Textures\Assorted2\junkyard\Models\xkzlae1.gem" />
+    <None Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Models\Soldier1.gem" />
     <None Include="TRex.gem" />
   </ItemGroup>
   <ItemGroup>
@@ -1048,6 +1049,10 @@
     <Image Include="Textures\pine2_pine branch_2_metallic.bmp" />
     <Image Include="Textures\pine2_stump01_1_metallic.bmp" />
     <Image Include="Textures\pine branch.png" />
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Diffuse.png" />
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Gloss.png" />
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Normal.png" />
+    <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Specular.png" />
     <Image Include="Textures\stump01.png" />
     <Image Include="Textures\stump01_normal.png" />
     <Image Include="Textures\stump01_roughness.png" />

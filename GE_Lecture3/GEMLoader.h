@@ -333,6 +333,7 @@ namespace GEMLoader
 			if (n != 4058972161)
 			{
 				std::cout << filename << " is not a GE Model File" << std::endl;
+				
 				file.close();
 				exit(0);
 			}
