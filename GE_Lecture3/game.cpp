@@ -29,10 +29,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	Cube cube;
 	Cube skyBox;
 	Sphere sphere;
+	// stuff in world
+	Meshes tkp;
 	Meshes tree;
 	AnimationInstance instance;
 	Meshes pine;
 	Meshes junk;
+	Meshes bamboo;
 	TextureManager textureManager;
 	TextureManager textureManager1;
 	Camera camera(20,0.1f,100);
@@ -48,7 +51,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore);
 	textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
 	//tri.init(dxcore); // 2D example
-
+	tkp.init("tkpmbcnjw.gem", dxcore, &textureManager);
 	plane.init(dxcore); // USE THIS AS PLAYER'S MODEL
 	skyBox.init(dxcore);
 	//cube.init(dxcore);
@@ -59,6 +62,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	
 	junk.init("teraccgda.gem", dxcore, &textureManager);
 
+	// bamboo.init("bamboo.gem", dxcore, &textureManager);
 	// dina.init("TRex.gem", dxcore);
 	// dinas.loadAnimation3D("TRex.gem", dxcore);
 	// planeWorld.translation(1, 2, 1);
@@ -95,16 +99,19 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		camera.setRotation(object);
 
 		// 检测键盘输入与鼠标输入,然后调用move或者setposition
+		// 检测鼠标输入,完成开火操作(左键)
 		
 		Matrix lookAt = camera.updateCameraMat();
 		Matrix perspProj = camera.updateProjectionMat();
 		Matrix resultMatrix = lookAt * perspProj;
 
+		//  skybox
 		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		Matrix w5;
-		w5 = Matrix::scaling(Vec3(20,20,20));
+		w5 = Matrix::scaling(Vec3(100,100,100));
 		skyBox.updateWorld(w5, shad, dxcore);
 		skyBox.draw(&dxcore);
+		//TODO Attatch textures for skybox
 
 
 
@@ -117,31 +124,36 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		
 
 		// Working animation example
-		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		//Matrix w1;
-		//instance.update("Run", dt);
-		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", instance.matrices);
-		//w1 = Matrix::translation(Vec3(2, 0, 0));
-		//animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationShad.apply(&dxcore);
-		//instance.draw(&dxcore);
+		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+		Matrix w1;
+		instance.update("Run", dt);
+		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", instance.matrices);
+		w1 = Matrix::worldTrans(Vec3(0.8, 0.8, 0.8), Vec3(0, 0, 0), Vec3(-10, 0, 0));
+		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationShad.apply(&dxcore);
+		instance.draw(&dxcore);
 
 		// 用一个列表存下场景内部所有的模型以及位置等参数,然后调用他们
 
 		// Working example for texture map
 		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		Matrix w2;
-		w2 = Matrix::scaling(Vec3(0.05f, 0.05f, 0.05f));
+		w2 = Matrix::worldTrans(Vec3(0.01, 0.01, 0.01), Vec3(0, 0, 0), Vec3(-10, 0, 10));
 		//pine.updateWorld(w2, textureShad, dxcore);
 		//// w2 = Matrix::translation(Vec3(5, 0, 0));
 		//pine.drawTexture(&dxcore, textureShad,&textureManager);
-		
+
+		w2 = Matrix::worldTrans(Vec3(0.03, 0.03, 0.03), Vec3(0, 0, 0), Vec3(0, 0, 0));
 		junk.updateWorld(w2, textureShad, dxcore);
 
 		junk.drawTexture(&dxcore, textureShad, &textureManager);
 
-
+		w2 = Matrix::worldTrans(Vec3(0.3, 0.3, 0.3), Vec3(0, 0, 0), Vec3(7, 0, 0));
+		tkp.updateWorld(w2, textureShad, dxcore);
+		tkp.drawTexture(&dxcore, textureShad, &textureManager);
+		/*bamboo.updateWorld(w2, textureShad, dxcore);
+		bamboo.drawTexture(&dxcore, textureShad, &textureManager);*/
 		//! WORKING STATIC EXAMPLE
 		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		Matrix w3;
@@ -155,6 +167,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 
 		w3 = w3.worldTrans(Vec3(0.01f, 0.01f, 0.01f), Vec3(), Vec3(10, 0, 0));
 		tree.updateWorld(w3, shad, dxcore);
+
 		tree.draw(&dxcore);
 
 		// working example: cube

@@ -389,6 +389,7 @@ public:
 			mesh.init(vertices, gemmeshes[i].indices, core);
 			meshes.push_back(mesh);
 		}
+		std::cout <<"Textures" << textures << std::endl;
 
 
 	}

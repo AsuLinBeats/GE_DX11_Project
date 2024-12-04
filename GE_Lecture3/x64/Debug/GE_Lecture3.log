@@ -70,5 +70,17 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\anime.h(59,10): warning C4267: 
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\anime.h(89,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'game.cpp')
   
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(132,42): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(132,37): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(132,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(142,44): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(142,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(142,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(147,44): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(147,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(147,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(152,42): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(152,37): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(152,32): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(31,9): warning C4101: 'sphere': unreferenced local variable
   GE_Lecture3.vcxproj -> C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.exe

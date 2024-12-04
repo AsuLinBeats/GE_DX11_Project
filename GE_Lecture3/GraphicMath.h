@@ -902,11 +902,11 @@ public:
 		d = _d;
 	}
 
-	float mod(Quaternion q0) {
+	float mod(Quaternion q0) const {
 		return float(sqrt(q0.a * q0.a + q0.b * q0.b + q0.c * q0.c + q0.d * q0.d));
 	}
 	
-	float Dot(const Quaternion q) const {
+	float Dot(const Quaternion& q) const {
 		return float(a * q.a+b*q.b+c*q.c+d*q.d);
 	}
 
@@ -920,6 +920,7 @@ public:
 		}
 
 		// angle between the quaternions
+		dot = fmin(fmax(dot, -1.0f), 1.0f);
 		float theta = acosf(dot);
 		if (theta == 0)
 		{

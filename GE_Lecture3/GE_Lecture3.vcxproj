@@ -166,6 +166,7 @@
   <ItemGroup>
     <None Include="acacia.gem" />
     <None Include="acacia_003.gem" />
+    <None Include="bamboo.gem" />
     <None Include="pine.gem" />
     <None Include="teraccgda.gem" />
     <None Include="Textures\Assorted1\bazaar\Models\riiveayqx.gem" />
@@ -339,10 +340,17 @@
     <None Include="TRex.gem" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bamboo branch.png" />
+    <Image Include="bamboo branch_Normal.png" />
+    <Image Include="bamboo branch_roughness.png" />
     <Image Include="teraccgda_2K_BaseColor.jpg" />
+    <Image Include="teraccgda_2K_BaseColor.png" />
     <Image Include="teraccgda_2K_Gloss.jpg" />
+    <Image Include="teraccgda_2K_Gloss.png" />
     <Image Include="teraccgda_2K_Normal.jpg" />
+    <Image Include="teraccgda_2K_Normal.png" />
     <Image Include="teraccgda_2K_Roughness.jpg" />
+    <Image Include="teraccgda_2K_Roughness.png" />
     <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_BaseColor.jpg" />
     <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_Gloss.jpg" />
     <Image Include="Textures\Assorted1\bazaar\Textures\riiveayqx_2K_Normal.jpg" />

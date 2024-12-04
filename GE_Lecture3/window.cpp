@@ -120,3 +120,10 @@ Closing the Application:
 When the user presses close (X), WM_CLOSE or WM_DESTROY ends the application.
 
 */
+
+//void Window::updateMouse() {
+//	mouseDiffx = mousex - mousedx;
+//	mouseDiffy = mousey - mousedy;
+//	mousedx = mousex;
+//	mousedy = mousey;
+//}

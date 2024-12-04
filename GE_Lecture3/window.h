@@ -22,6 +22,9 @@ public:
 	int mousedy;
 	bool mouseButtons[3];
 
+	int mouseDiffx;
+	int mouseDiffy;
+
 	void init(int window_width, int window_height, const std::string window_name);
 
 	void processMessages();

@@ -33,4 +33,6 @@
 //	void update() {
 //		// apply changes and draw 
 //	};
+// 
+// bool collider
 //};
