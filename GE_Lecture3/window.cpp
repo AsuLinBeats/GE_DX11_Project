@@ -43,13 +43,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	case WM_LBUTTONUP:
 	{
 		window->updateMouse(WINDOW_GET_X_LPARAM(lParam), WINDOW_GET_Y_LPARAM(lParam));
-		window->mouseButtons[0] = false; 
+		window->mouseButtons[0] = false;
 		return 0;
 	}
 	case WM_MOUSEMOVE:
 	{
 		window->updateMouse(WINDOW_GET_X_LPARAM(lParam), WINDOW_GET_Y_LPARAM(lParam));// update mouse position
 		return 0;
+		
 	}
 	default:
 	{
@@ -100,14 +101,19 @@ void Window::init(int window_width, int window_height, const std::string window_
 
 // process pending messages to window
 void Window::processMessages() {
+
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG)); // Clears the msg structure.
-	while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 		// Checks for messages and removes them from queue
 		TranslateMessage(&msg); // prepare keyboard input for processing
 		DispatchMessage(&msg); // sends message to Wndproc
 	}
+	POINT mousePos;
+	GetCursorPos(&mousePos); // Get current mouse position
+	ScreenToClient(hwnd, &mousePos); // Convert to client space
 }
+
 
 /*
 Global Flow:

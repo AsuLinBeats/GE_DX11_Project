@@ -207,6 +207,26 @@ public:
         }
     }
 
+    void loadInstanceVS(DXCore* core, std::string hlsl) {
+        ID3DBlob* compiledVertexShader;
+        ID3DBlob* status;
+        HRESULT hr = D3DCompile(hlsl.c_str(), strlen(hlsl.c_str()), NULL, NULL, NULL, "VS", "vs_5_0", 0, 0, &compiledVertexShader, &status);
+        if (FAILED(hr))
+        {
+            MessageBoxA(NULL, (char*)status->GetBufferPointer(), "Vertex Shader Error", 0);
+            exit(0);
+        }
+        core->device->CreateVertexShader(compiledVertexShader->GetBufferPointer(), compiledVertexShader->GetBufferSize(), NULL, &vertexShader);
+        D3D11_INPUT_ELEMENT_DESC layoutDesc[] =
+        {
+            { "POS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, 							D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, 							D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, 							D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, 							D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "INSTANCEPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 1, 0, 							D3D11_INPUT_PER_INSTANCE_DATA, 1 },
+        };
+    }
+
 
     void loadVS(DXCore* core, std::string hlsl)
     {

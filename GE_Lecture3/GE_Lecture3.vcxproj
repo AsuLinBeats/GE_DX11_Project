@@ -138,6 +138,7 @@
     <ClInclude Include="anime.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="DXCore.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GamesEngineeringBase.h" />
@@ -158,9 +159,13 @@
     <Text Include="3D_pixel_shader.txt" />
     <Text Include="3D_vertex_shader.txt" />
     <Text Include="Animation_vertex_shader.txt" />
+    <Text Include="Collider.txt" />
     <Text Include="pixel_shader.txt" />
     <Text Include="const_buffer.txt" />
+    <Text Include="SkyDome_pixel_shader.txt" />
+    <Text Include="SkyDome_vertex_shader.txt" />
     <Text Include="texture_pixel_shader.txt" />
+    <Text Include="texture_pixel_shader_alpha.txt" />
     <Text Include="vertex_shader.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +173,7 @@
     <None Include="acacia_003.gem" />
     <None Include="bamboo.gem" />
     <None Include="pine.gem" />
+    <None Include="Soldier1.gem" />
     <None Include="teraccgda.gem" />
     <None Include="Textures\Assorted1\bazaar\Models\riiveayqx.gem" />
     <None Include="Textures\Assorted1\bazaar\Models\rlctbdhqx.gem" />
@@ -344,6 +350,10 @@
     <Image Include="bamboo branch.png" />
     <Image Include="bamboo branch_Normal.png" />
     <Image Include="bamboo branch_roughness.png" />
+    <Image Include="T-rex_Base_Color.png" />
+    <Image Include="T-rex_Metallic.png" />
+    <Image Include="T-rex_Normal_OpenGL.png" />
+    <Image Include="T-rex_Roughness.png" />
     <Image Include="teraccgda_2K_BaseColor.jpg" />
     <Image Include="teraccgda_2K_BaseColor.png" />
     <Image Include="teraccgda_2K_Gloss.jpg" />

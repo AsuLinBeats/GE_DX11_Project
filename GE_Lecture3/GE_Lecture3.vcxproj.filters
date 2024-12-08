@@ -98,6 +98,9 @@
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -120,6 +123,18 @@
     </Text>
     <Text Include="texture_pixel_shader.txt">
       <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="texture_pixel_shader_alpha.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="SkyDome_vertex_shader.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="SkyDome_pixel_shader.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Collider.txt">
+      <Filter>Header Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -647,6 +662,9 @@
     </None>
     <None Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Models\Soldier1.gem">
       <Filter>Resource Files\Bazaar\NewFilter1</Filter>
+    </None>
+    <None Include="Soldier1.gem">
+      <Filter>Resource Files\Example</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -2794,6 +2812,18 @@
     </Image>
     <Image Include="Textures\SoldierWeaponsTreesLowPoly\Soldier\Textures\MaleDuty_3_OBJ_Happy_Packed0_Specular.png">
       <Filter>Resource Files\Bazaar\NewFilter1</Filter>
+    </Image>
+    <Image Include="T-rex_Base_Color.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="T-rex_Metallic.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="T-rex_Normal_OpenGL.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="T-rex_Roughness.png">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,24 @@ std::vector<std::string> loadMeshFileNames(const std::string& filePath) {
 	return meshFiles;
 }
 
+void DebugLog(const std::string& message) {
+	OutputDebugStringA(message.c_str()); // Send string to Output window
+}
+
+void RandomCreation(std::vector<Matrix>& matrices, unsigned int count) {
+	for (unsigned int i = 0; i < count; i++) {
+		float x = rand() % 30;
+		float z = rand() % 30;
+		Matrix w2;
+		w2 = Matrix::worldTrans(Vec3(0.01, 0.01, 0.01), Vec3(0, 0, 0), Vec3(x, 0, z));
+		matrices.push_back(w2);
+	}
+}
+
+void RenderRandom() {
+
+}
+
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
 	Window win;
 	DXCore dxcore;
@@ -41,54 +59,77 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shader shad;
 	shader animationShad;
 	shader textureShad;
+	shader animationTextureShad;
+	shader textureAlphaShad;
+	shader skyDomeShad; // shader for skyDome to fix the mix buffer bug.
 	ConstantBuffer constBuffer;
 	Matrix vp1;
 	Matrix planeWorld;
 	Matrix vp;
 	Cube cube;
-	Cube skyBox;
-	Sphere sphere;
+	// Cube skyBox;
+	Sphere sphere;  // will use this for now, if grounded is filled, will use hemisphere to improve performance
+	// Hemisphere sphere; 
 	// stuff in world
 	Meshes tkp;
 	Meshes tree;
-	AnimationInstance instance;
+
 	Meshes pine;
 	Meshes junk;
 	Meshes bamboo;
-	Meshes enemySolider;
-
+	Meshes test;
+	// Dynamic stuff
+	AnimationInstance dina;
+	AnimationInstance testAni;
+	AnimationInstance enemySolider;
+	AnimationInstance Uzi;
+	AnimationInstance AC5;
 	TextureManager textureManager;
 	TextureManager textureManager1;
-	Camera camera(20,0.1f,100);
-	GamesEngineeringBase::SoundManager bgms;
+	TextureManager textureManager2;
+	TextureManager textureManagerGround;
+	TextureManager textureManagerEnemy;
+	TextureManager textureManagerWeapon;
+
+	std::vector<Matrix> trees;
+	Camera camera(20, 0.1f, 100);
+	GamesEngineeringBase::SoundManager bgms; // try bgms again
 	// Mesh mesh;
 	// loading dinas;
 	float t = 0.f;
 	GamesEngineeringBase::Timer timer;
 	win.init(1024, 1024, "mywindow");
-	dxcore.init(win.width, win.height, win.hwnd, false);
+	dxcore.init(win.width, win.height, win.hwnd, false); // dx tool
 	// initialise once----implement shader and example meshes
-	animationShad.initAnim("Animation_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore);
-	shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore);
-	textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
+	shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // basic 3d shader
+	animationShad.initAnim("Animation_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // 3d animation non texture shader
+	textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d shader with texture
+	textureAlphaShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
+	animationTextureShad.initAnim("Animation_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d animation texture shader
+	skyDomeShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
+	// TODO initialise stuffs in world
 	//tri.init(dxcore); // 2D example
+	sphere.init(dxcore, 30, 30, 80, "SkyDome.png");
+	enemySolider.initTexture("Soldier1.gem", dxcore, &textureManagerEnemy);
+	//Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon);
+	AC5.initTexture("Automatic_Carbine_5.gem", dxcore, &textureManagerWeapon);
+	dina.initTexture("TRex.gem", dxcore, &textureManager); // vertices and animation for dina
+	// tkp.init("tkpmbcnjw.gem", dxcore, &textureManager);
+	plane.initTexture(dxcore, "riuvL_2K_BaseColor.jpg"); // USE THIS AS PLAYER'S MODEL
+	//skyBox.init(dxcore);
 
-	enemySolider.init("Soldier1.gem", dxcore, &textureManager);
-	tkp.init("tkpmbcnjw.gem", dxcore, &textureManager);
-	plane.init(dxcore); // USE THIS AS PLAYER'S MODEL
-	skyBox.init(dxcore);
+	// wclie.init("wcliegz.gem", dxcore, &textureManager); // a spring
+	//test.init("Uzi.gem", dxcore, &textureManager); // a spring
+	//testAni.initTexture("Uzi.gem", dxcore, &textureManager);
 	//cube.init(dxcore);
-	//sphere.init(dxcore, 30, 50, 3);
-	tree.initWithoutTexture("acacia_003.gem",dxcore);
-	instance.init("TRex.gem", dxcore); // vertices and animation for dina
-	// pine.init("pine.gem", dxcore, &textureManager);
-	
-	junk.init("teraccgda.gem", dxcore, &textureManager);
+	//sky.init(dxcore, 10, 10, 10, "SkyDome.png");
+	//tree.initWithoutTexture("acacia_003.gem",dxcore);
+	 pine.init("pine.gem", dxcore, &textureManager);
+
+	//junk.init("teraccgda.gem", dxcore, &textureManager);
 
 	// bamboo.init("bamboo.gem", dxcore, &textureManager);
-	// dina.init("TRex.gem", dxcore);
-	// dinas.loadAnimation3D("TRex.gem", dxcore);
-	// planeWorld.translation(1, 2, 1);
+
 	Vec3 from = Vec3(11, 5, 11);
 	Vec3 object = Vec3(0.0f, 0.0f, 0.0f);
 	Vec3 up = Vec3(0.0f, 1.0f, 0.0f);
@@ -96,8 +137,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	std::string filePath = "C:/Users/Davi/source/GE_DX11_Project/GE_Lecture3/Textures/Assorted1/bazaar/Models/filelist1.txt";
 	std::vector<std::string> meshFiles = loadMeshFileNames(filePath);
 
-
-	while (true)
+	int treeCount = 20;
+	float mouseSensitivity = 0.001f;
+	bool running = true;
+	RandomCreation(trees, 3);
+	while (running)
 	{
 		dxcore.Clear();
 		win.processMessages();
@@ -105,35 +149,79 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 
 		t += dt;
 		// camera control
+		float speed = 6.f;
 
-
-		float speed = 10.f;
-		Vec3 forward = (object - from).normalise();  // Camera's local forward direction
-		Vec3 right = (up.Cross(forward).normalise()); // Camera's local right direction
-		Vec3 cameraUp = forward.Cross(right);    // Recompute camera's local up
-
-		if (GetAsyncKeyState('W') & 0x8000) from += forward * speed * dt; // Forward
-		if (GetAsyncKeyState('S') & 0x8000) from -= forward * speed * dt; // Backward
-
-		if (GetAsyncKeyState('A') & 0x8000) object += right*speed * dt; // Left
-		if (GetAsyncKeyState('D') & 0x8000) object -= right * speed * dt; // Right
-
-		// mouse control
-		if (GetAsyncKeyState('J') & 0x8000) object += cameraUp*speed * dt; // Right
-		if (GetAsyncKeyState('K') & 0x8000) object -= cameraUp*speed * dt; // Right
-
-
-		camera.setPostion(from);
-		camera.setRotation(object);
-
-		// 检测键盘输入与鼠标输入,然后调用move或者setposition
-		// 检测鼠标输入,完成开火操作(左键)
 		
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+		// TODO DEBUG TO FIND ERROR OF MATRIX, WHICH CAUSES CHAOS DISPLAY AND BLUE SCREEN
+		// TODO ERROR HAPPENS INSIDE THE FORWARD. AND NOT RELATED WITH NORMALISE
+		// TODO idea: replace hemisphere with cube skybox or hemisphere, but sky box for now works.
+		win.capture(from, object, up, mouseSensitivity, camera);
+
+		Vec3 forward = (object - from);
+		if (forward.Length() == 0) {
+			forward = Vec3(0, 0, -1); // Default forward direction
+		}
+		else {
+			forward = forward.normalise();
+		}
+
+		//std::ostringstream logStream;
+		//logStream << "forward: " << forward.x << ", " << forward.y << ", " << forward.z << "\n";
+		//DebugLog(logStream.str());
+
+
+		// Vec3 right = (up.Cross(forward).normalise());
+		Vec3 right = up.Cross(forward);
+		if (right.Length() == 0) {
+			right = Vec3(1, 0, 0); // Default right vector
+		}
+		else {
+			right = right.normalise();
+		}
+
+		if (std::isnan(forward.x) || std::isnan(forward.y) || std::isnan(forward.z)) {
+			// avoid Nah
+			camera.resetCamera(from, object, up);
+		}
+
+		// Process keyboard input for movement
+		if (win.keys['W']) from += forward * speed * dt;
+		if (win.keys['S']) from -= forward * speed * dt;
+
+		if (win.keys['A']) {
+			Vec3 delta = right * speed * dt;
+			from += delta;
+			object += delta; // Keep `object` and `from` offset consistent
+		}
+		if (win.keys['D']) {
+			Vec3 delta = right * speed * dt;
+			from -= delta;
+			object -= delta;
+		}
+
+		if (win.keys['T']) {
+			// reset camera position
+			camera.resetCamera(from, object, up);
+		}
+		if (win.keys['Q']) break;
+
+		// win.CenterCursor(win.hwnd);
+
 		Matrix lookAt = camera.updateCameraMat();
 		Matrix perspProj = camera.updateProjectionMat();
 		Matrix resultMatrix = lookAt * perspProj;
-
-
+		skyDomeShad.apply(&dxcore);
+		dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
+		// make sure skybox following camera all time
+		Matrix skyDomeWorldMatrix = Matrix::translation(camera.position); // get camera position
+		skyDomeShad.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
+		skyDomeShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		Matrix w0;
+		w0 = Matrix::translation(Vec3(1, -10, -10));
+		sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
+		sphere.draw(dxcore);
+		//////////////////////////////////////////////////////////////////////////////////////////////////
 		//for (unsigned i = 0; i < 86; i++) {
 		//	// Tester, to load the mesh and confirm their appearance
 		//	Meshes meshes;
@@ -151,78 +239,112 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 
 
 
-		//  skybox
-		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		Matrix w5;
-		w5 = Matrix::scaling(Vec3(100,100,100));
-		skyBox.updateWorld(w5, shad, dxcore);
-		skyBox.draw(&dxcore);
-		//TODO Attatch textures for skybox
+		 // skybox
+		//shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		//Matrix w5;
+		//w5 = Matrix::scaling(Vec3(100, 100, 100));
+		//sky.updateWorld(w5, shad, dxcore);
+		//sky.draw(dxcore);
 
+		//TODO Attatch textures for skybox
+		// TODO add collider first.
 		// TODO velocity should be -9.8 for players and enemies, others is unchange
 		// TODO 
 
-
+		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		textureShad.apply(&dxcore);
+		dxcore.devicecontext->PSSetShaderResources(0, 1, &plane.textures.srv);
 		Matrix w;
-		w = Matrix::scaling(Vec3(10, 10, 10));
-		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
-		shad.apply(&dxcore);
-		plane.draw(&shad, &dxcore);
+		w = Matrix::scaling(Vec3(50, 50, 50));
+		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
+		plane.draw(&textureShad, &dxcore);
+
 		
-
 		// Working animation example
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+		// TODO MESHES WITH ANIMATION
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
 		Matrix w1;
-		instance.update("Run", dt);
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", instance.matrices);
+		dina.update("Run", dt);
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
 		w1 = Matrix::worldTrans(Vec3(0.8, 0.8, 0.8), Vec3(0, 0, 0), Vec3(-10, 0, 0));
-		animationShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationShad.apply(&dxcore);
-		instance.draw(&dxcore);
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShad.apply(&dxcore);
+		dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
 
+
+		enemySolider.update("idle", dt);
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
+		w1 = Matrix::worldTrans(Vec3(0.04, 0.04, 0.04), Vec3(0, 0, 0), Vec3(-4, 0, 0));
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShad.apply(&dxcore);
+		enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManagerEnemy);
+
+
+		//Uzi.update("Armature|00 Pose", dt);
+		////animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
+		//w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(6, 0, 0));
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationTextureShad.apply(&dxcore);
+		//Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);
+
+		AC5.update("Armature|00 Pose", dt);
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", AC5.matrices);
+		w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(6, 0, 0));
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShad.apply(&dxcore);
+		AC5.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);
+
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+		//enemySolider.update("Talking", dt);
+		////animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
+		//w1 = Matrix::worldTrans(Vec3(0.5, 0.5, 0.5), Vec3(0, 0, 0), Vec3(7, 0, 0));
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuSffer", "W", &w1);
+		//animationTextureShad.apply(&dxcore);
+		//enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManager2);
 		// 用一个列表存下场景内部所有的模型以及位置等参数,然后调用他们
 
-		// Working example for texture map
-		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		Matrix w2;
-		w2 = Matrix::worldTrans(Vec3(0.01, 0.01, 0.01), Vec3(0, 0, 0), Vec3(-10, 0, 10));
-		//pine.updateWorld(w2, textureShad, dxcore);
-		//// w2 = Matrix::translation(Vec3(5, 0, 0));
-		//pine.drawTexture(&dxcore, textureShad,&textureManager);
+		// TODO MESHES REQUIRES ALPHA TEST: Grass, Trees, etc
+		
 
-		w2 = Matrix::worldTrans(Vec3(0.03, 0.03, 0.03), Vec3(0, 0, 0), Vec3(0, 0, 0));
-		enemySolider.updateWorld(w2, textureShad, dxcore);
+		// generate random trees---Roguelike!
+		for (const Matrix& mat : trees) {
 
-		enemySolider.drawTexture(&dxcore, textureShad, &textureManager);
+			Meshes pines;
+			pines.init("pine.gem", dxcore, &textureManager);
 
-		w2 = Matrix::worldTrans(Vec3(0.3, 0.3, 0.3), Vec3(0, 0, 0), Vec3(7, 0, 0));
-		tkp.updateWorld(w2, textureShad, dxcore);
-		tkp.drawTexture(&dxcore, textureShad, &textureManager);
+			textureAlphaShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+
+			pines.updateWorld(mat, textureAlphaShad, dxcore);
+			// w2 = Matrix::translation(Vec3(5, 0, 0));
+			pines.drawTexture(&dxcore, textureAlphaShad, &textureManager);
+		}
+		
+
+		// TODO STATIC MESHES WITH TEXTURE
+		/*textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		w2 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(5, 0, 5));
+
+		test.updateWorld(w2, textureShad, dxcore);
+		test.drawTexture(&dxcore, textureShad, &textureManager);*/
+		// TODO PLAYER RELATED MESHES
+		// TODO PLAYER MODEL
+		//w2 = Matrix::worldTrans(Vec3(0.03, 0.03, 0.03), Vec3(0, 0, 0), Vec3(0, 0, 0));
+		//enemySolider.updateWorld(w2, textureShad, dxcore);
+
+		//enemySolider.drawTexture(&dxcore, textureShad, &textureManager);
+
+		//w2 = Matrix::worldTrans(Vec3(0.3, 0.3, 0.3), Vec3(0, 0, 0), Vec3(7, 0, 0));
+		//tkp.updateWorld(w2, textureShad, dxcore);
+		//tkp.drawTexture(&dxcore, textureShad, &textureManager);
 		/*bamboo.updateWorld(w2, textureShad, dxcore);
 		bamboo.drawTexture(&dxcore, textureShad, &textureManager);*/
-		//! WORKING STATIC EXAMPLE
-		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		Matrix w3;
-		//Matrix temp;
-		//Matrix test2;
-		//w3 = Matrix::scaling(Vec3(0.01f, 0.01f, 0.01f));
-		//tree.updateWorld(w3, shad, dxcore);
-		//temp = Matrix::translation(Vec3(10, 0, 0));
-		//w3 = w3 * temp;
-		//tree.updateWorld(w3, shad, dxcore);
 
-		w3 = w3.worldTrans(Vec3(0.01f, 0.01f, 0.01f), Vec3(), Vec3(10, 0, 0));
-		tree.updateWorld(w3, shad, dxcore);
 
-		tree.draw(&dxcore);
-
-		// working example: cube
-		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		Matrix w4;
-		w4 = Matrix::translation(Vec3(-6, 0, 0));
-		cube.updateWorld(w4, shad, dxcore);
-		cube.draw(&dxcore);
 
 		dxcore.Present();
 	}

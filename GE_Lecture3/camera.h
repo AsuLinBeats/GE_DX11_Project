@@ -50,17 +50,14 @@ public:
 	}
 
 	void moveX(float& speed) {
-		// change position, i.e, position
 		position.x+=speed;
 	}
 
 	void moveY(float& speed) {
-		// change position, i.e, position
 		position.y += speed;
 	}
 
 	void moveZ(float& speed) {
-		// change position, i.e, position
 		position.z += speed;
 	}
 	//Vec3 moveY(float& speed) {
@@ -69,15 +66,13 @@ public:
 	//}
 
 	void rotationX(float& speed) {
-		// change rotation, i.e the direction for player
-		//改变rotation,也就是摄像机再看哪里,根据鼠标前后和上下有俩结果,写两个,X应该是上下
+		
 		rotation.x += speed;
 	}
 
 
 	void rotationY(float& speed) {
-		// change rotation, i.e the direction for player
-		//改变rotation,也就是摄像机再看哪里,根据鼠标前后和上下有俩结果,写两个,X应该是上下
+
 		rotation.y += speed;
 	}
 
@@ -90,5 +85,11 @@ public:
 	Matrix updateProjectionMat() {
 		Matrix perspProjMatrix = pp.PerPro(1.f, 1.f, fov, farPlane, nearPlane);
 		return perspProjMatrix;
+	}
+
+	void resetCamera(Vec3 &from, Vec3 &object, Vec3 &up) {
+		from = Vec3(0, 5, -10);
+		object = Vec3(0, 0, 0);
+		up = Vec3(0, 1, 0);
 	}
 };

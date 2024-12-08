@@ -125,7 +125,7 @@ public:
 	 GamesEngineeringBase::Timer timer;
 	 float time = 0;
 	Mesh mesh;
-
+	Texture textures;
 
 	//shader shader;
 	STATIC_VERTEX addVertex(Vec3 p, Vec3 n, float tu, float tv)
@@ -157,6 +157,19 @@ public:
 		indices.push_back(1); indices.push_back(2); indices.push_back(3);
 		
 		mesh.init(vertices,indices,core);
+	}
+
+	void initTexture(DXCore& core, std::string filename){
+		std::vector<STATIC_VERTEX> vertices;
+		vertices.push_back(addVertex(Vec3(-1.5, 0, -1.5), Vec3(0, 1, 0), 0, 0));
+		vertices.push_back(addVertex(Vec3(1.5, 0, -1.5), Vec3(0, 1, 0), 1, 0));
+		vertices.push_back(addVertex(Vec3(-1.5, 0, 1.5), Vec3(0, 1, 0), 0, 1));
+		vertices.push_back(addVertex(Vec3(1.5, 0, 1.5), Vec3(0, 1, 0), 1, 1));
+		std::vector<unsigned int> indices;
+		indices.push_back(2); indices.push_back(1); indices.push_back(0);
+		indices.push_back(1); indices.push_back(2); indices.push_back(3);
+		textures.load(&core, filename);
+		mesh.init(vertices, indices, core);
 	}
 
 
@@ -306,6 +319,7 @@ public:
 class Sphere {
 public:
 	Mesh mesh;
+	Texture text;
 	// make sphere huge enough to create a sky!
 	STATIC_VERTEX addVertex(Vec3 p, Vec3 n, float tu, float tv)
 	{
@@ -319,9 +333,7 @@ public:
 		return v;
 	}
 
-	void init(DXCore& core, int rings, int segments, float radius) {
-
-		
+	void init(DXCore& core, int rings, int segments, float radius,TextureManager *textures) {
 		std::vector<STATIC_VERTEX> vertices;
 		std::vector<unsigned int> indices;
 		// create sphere vertices
@@ -340,6 +352,8 @@ public:
 				vertices.push_back(addVertex(position, normal, tu, tv));
 			}
 		}
+
+
 		// create indices vertices
 		for (int lat = 0; lat < rings; lat++)
 		{
@@ -355,11 +369,128 @@ public:
 				indices.push_back(next + 1);
 			}
 		}
-
+	//	text.load(&core, "SkyDome.png");
+		
+		textures->load(&core, "SkyDome.png");
 		mesh.init(vertices, indices,core);
 	}
+
+	void init(DXCore& core, int rings, int segments, float radius,std::string filename) {
+		std::vector<STATIC_VERTEX> vertices;
+		std::vector<unsigned int> indices;
+		// create sphere vertices
+		for (int lat = 0; lat <= rings; lat++) {
+			float theta = lat * M_PI / rings;
+			float sinTheta = sinf(theta);
+			float cosTheta = cosf(theta);
+			for (int lon = 0; lon <= segments; lon++) {
+				float phi = lon * 2.0f * M_PI / segments;
+				float sinPhi = sinf(phi);
+				float cosPhi = cosf(phi);
+				Vec3 position(radius * sinTheta * cosPhi, radius * cosTheta, radius * sinTheta * sinPhi);
+				Vec3 normal = position.normalise();
+				float tu = 1.0f - (float)lon / segments;
+				float tv = (float)lat / rings;
+				vertices.push_back(addVertex(position, normal, tu, tv));
+			}
+		}
+		for (int lat = 0; lat < rings; lat++)
+		{
+			for (int lon = 0; lon < segments; lon++)
+			{
+				int current = lat * (segments + 1) + lon;
+				int next = current + segments + 1;
+				indices.push_back(current);
+				indices.push_back(next);
+				indices.push_back(current + 1);
+				indices.push_back(current + 1);
+				indices.push_back(next);
+				indices.push_back(next + 1);
+			}
+		}
+		text.load(&core, filename);
+		mesh.init(vertices, indices, core);
+	}
+
 	void draw(DXCore core) {
 		mesh.draw(core);
+	}
+	void updateWorld(Matrix w, shader shad, DXCore core) {
+		// submit world matrix to vertex shader
+		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
+		shad.apply(&core); // apply adjusted buffer immediately
+	}
+};
+
+class Hemisphere {
+public:
+	Mesh mesh;
+	Texture text;
+
+	STATIC_VERTEX addVertex(Vec3 p, Vec3 n, float tu, float tv) {
+		STATIC_VERTEX v;
+		v.pos = p;
+		v.normal = n;
+		v.tangent = Vec3(0, 0, 0); // For now
+		v.tu = tu;
+		v.tv = tv;
+		return v;
+	}
+	void init(DXCore& core, int rings, int segments, float radius, std::string filename, bool isUpper = true) {
+		std::vector<STATIC_VERTEX> vertices;
+		std::vector<unsigned int> indices;
+
+		int startLat = isUpper ? 0 : rings / 2;
+		int endLat = isUpper ? rings / 2 : rings;
+
+		for (int lat = startLat; lat <= endLat; lat++) {
+			float theta = lat * M_PI / rings;
+			float sinTheta = sinf(theta);
+			float cosTheta = cosf(theta);
+
+			for (int lon = 0; lon <= segments; lon++) {
+				float phi = lon * 2.0f * M_PI / segments;
+				float sinPhi = sinf(phi);
+				float cosPhi = cosf(phi);
+
+				Vec3 position(
+					radius * sinTheta * cosPhi,
+					radius * cosTheta,
+					radius * sinTheta * sinPhi
+				);
+				Vec3 normal = position.normalise();
+				float tu = 1.0f - (float)lon / segments;
+				float tv = isUpper ? (float)lat / (rings / 2) : (float)(lat - rings / 2) / (rings / 2);
+				vertices.push_back(addVertex(position, normal, tu, tv));
+			}
+		}
+
+		for (int lat = startLat; lat < endLat; lat++) {
+			for (int lon = 0; lon < segments; lon++) {
+				int current = lat * (segments + 1) + lon;
+				int next = current + segments + 1;
+
+				indices.push_back(current);
+				indices.push_back(next);
+				indices.push_back(current + 1);
+
+				indices.push_back(current + 1);
+				indices.push_back(next);
+				indices.push_back(next + 1);
+			}
+		}
+
+		text.load(&core, filename);
+		mesh.init(vertices, indices, core);
+	}
+
+	void draw(DXCore core) {
+		mesh.draw(core);
+	}
+
+	void updateWorld(Matrix w, shader shad, DXCore core) {
+		shad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // Update world matrix
+		shad.apply(&core);
 	}
 };
 
@@ -386,12 +517,12 @@ public:
 			}
 			textureFilenames.push_back(gemmeshes[i].material.find("diffuse").getValue());
 			textures->load(&core, gemmeshes[i].material.find("diffuse").getValue());
+			//textureFilenames.push_back(gemmeshes[i].material.find("normals").getValue());
+			//textures->load(&core, gemmeshes[i].material.find("normals").getValue());
 			mesh.init(vertices, gemmeshes[i].indices, core);
 			meshes.push_back(mesh);
 		}
 		std::cout <<"Textures" << textures << std::endl;
-
-
 	}
 
 

@@ -6,6 +6,8 @@
 #define min(a,b) (a>b? b : a)
 #include"memory.h" // enable some memory related operations
 #include"GamesEngineeringBase.h"
+
+
 class Vec3 {
 public:
 	union {
@@ -127,15 +129,18 @@ public:
 					v.x * y - v.y * x);
 	}	
 
-	Vec3 Max(const Vec3& v1, const Vec3& v2) {
-		return Vec3(max(v1.x, v2.x),
-			max(v1.y, v2.y),
-			max(v1.z, v1.z));
+	static Vec3 Min(const Vec3& a, const Vec3& b) {
+		return Vec3(min(a.x, b.x), min(a.y, b.y), min(a.z, b.z));
+	}
+
+	static Vec3 Max(const Vec3& a, const Vec3& b) {
+		return Vec3(max(a.x, b.x), max(a.y, b.y), max(a.z, b.z));
 	}
 
 	float Max() const {
 		return max(x, max(y, z));
 	}
+
 };
 
 class Vec2 {
@@ -458,6 +463,26 @@ public:
 
 		return scale * rotate * translate;
 	}
+
+	static Matrix rotation(const Vec3 axisTheta) {
+		Matrix mat;
+		mat = mat.rotationX(axisTheta.x);
+		mat = mat.rotationY(axisTheta.y);
+		mat = mat.rotationZ(axisTheta.z);
+		return mat;
+	}
+
+	static Matrix RotationAxis(const Vec3& axis, float angle) {
+		Matrix R;
+		float c = cosf(angle), s = sinf(angle);
+		float x = axis.x, y = axis.y, z = axis.z;
+
+		R.m[0] = x * x * (1 - c) + c;   R.m[1] = x * y * (1 - c) + z * s; R.m[2] = x * z * (1 - c) - y * s; R.m[3] = 0;
+		R.m[4] = y * x * (1 - c) - z * s; R.m[5] = y * y * (1 - c) + c;   R.m[6] = y * z * (1 - c) + x * s; R.m[7] = 0;
+		R.m[8] = z * x * (1 - c) + y * s; R.m[9] = z * y * (1 - c) - x * s; R.m[10] = z * z * (1 - c) + c;  R.m[11] = 0;
+		R.m[12] = 0;            R.m[13] = 0;            R.m[14] = 0;            R.m[15] = 1;
+		return R;
+	}
 	Matrix mul1(const Matrix& matrix) const
 	{
 		Matrix ret;
@@ -743,7 +768,13 @@ public:
 		return temp;
 	};
 
-
+	Vec3 toVec3(const Vec3& v) const {
+		Vec3 temp;
+		temp.x = v.x * m[0] + v.y * m[1] + v.z * m[2];
+		temp.y = v.x * m[4] + v.y * m[5] + v.z * m[6];
+		temp.z = v.x * m[8] + v.y * m[9] + v.z * m[10];
+		return temp;
+	}
 };
 
 class ShadingFrame {

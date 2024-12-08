@@ -6,7 +6,7 @@
 #pragma comment(lib, "D3D11.lib")
 #pragma comment(lib, "D3DCompiler.lib")
 #pragma comment(lib, "DXGI.lib")
-
+// TODO THE COMMITMENT IN THIS FILE IS FOR LEARNING DX11 PURPOSE, AND NOT RELATED WITH MY IDEA FOR ASSESSMENT (so just skip them while marking)
 class DXCore {
 public:
 

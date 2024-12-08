@@ -1,7 +1,10 @@
 #pragma once
 #include "GamesEngineeringBase.h"
 #include "GraphicMath.h"
-//
+
+
+
+
 //class Character {
 //	Vec3 position;
 //	int currentBlood;
