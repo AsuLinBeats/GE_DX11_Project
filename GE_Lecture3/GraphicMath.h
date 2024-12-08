@@ -143,6 +143,10 @@ public:
 
 };
 
+//void rads() {
+//
+//}
+
 class Vec2 {
 public:
 	union {

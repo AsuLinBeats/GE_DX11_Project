@@ -90,9 +90,25 @@ public:
         }
         lastMousePos = currentMousePos;
 
-        Vec3 forward = (object - from).normalise();
-        Vec3 right = (up.Cross(forward).normalise());
+        Vec3 forward = (object - from);
+        if (forward.Length() == 0 || std::isnan(forward.x)) {
+            forward = Vec3(0, 0, -1); // Default forward vector
+        }
+        else {
+            forward = forward.normalise();
+        }
+
+        Vec3 right = up.Cross(forward);
+        if (right.Length() == 0 || std::isnan(right.x)) {
+            right = Vec3(1, 0, 0); // Default right vector
+        }
+        else {
+            right = right.normalise();
+        }
+
         Vec3 cameraUp = forward.Cross(right);
+
+
 
         if (mouseDY != 0.0f) {
             float pitch = mouseDY * mouseSensitivity;
@@ -122,7 +138,8 @@ public:
       //  CenterCursor(hwnd);
         camera.setPostion(from);
         camera.setRotation(object);
-        ClipCursorToWindow(hwnd);
+        // DISABLE FOR NOW TO TEST MATRICES AT OUTPUT
+        // ClipCursorToWindow(hwnd);
     }
 
 

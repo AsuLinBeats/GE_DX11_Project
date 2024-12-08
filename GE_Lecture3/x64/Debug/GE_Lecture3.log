@@ -10,22 +10,22 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(6,9): warning C40
       C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(197,9):
       see previous definition of 'min'
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(565,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(569,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(571,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(575,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(623,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(627,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(683,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(687,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(684,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(688,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(686,34): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(690,34): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\adapter.h(38,34): warning C4018: '>': signed/unsigned mismatch
@@ -82,19 +82,46 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\anime.h(59,10): warning C4267: 
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\anime.h(89,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'game.cpp')
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(42,11): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(43,11): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(45,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(45,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(45,32): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(270,42): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(270,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(270,32): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(279,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(279,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(279,32): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(296,42): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(296,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(296,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(63,11): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(64,11): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(66,44): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(66,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(66,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(290,42): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(290,37): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(290,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(299,44): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(299,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(299,32): warning C4305: 'argument': truncation from 'double' to 'float'
+  window.cpp
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(5,9): warning C4005: 'max': macro redefinition
+  (compiling source file 'window.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(193,9):
+      see previous definition of 'max'
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(6,9): warning C4005: 'min': macro redefinition
+  (compiling source file 'window.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(197,9):
+      see previous definition of 'min'
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(569,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(575,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(627,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(687,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(688,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(690,34): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+  Generating Code...
      Creating library C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.lib and object C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.exp
   GE_Lecture3.vcxproj -> C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.exe

@@ -82,14 +82,17 @@ public:
 		return lookAtMatrix;
 	}
 
+
+
 	Matrix updateProjectionMat() {
 		Matrix perspProjMatrix = pp.PerPro(1.f, 1.f, fov, farPlane, nearPlane);
 		return perspProjMatrix;
 	}
 
 	void resetCamera(Vec3 &from, Vec3 &object, Vec3 &up) {
-		from = Vec3(0, 5, -10);
-		object = Vec3(0, 0, 0);
-		up = Vec3(0, 1, 0);
+		 from = Vec3(11, 5, 11);
+		 object = Vec3(0.0f, 0.0f, 0.0f);
+		 up = Vec3(0.0f, 1.0f, 0.0f);
+
 	}
 };

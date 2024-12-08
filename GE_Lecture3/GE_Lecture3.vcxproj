@@ -151,6 +151,7 @@
     <ClInclude Include="ShaderReflection.h" />
     <ClInclude Include="shaders.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Support_tools.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="World.h" />

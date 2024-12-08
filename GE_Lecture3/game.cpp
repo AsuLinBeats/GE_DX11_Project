@@ -14,8 +14,29 @@
 #include"camera.h"
 #include"GamesEngineeringBase.h"
 #include"Character.h"
+// TODO THESE SUPPORT FUNCTIONS WILL BE PUT INTO SUPPORT_TOOLS.H AT END
+std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
+	os << "[";
+	for (int i = 0; i < 4; ++i) {
+		os << "[";
+		for (int j = 0; j < 4; ++j) {
+			os << matrix.a[i][j];
+			if (j < 3) os << ", "; // Add commas between elements in a row
+		}
+		os << "]";
+		if (i < 3) os << ",\n "; // Add a newline between rows
+	}
+	os << "]";
+	return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const Vec3& vec) {
+	os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
+	return os;
+}
 
 std::vector<std::string> loadMeshFileNames(const std::string& filePath) {
+	// For testing model purpose, use with Windows powershell command to save name of model into a txt file and load them at once to see what they are
 	std::vector<std::string> meshFiles;
 	std::ifstream file(filePath);
 	if (!file.is_open()) {
@@ -141,8 +162,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	float mouseSensitivity = 0.001f;
 	bool running = true;
 	RandomCreation(trees, 3);
+
+	// bgms.loadMusic("bgm.wav");
+
 	while (running)
 	{
+	//	 bgms.playMusic();
 		dxcore.Clear();
 		win.processMessages();
 		float dt = timer.dt();
@@ -159,32 +184,22 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		win.capture(from, object, up, mouseSensitivity, camera);
 
 		Vec3 forward = (object - from);
-		if (forward.Length() == 0) {
+		if (forward.Length() == 0 || std::isnan(forward.x)) {
 			forward = Vec3(0, 0, -1); // Default forward direction
 		}
 		else {
 			forward = forward.normalise();
 		}
 
-		//std::ostringstream logStream;
-		//logStream << "forward: " << forward.x << ", " << forward.y << ", " << forward.z << "\n";
-		//DebugLog(logStream.str());
-
-
-		// Vec3 right = (up.Cross(forward).normalise());
 		Vec3 right = up.Cross(forward);
-		if (right.Length() == 0) {
+		if (right.Length() == 0 || std::isnan(right.x)) {
 			right = Vec3(1, 0, 0); // Default right vector
 		}
 		else {
 			right = right.normalise();
 		}
 
-		if (std::isnan(forward.x) || std::isnan(forward.y) || std::isnan(forward.z)) {
-			// avoid Nah
-			camera.resetCamera(from, object, up);
-		}
-
+		Vec3 cameraUp = forward.Cross(right);
 		// Process keyboard input for movement
 		if (win.keys['W']) from += forward * speed * dt;
 		if (win.keys['S']) from -= forward * speed * dt;
@@ -192,25 +207,30 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		if (win.keys['A']) {
 			Vec3 delta = right * speed * dt;
 			from += delta;
-			object += delta; // Keep `object` and `from` offset consistent
+			object += delta; 
 		}
 		if (win.keys['D']) {
 			Vec3 delta = right * speed * dt;
 			from -= delta;
-			object -= delta;
+			object -= delta; 
 		}
 
 		if (win.keys['T']) {
-			// reset camera position
 			camera.resetCamera(from, object, up);
 		}
 		if (win.keys['Q']) break;
 
-		// win.CenterCursor(win.hwnd);
-
+		// Update camera
 		Matrix lookAt = camera.updateCameraMat();
 		Matrix perspProj = camera.updateProjectionMat();
 		Matrix resultMatrix = lookAt * perspProj;
+
+		std::ostringstream logStream;
+		logStream << "from: " << from << "\n";
+		logStream << "object: " << object << "\n";
+		logStream << "Right: " << right.x << ", " << right.y << ", " << right.z << "\n";
+		DebugLog(logStream.str());
+
 		skyDomeShad.apply(&dxcore);
 		dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
 		// make sure skybox following camera all time
@@ -267,7 +287,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		dina.update("Run", dt);
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
-		w1 = Matrix::worldTrans(Vec3(0.8, 0.8, 0.8), Vec3(0, 0, 0), Vec3(-10, 0, 0));
+		w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShad.apply(&dxcore);
 		dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
@@ -276,7 +296,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		enemySolider.update("idle", dt);
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
-		w1 = Matrix::worldTrans(Vec3(0.04, 0.04, 0.04), Vec3(0, 0, 0), Vec3(-4, 0, 0));
+		w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShad.apply(&dxcore);
 		enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManagerEnemy);
@@ -290,13 +310,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//animationTextureShad.apply(&dxcore);
 		//Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);
 
-		AC5.update("Armature|00 Pose", dt);
+		//AC5.update("Armature|00 Pose", dt);
+		////animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", AC5.matrices);
+		//w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(6, 0, 0));
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", AC5.matrices);
-		w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(6, 0, 0));
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.apply(&dxcore);
-		AC5.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);
+		//animationTextureShad.apply(&dxcore);
+		//AC5.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);
 
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
 		//enemySolider.update("Talking", dt);
@@ -311,7 +331,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		// TODO MESHES REQUIRES ALPHA TEST: Grass, Trees, etc
 		
 
-		// generate random trees---Roguelike!
+		// generate random trees---Roguelike! 
+		// TODO SAVE THEM IN A FILE AND LOAD WHEN RENDERING
 		for (const Matrix& mat : trees) {
 
 			Meshes pines;
@@ -343,8 +364,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//tkp.drawTexture(&dxcore, textureShad, &textureManager);
 		/*bamboo.updateWorld(w2, textureShad, dxcore);
 		bamboo.drawTexture(&dxcore, textureShad, &textureManager);*/
-
-
 
 		dxcore.Present();
 	}
