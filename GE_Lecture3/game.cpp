@@ -67,10 +67,34 @@ void RandomCreation(std::vector<Matrix>& matrices, unsigned int count) {
 		matrices.push_back(w2);
 	}
 }
+class FPS {
+public:
+	int frame = 0;
+	float elapsed = 0;
+	int fps = 0;
 
-void RenderRandom() {
+	void update(float dt) {
+		frame++;
+		elapsed += dt;
 
-}
+		if (elapsed >= 1.0f) { // Update every second
+			fps = frame;
+			frame = 0;
+			elapsed = 0.0f;
+		}
+	}
+
+	int getFps() {
+		return fps;
+	}
+
+	void draw() {
+		std::ostringstream logStream;
+		logStream << "FPS: " << fps << "\n";
+		DebugLog(logStream.str());
+	}
+};
+
 
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
 	Window win;
@@ -111,15 +135,17 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	TextureManager textureManagerGround;
 	TextureManager textureManagerEnemy;
 	TextureManager textureManagerWeapon;
-
+	TextureManager textureManagerWeapon1;
+	FPS fps;
 	std::vector<Matrix> trees;
 	Camera camera(20, 0.1f, 100);
+	Player player(100.f,40,camera.position,camera.rotation, 4,0.1);
 	GamesEngineeringBase::SoundManager bgms; // try bgms again
 	// Mesh mesh;
 	// loading dinas;
 	float t = 0.f;
 	GamesEngineeringBase::Timer timer;
-	win.init(1024, 1024, "mywindow");
+	win.init(1024, 1024, "Solider Cadillacs and Dinosaurs"); // Well, salute to FC game Cadillacs and Dinosaurs by capcon!(but this game did not add melee attack :( 
 	dxcore.init(win.width, win.height, win.hwnd, false); // dx tool
 	// initialise once----implement shader and example meshes
 	shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // basic 3d shader
@@ -132,7 +158,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	//tri.init(dxcore); // 2D example
 	sphere.init(dxcore, 30, 30, 80, "SkyDome.png");
 	enemySolider.initTexture("Soldier1.gem", dxcore, &textureManagerEnemy);
-	//Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon);
+	Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon1);
 	AC5.initTexture("Automatic_Carbine_5.gem", dxcore, &textureManagerWeapon);
 	dina.initTexture("TRex.gem", dxcore, &textureManager); // vertices and animation for dina
 	// tkp.init("tkpmbcnjw.gem", dxcore, &textureManager);
@@ -175,7 +201,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		t += dt;
 		// camera control
 		float speed = 6.f;
-
+		fps.update(dt);
+		fps.draw();
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		// TODO DEBUG TO FIND ERROR OF MATRIX, WHICH CAUSES CHAOS DISPLAY AND BLUE SCREEN
@@ -293,7 +320,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
 
 
-		enemySolider.update("idle", dt);
+		enemySolider.update("rifle aiming idle", dt);
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
 		w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
@@ -301,19 +328,24 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		animationTextureShad.apply(&dxcore);
 		enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManagerEnemy);
 
+	
 
-		//Uzi.update("Armature|00 Pose", dt);
-		////animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
-		//w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(6, 0, 0));
+		Matrix wn;
+		//  camera should match it
+		Uzi.update("Armature|08 Fire", dt);
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationTextureShad.apply(&dxcore);
-		//Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);
-
-		//AC5.update("Armature|00 Pose", dt);
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
+	// 	w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI / 2), Vec3(-4, 10, 0));
+		w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, M_PI/2, M_PI / 2), Vec3(camera.position.x, camera.position.y, camera.position.z));
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn);
+		animationTextureShad.apply(&dxcore);
+		Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon1);
+		
+		// TODO PLAYER'S HAND---- SO THE PLAYER'S MODEL CAN USE A SIMPLE RECGANGULAR TO REPRESENT?
+		//AC5.update("Armature|08 Fire", dt);
 		////animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", AC5.matrices);
-		//w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(6, 0, 0));
+		//w1 = Matrix::worldTrans(Vec3(0.5, 0.5, 0.5), Vec3(M_PI / 2, 0, M_PI / 2), Vec3(6,10 , 5));
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		//animationTextureShad.apply(&dxcore);
 		//AC5.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);

@@ -120,7 +120,7 @@ public:
 	std::vector<Animation> anim;
 	std::vector<std::string> textureFilenames;
 	// Animation animation;
-
+	std::vector<ANIMATED_VERTEX> vertices;
 
 	// helper functions
 	void resetAnimationTime()
@@ -200,7 +200,7 @@ public:
 		GEMLoader::GEMAnimation gemanimation;
 		loader.load(filename, gemmeshes, gemanimation);
 		for (int i = 0; i < gemmeshes.size(); i++) {
-			std::vector<ANIMATED_VERTEX> vertices;
+			
 			for (int j = 0; j < gemmeshes[i].verticesAnimated.size(); j++) {
 				ANIMATED_VERTEX v;
 				memcpy(&v, &gemmeshes[i].verticesAnimated[j], sizeof(ANIMATED_VERTEX));
@@ -261,8 +261,11 @@ public:
 	void drawTexture(DXCore* core, shader shad, TextureManager* textureM) {
 		for (int i = 0; i < meshes.size(); i++)
 		{
-			shad.updateShaderPS(core, "tex", textureM->find(textureFilenames[i]));
-			meshes[i].draw(*core);
+			if (textureFilenames[i] != "") { // fix error of null
+				shad.updateShaderPS(core, "tex", textureM->find(textureFilenames[i]));
+				meshes[i].draw(*core);
+			}
+
 		}
 
 	}

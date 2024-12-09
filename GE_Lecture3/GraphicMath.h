@@ -280,8 +280,8 @@ public:
 		}
 	}
 
-	void Normalise() {
-		
+	Vec3 ToVec3() {
+		return Vec3(x / w, y / w, z / w);
 	}
 
 };
@@ -458,13 +458,15 @@ public:
 	static Matrix worldTrans(Vec3 scaling, Vec3 rotation, Vec3 translation) {
 		Matrix scale;
 		scale = scale.scaling(scaling);
-		Matrix rotate;
-		rotate = rotate.rotationX(rotation.x);
-		rotate = rotate.rotationY(rotation.y);
-		rotate = rotate.rotationZ(rotation.z);
+		Matrix rotateX;
+		rotateX = Matrix::rotationX(rotation.x);
+		Matrix rotateY;
+		rotateY = Matrix::rotationY(rotation.y);
+		Matrix rotateZ;
+		rotateZ = Matrix::rotationZ(rotation.z);
 		Matrix translate;
 		translate = translate.translation(translation);
-
+		Matrix rotate = rotateZ * rotateY * rotateX;
 		return scale * rotate * translate;
 	}
 
