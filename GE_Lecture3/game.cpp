@@ -59,14 +59,40 @@ void DebugLog(const std::string& message) {
 }
 
 void RandomCreation(std::vector<Matrix>& matrices, unsigned int count) {
+	matrices.clear(); // clear matrices to avoid some bugs
 	for (unsigned int i = 0; i < count; i++) {
-		float x = rand() % 30;
-		float z = rand() % 30;
+		float x = static_cast<float>(rand() % 30);
+		float z = static_cast<float>(rand() % 30);
 		Matrix w2;
 		w2 = Matrix::worldTrans(Vec3(0.01, 0.01, 0.01), Vec3(0, 0, 0), Vec3(x, 0, z));
 		matrices.push_back(w2);
 	}
 }
+
+void SaveTrees( std::vector<Matrix>& matrices) {
+	// use fstream to save random tree position into binary file
+	std::ofstream file("world.dat", std::ios::binary);
+	if (!file.is_open()) return;
+
+	size_t count = matrices.size();
+	file.write(reinterpret_cast<const char*>(&count), sizeof(count));
+	file.write(reinterpret_cast<const char*>(matrices.data()), sizeof(Matrix) * count);
+	file.close();
+}
+
+bool LoadTrees(std::vector<Matrix>& matrices, const std::string& filename) {
+	// load file, set it to bool so the game can check if world file exist to decide generate a new one or just load
+	std::ifstream file(filename, std::ios::binary);
+	if (!file.is_open()) return false;
+
+	size_t count;
+	file.read(reinterpret_cast<char*>(&count), sizeof(count));
+	matrices.resize(count);
+	file.read(reinterpret_cast<char*>(matrices.data()), sizeof(Matrix) * count);
+	file.close();
+	return true;
+}
+
 class FPS {
 public:
 	int frame = 0;
@@ -119,7 +145,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	Meshes tkp;
 	Meshes tree;
 
-	Meshes pine;
+	//Meshes pine;
+	Meshes pines; // only need one instance for each tree
 	Meshes junk;
 	Meshes bamboo;
 	Meshes test;
@@ -138,8 +165,14 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	TextureManager textureManagerWeapon1;
 	FPS fps;
 	std::vector<Matrix> trees;
+	//////////////////////////////////////////GAME OBJECTS/////////////
 	Camera camera(20, 0.1f, 100);
 	Player player(100.f,40,camera.position,camera.rotation, 4,0.1);
+	Enemy dinasour(60);
+
+
+
+
 	GamesEngineeringBase::SoundManager bgms; // try bgms again
 	// Mesh mesh;
 	// loading dinas;
@@ -171,7 +204,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	//cube.init(dxcore);
 	//sky.init(dxcore, 10, 10, 10, "SkyDome.png");
 	//tree.initWithoutTexture("acacia_003.gem",dxcore);
-	 pine.init("pine.gem", dxcore, &textureManager);
+	 pines.init("pine.gem", dxcore, &textureManager);
 
 	//junk.init("teraccgda.gem", dxcore, &textureManager);
 
@@ -187,9 +220,15 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	int treeCount = 20;
 	float mouseSensitivity = 0.001f;
 	bool running = true;
-	RandomCreation(trees, 3);
+	if (!LoadTrees(trees,"world.dat")) {
+		// if there is no file, create one and save
+		// TODO one potential improvement: The previous dat file must be deleted if want to change number of trees, maybe can add a number check
+		RandomCreation(trees, 10);
+		SaveTrees(trees);
+	}
+	
 
-	// bgms.loadMusic("bgm.wav");
+	// bgms.loadMusic("bgm.wav"); // still not work....
 
 	while (running)
 	{
@@ -203,60 +242,31 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		float speed = 6.f;
 		fps.update(dt);
 		fps.draw();
-		
-		///////////////////////////////////////////////////////////////////////////////////////////////////
-		// TODO DEBUG TO FIND ERROR OF MATRIX, WHICH CAUSES CHAOS DISPLAY AND BLUE SCREEN
-		// TODO ERROR HAPPENS INSIDE THE FORWARD. AND NOT RELATED WITH NORMALISE
-		// TODO idea: replace hemisphere with cube skybox or hemisphere, but sky box for now works.
-		win.capture(from, object, up, mouseSensitivity, camera);
 
-		Vec3 forward = (object - from);
-		if (forward.Length() == 0 || std::isnan(forward.x)) {
-			forward = Vec3(0, 0, -1); // Default forward direction
-		}
-		else {
-			forward = forward.normalise();
-		}
+		////////////////////////////////CAMERA CONTROL RELATED///////////////////////////////////////////////
+		camera.captureInput(win.hwnd, mouseSensitivity);
 
-		Vec3 right = up.Cross(forward);
-		if (right.Length() == 0 || std::isnan(right.x)) {
-			right = Vec3(1, 0, 0); // Default right vector
-		}
-		else {
-			right = right.normalise();
-		}
-
-		Vec3 cameraUp = forward.Cross(right);
 		// Process keyboard input for movement
-		if (win.keys['W']) from += forward * speed * dt;
-		if (win.keys['S']) from -= forward * speed * dt;
+		bool moveForward = win.keys['W'];
+		bool moveBackward = win.keys['S'];
+		bool moveLeft = win.keys['A'];
+		bool moveRight = win.keys['D'];
+		bool reset = win.keys['T'];
 
-		if (win.keys['A']) {
-			Vec3 delta = right * speed * dt;
-			from += delta;
-			object += delta; 
-		}
-		if (win.keys['D']) {
-			Vec3 delta = right * speed * dt;
-			from -= delta;
-			object -= delta; 
-		}
+		if (win.keys['Q']) break; // put q in here to break the loop, more convenient than put everything in camera class
+		camera.processInput(moveForward, moveBackward, moveLeft, moveRight, reset, speed, dt);
 
-		if (win.keys['T']) {
-			camera.resetCamera(from, object, up);
-		}
-		if (win.keys['Q']) break;
+		// Get matrices after updating camera
+		Matrix lookAt = camera.getViewMatrix();
+		Matrix proj = camera.getProjectionMatrix(1);
+		Matrix resultMatrix = lookAt * proj;
 
-		// Update camera
-		Matrix lookAt = camera.updateCameraMat();
-		Matrix perspProj = camera.updateProjectionMat();
-		Matrix resultMatrix = lookAt * perspProj;
-
-		std::ostringstream logStream;
-		logStream << "from: " << from << "\n";
-		logStream << "object: " << object << "\n";
-		logStream << "Right: " << right.x << ", " << right.y << ", " << right.z << "\n";
-		DebugLog(logStream.str());
+		//std::ostringstream logStream;
+	//logStream << "from: " << from << "\n";
+	//logStream << "object: " << object << "\n";
+	//logStream << "Right: " << right.x << ", " << right.y << ", " << right.z << "\n";
+	//DebugLog(logStream.str());
+		//////////////////////////////////SKY DOME//////////////////////////////////////////////////////////
 
 		skyDomeShad.apply(&dxcore);
 		dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
@@ -268,36 +278,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		w0 = Matrix::translation(Vec3(1, -10, -10));
 		sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
 		sphere.draw(dxcore);
-		//////////////////////////////////////////////////////////////////////////////////////////////////
-		//for (unsigned i = 0; i < 86; i++) {
-		//	// Tester, to load the mesh and confirm their appearance
-		//	Meshes meshes;
-		//	meshes.init(meshFiles[i], dxcore, &textureManager);
-
-		//	textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		//	Matrix w2;
-
-		//	w2 = Matrix::worldTrans(Vec3(0.03, 0.03, 0.03), Vec3(0, 0, 0), Vec3(0+i, 0, 0+i));
-		//	meshes.updateWorld(w2, textureShad, dxcore);
-
-		//	meshes.drawTexture(&dxcore, textureShad, &textureManager);
-		//}
-
-
-
-
-		 // skybox
-		//shad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		//Matrix w5;
-		//w5 = Matrix::scaling(Vec3(100, 100, 100));
-		//sky.updateWorld(w5, shad, dxcore);
-		//sky.draw(dxcore);
-
-		//TODO Attatch textures for skybox
-		// TODO add collider first.
-		// TODO velocity should be -9.8 for players and enemies, others is unchange
-		// TODO 
-
+		
 		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		textureShad.apply(&dxcore);
 		dxcore.devicecontext->PSSetShaderResources(0, 1, &plane.textures.srv);
@@ -306,8 +287,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
 		plane.draw(&textureShad, &dxcore);
 
-		
-		// Working animation example
+		/////////////////////////////////////////////GAME LOGIC///////////////////////////////////////////////////
 		// TODO MESHES WITH ANIMATION
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
 		Matrix w1;
@@ -328,27 +308,36 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		animationTextureShad.apply(&dxcore);
 		enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManagerEnemy);
 
-	
 
-		Matrix wn;
+
+		Vec3 weaponOffset = Vec3(0.4f, -0.3f, 0.5f); // Right, Down, Forward
+
+		// Compute world position for weapon based on camera position and orientation
+		Vec3 weaponWorldPos = camera.position
+			+ camera.right * weaponOffset.x
+			+ camera.upLocal * weaponOffset.y
+			+ camera.forward * weaponOffset.z;
+
+		//Matrix3 cameraRotation = Matrix3(
+		//	camera.right.x, camera.upLocal.x, camera.forward.x,
+		//	camera.right.y, camera.upLocal.y, camera.forward.y, 
+		//	camera.right.z, camera.upLocal.z, camera.forward.z
+		//);
+		
+		// TODO PLAYER'S HAND---- SO THE PLAYER'S MODEL CAN USE A SIMPLE RECGANGULAR TO REPRESENT?
+		Matrix wn1;
 		//  camera should match it
 		Uzi.update("Armature|08 Fire", dt);
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
 	// 	w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI / 2), Vec3(-4, 10, 0));
-		w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, M_PI/2, M_PI / 2), Vec3(camera.position.x, camera.position.y, camera.position.z));
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn);
+		//wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), cameraRotation * Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
+		wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
+		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
 		animationTextureShad.apply(&dxcore);
 		Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon1);
 		
-		// TODO PLAYER'S HAND---- SO THE PLAYER'S MODEL CAN USE A SIMPLE RECGANGULAR TO REPRESENT?
-		//AC5.update("Armature|08 Fire", dt);
-		////animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", AC5.matrices);
-		//w1 = Matrix::worldTrans(Vec3(0.5, 0.5, 0.5), Vec3(M_PI / 2, 0, M_PI / 2), Vec3(6,10 , 5));
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationTextureShad.apply(&dxcore);
-		//AC5.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon);
+
 
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
 		//enemySolider.update("Talking", dt);
@@ -358,44 +347,14 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuSffer", "W", &w1);
 		//animationTextureShad.apply(&dxcore);
 		//enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManager2);
-		// 用一个列表存下场景内部所有的模型以及位置等参数,然后调用他们
 
-		// TODO MESHES REQUIRES ALPHA TEST: Grass, Trees, etc
-		
-
-		// generate random trees---Roguelike! 
-		// TODO SAVE THEM IN A FILE AND LOAD WHEN RENDERING
+		// TODO MESHES REQUIRES ALPHA TEST: Grass, Trees, etc, Trees for now, also can try grass or stones
+		// generate random trees---Roguelike! it's based on file so map for each time running will be same------can create a complex map generation system in future, seed based
+		textureAlphaShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		for (const Matrix& mat : trees) {
-
-			Meshes pines;
-			pines.init("pine.gem", dxcore, &textureManager);
-
-			textureAlphaShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-
 			pines.updateWorld(mat, textureAlphaShad, dxcore);
-			// w2 = Matrix::translation(Vec3(5, 0, 0));
 			pines.drawTexture(&dxcore, textureAlphaShad, &textureManager);
-		}
-		
-
-		// TODO STATIC MESHES WITH TEXTURE
-		/*textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		w2 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(0, 0, 0), Vec3(5, 0, 5));
-
-		test.updateWorld(w2, textureShad, dxcore);
-		test.drawTexture(&dxcore, textureShad, &textureManager);*/
-		// TODO PLAYER RELATED MESHES
-		// TODO PLAYER MODEL
-		//w2 = Matrix::worldTrans(Vec3(0.03, 0.03, 0.03), Vec3(0, 0, 0), Vec3(0, 0, 0));
-		//enemySolider.updateWorld(w2, textureShad, dxcore);
-
-		//enemySolider.drawTexture(&dxcore, textureShad, &textureManager);
-
-		//w2 = Matrix::worldTrans(Vec3(0.3, 0.3, 0.3), Vec3(0, 0, 0), Vec3(7, 0, 0));
-		//tkp.updateWorld(w2, textureShad, dxcore);
-		//tkp.drawTexture(&dxcore, textureShad, &textureManager);
-		/*bamboo.updateWorld(w2, textureShad, dxcore);
-		bamboo.drawTexture(&dxcore, textureShad, &textureManager);*/
+		 }
 
 		dxcore.Present();
 	}

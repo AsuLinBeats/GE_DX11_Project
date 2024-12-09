@@ -4,53 +4,6 @@
 #include"Collider.h"
 #include"mesh.h"
 
-
-//class Character {
-//	Vec3 position;
-//	int currentBlood;
-//	int maxBlood;
-//	int currentAmmo;
-//	int maxAmmo;
-//	Vec3 wPosition;
-//	Vec3 rotation;
-//	float speed;
-//	float sightrange;
-//	void move() {
-//		// 对于玩家而言,这个与相机移动完全一致
-//	};
-//
-//	void rotation() {
-//
-//	};
-//
-//	void init(int blood, int ammo) {
-//		// init properties and load meshes
-//		maxBlood = blood;
-//		currentBlood = maxBlood;
-//
-//		maxAmmo = ammo;
-//		currentAmmo = maxAmmo;
-//	};
-//
-//	void spawn() {
-//
-//	};
-//
-//	void reload() {
-//		// suppose we have infinite magazines
-//		currentAmmo = maxAmmo;
-//	};
-//
-//	void update() {
-//		// apply changes and draw 
-//	};
-//	
-//	bool collider() {
-//
-//	}
-//};
-//
-
 class Bullet {
 public:
 	Vec3 pos;   // Current position of the bullet
@@ -60,6 +13,7 @@ public:
 	float damage;
 	Cube bull;
 	Vec3 prevPos;
+	Enemy dinasour;
 	Bullet(Vec3 _pos, Vec3 _dir, float _spd, float _damage) {
 		pos = _pos;
 		dir = _dir;
@@ -68,6 +22,9 @@ public:
 		dir.normalise();// ensure consistent move
 	}
 	
+	void Attack() {
+		isActive = false;
+	}
 
 	void update(float dt) {
 		if (!isActive) return;
@@ -79,6 +36,8 @@ public:
 		if (pos.Length() > 100.0f) {
 			isActive = false;
 		}
+
+		if (checkCollision(dinasour.collider))
 	}
 
 	bool checkCollision(const AABB& enemyBox, float& hitDist) {

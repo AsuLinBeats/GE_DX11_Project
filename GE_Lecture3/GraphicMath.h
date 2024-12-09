@@ -286,6 +286,53 @@ public:
 
 };
 
+class Matrix3 {
+public:
+	union {
+		float a[3][3];
+		float m[9];
+	};
+
+	Matrix3() {
+		// Initialise to identity
+		m[0] = 1;
+		m[1] = 0;
+		m[2] = 0;
+		m[3] = 0;
+		m[4] = 0;
+		m[5] = 1;
+		m[6] = 0;
+		m[7] = 0;
+		m[8] = 0;
+	}
+
+	Matrix3(float m00, float m01, float m02,  float m10, float m11, float m12,  float m20, float m21, float m22) {
+		a[0][0] = m00;
+		a[0][1] = m01;
+		a[0][2] = m02;
+
+
+		a[1][0] = m10;
+		a[1][1] = m11;
+		a[1][2] = m12;
+
+
+		a[2][0] = m20;
+		a[2][1] = m21;
+		a[2][2] = m22;
+
+
+	}
+
+	Vec3 operator*(const Vec3& v) const {
+		return Vec3(m[0] * v.x + m[1] * v.y + m[2] * v.z ,
+			m[4] * v.x + m[5] * v.y + m[6] * v.z ,
+			m[8] * v.x + m[9] * v.y + m[10] * v.z);
+	}
+
+
+};
+
 class Matrix {
 public:
 	union {
