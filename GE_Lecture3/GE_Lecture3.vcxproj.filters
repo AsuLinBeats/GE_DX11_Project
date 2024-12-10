@@ -36,9 +36,6 @@
     <ClCompile Include="mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -138,6 +135,15 @@
     </Text>
     <Text Include="Collider.txt">
       <Filter>Header Files</Filter>
+    </Text>
+    <Text Include="G_buffer_pixel_shader.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="G_buffer_vertex_static_shader.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="G_buffer_pixel_shader_alpha.txt">
+      <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

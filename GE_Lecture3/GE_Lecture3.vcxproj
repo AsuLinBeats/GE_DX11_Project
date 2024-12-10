@@ -128,7 +128,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Character.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="window.cpp" />
@@ -161,6 +160,9 @@
     <Text Include="3D_vertex_shader.txt" />
     <Text Include="Animation_vertex_shader.txt" />
     <Text Include="Collider.txt" />
+    <Text Include="G_buffer_pixel_shader.txt" />
+    <Text Include="G_buffer_pixel_shader_alpha.txt" />
+    <Text Include="G_buffer_vertex_static_shader.txt" />
     <Text Include="pixel_shader.txt" />
     <Text Include="const_buffer.txt" />
     <Text Include="SkyDome_pixel_shader.txt" />

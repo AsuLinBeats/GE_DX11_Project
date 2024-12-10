@@ -133,7 +133,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shader animationTextureShad;
 	shader textureAlphaShad;
 	shader skyDomeShad; // shader for skyDome to fix the mix buffer bug.
-	shader bulletShad;
+	// Shader for G-buffer
+	shader textureShadG;
+	shader animationTextureShadG;
+	shader textureAlphaShadG;
+	shader skyDomeShadG; // shader for skyDome to fix the mix buffer bug.
+
 	ConstantBuffer constBuffer;
 	Matrix vp1;
 	Matrix planeWorld;
@@ -192,7 +197,9 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	textureAlphaShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
 	animationTextureShad.initAnim("Animation_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d animation texture shader
 	skyDomeShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
-	bulletShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
+	// bulletShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
+	// 
+	
 	// TODO initialise stuffs in world
 	//tri.init(dxcore); // 2D example
 	sphere.init(dxcore, 30, 30, 80, "SkyDome.png");
@@ -200,22 +207,25 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon1);
 	AC5.initTexture("Automatic_Carbine_5.gem", dxcore, &textureManagerWeapon);
 	dina.initTexture("TRex.gem", dxcore, &textureManager); // vertices and animation for dina
-	// tkp.init("tkpmbcnjw.gem", dxcore, &textureManager);
 	plane.initTexture(dxcore, "riuvL_2K_BaseColor.jpg"); // USE THIS AS PLAYER'S MODEL
-	//skyBox.init(dxcore);
 
-	// wclie.init("wcliegz.gem", dxcore, &textureManager); // a spring
-	//test.init("Uzi.gem", dxcore, &textureManager); // a spring
-	//testAni.initTexture("Uzi.gem", dxcore, &textureManager);
-	//cube.init(dxcore);
-	//sky.init(dxcore, 10, 10, 10, "SkyDome.png");
 	//tree.initWithoutTexture("acacia_003.gem",dxcore);
 	 pines.init("pine.gem", dxcore, &textureManager);
 
 	//junk.init("teraccgda.gem", dxcore, &textureManager);
 
 	// bamboo.init("bamboo.gem", dxcore, &textureManager);
+	//skyBox.init(dxcore);
 
+	// deferred shader 
+	 textureShadG.initStatic("3D_vertex_shader.txt", "G_buffer_pixel_shader.txt", &dxcore); // 3d shader with texture
+	 textureAlphaShadG.initStatic("3D_vertex_shader.txt", "G_buffer_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
+	 animationTextureShadG.initAnim("Animation_vertex_shader.txt", "G_buffer_pixel_shader.txt", &dxcore); // 3d animation texture shader
+	 skyDomeShadG.initStatic("3D_vertex_shader.txt", "G_buffer_pixel_shader.txt", &dxcore);
+
+
+
+	 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	Vec3 from = Vec3(11, 5, 11);
 	Vec3 object = Vec3(0.0f, 0.0f, 0.0f);
 	Vec3 up = Vec3(0.0f, 1.0f, 0.0f);
@@ -267,67 +277,70 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		Matrix proj = camera.getProjectionMatrix(1);
 		Matrix resultMatrix = lookAt * proj;
 
+		// tester
 		//std::ostringstream logStream;
 	//logStream << "from: " << from << "\n";
 	//logStream << "object: " << object << "\n";
 	//logStream << "Right: " << right.x << ", " << right.y << ", " << right.z << "\n";
 	//DebugLog(logStream.str());
-		//////////////////////////////////SKY DOME//////////////////////////////////////////////////////////
+		//////////////////////////////////BASIC MODEL//////////////////////////////////////////////////////////
 
-		skyDomeShad.apply(&dxcore);
-		dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
-		// make sure skybox following camera all time
-		Matrix skyDomeWorldMatrix = Matrix::translation(camera.position); // get camera position
-		skyDomeShad.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
-		skyDomeShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		Matrix w0;
-		w0 = Matrix::translation(Vec3(1, -10, -10));
-		sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
-		sphere.draw(dxcore);
-		
-		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-		textureShad.apply(&dxcore);
-		dxcore.devicecontext->PSSetShaderResources(0, 1, &plane.textures.srv);
-		Matrix w;
-		w = Matrix::scaling(Vec3(50, 50, 50));
-		textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
-		plane.draw(&textureShad, &dxcore);
+	//	skyDomeShad.apply(&dxcore);
+	//	dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
+	//	// make sure skybox following camera all time
+	////	Matrix skyDomeWorldMatrix = Matrix::translation(camera.position); // get camera position
+	//	Matrix skyDomeWorldMatrix = Matrix::worldTrans(Vec3(1,1,1), Vec3(0, 0,0), camera.position); // get camera position
+	//	skyDomeShad.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
+	//	skyDomeShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+	//	Matrix w0;
+	//	w0 = Matrix::translation(Vec3(1, -10, -10));
+	//	sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
+	//	sphere.draw(dxcore);
+	//	
+	//	// plane
+	//	textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+	//	textureShad.apply(&dxcore);
+	//	dxcore.devicecontext->PSSetShaderResources(0, 1, &plane.textures.srv);
+	//	Matrix w;
+	//	w = Matrix::scaling(Vec3(50, 50, 50));
+	//	textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
+	//	plane.draw(&textureShad, &dxcore);
 
-		/////////////////////////////////////////////GAME LOGIC///////////////////////////////////////////////////
-		// TODO MESHES WITH ANIMATION
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		Matrix w1;
-		dina.update("Run", dt);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
-		w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.apply(&dxcore);
-		dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
-		/////////////LOGIC PART///////
-		//player.movePlayer(camera, dt);
-		//player.update(dt,hitDistance);
+	//	/////////////////////////////////////////////GAME LOGIC///////////////////////////////////////////////////
+	//	// TODO MESHES WITH ANIMATION
+	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+	//	Matrix w1;
+	//	dina.update("Run", dt);
+	//	//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
+	//	w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
+	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+	//	animationTextureShad.apply(&dxcore);
+	//	dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
+	//	/////////////LOGIC PART///////
+	//	//player.movePlayer(camera, dt);
+	//	//player.update(dt,hitDistance);
 
-		//if (mouseLeftPressed) {
-		//	player.shoot(dt, reloadDuration, bulletSpeed);
-		//}
+	//	//if (mouseLeftPressed) {
+	//	//	player.shoot(dt, reloadDuration, bulletSpeed);
+	//	//}
 
-		//dinasour.moveNormal(dt, moveDistance, animationTextureShad, dxcore, resultMatrix, textureManager, player, bullet);
-		//
-		//player.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
-		//for (auto& b : player.bullets) {
-		//	b.render(bulletShad, dxcore, resultMatrix);
-		//}
-		//dinasour.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
+	//	//dinasour.moveNormal(dt, moveDistance, animationTextureShad, dxcore, resultMatrix, textureManager, player, bullet);
+	//	//
+	//	//player.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
+	//	//for (auto& b : player.bullets) {
+	//	//	b.render(bulletShad, dxcore, resultMatrix);
+	//	//}
+	//	//dinasour.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
 
 
-		enemySolider.update("rifle aiming idle", dt);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
-		w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.apply(&dxcore);
-		enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManagerEnemy);
+	//	enemySolider.update("rifle aiming idle", dt);
+	//	//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
+	//	w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
+	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+	//	animationTextureShad.apply(&dxcore);
+	//	enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManagerEnemy);
 
 
 
@@ -339,44 +352,122 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 			+ camera.upLocal * weaponOffset.y
 			+ camera.forward * weaponOffset.z;
 
-		//Matrix3 cameraRotation = Matrix3(
-		//	camera.right.x, camera.upLocal.x, camera.forward.x,
-		//	camera.right.y, camera.upLocal.y, camera.forward.y, 
-		//	camera.right.z, camera.upLocal.z, camera.forward.z
-		//);
+	//	//Matrix3 cameraRotation = Matrix3(
+	//	//	camera.right.x, camera.upLocal.x, camera.forward.x,
+	//	//	camera.right.y, camera.upLocal.y, camera.forward.y, 
+	//	//	camera.right.z, camera.upLocal.z, camera.forward.z
+	//	//);
+	//	
+	//	// TODO PLAYER'S HAND---- SO THE PLAYER'S MODEL CAN USE A SIMPLE RECGANGULAR TO REPRESENT?
+	//	Matrix wn1;
+	//	//  camera should match it
+	//	Uzi.update("Armature|08 Fire", dt);
+	//	//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
+	//// 	w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI / 2), Vec3(-4, 10, 0));
+	//	//wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), cameraRotation * Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
+	//	wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
+	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
+	//	animationTextureShad.apply(&dxcore);
+	//	Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon1);
+	//	
+
+	//	// TODO MESHES REQUIRES ALPHA TEST: Grass, Trees, etc, Trees for now, also can try grass or stones
+	//	// generate random trees---Roguelike! it's based on file so map for each time running will be same------can create a complex map generation system in future, seed based
+	//	textureAlphaShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+	//	for (const Matrix& mat : trees) {
+	//		pines.updateWorld(mat, textureAlphaShad, dxcore);
+	//		pines.drawTexture(&dxcore, textureAlphaShad, &textureManager);
+	//	 }
+
+		/////////////////////////////////////////////////////////////////////////////////Deferred shading ///////////////
+		// Implement deferred shading
+		//dxcore.devicecontext->OMSetRenderTargets(1, &dxcore.renderTargetView, dxcore.depthStencilView);
+		//const float clearColour[1] = { 0.0f}; // Clear to black with full alpha
+		//dxcore.devicecontext->ClearRenderTargetView(dxcore.renderTargetView, clearColour);
+		//dxcore.devicecontext->ClearDepthStencilView(dxcore.depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 		
-		// TODO PLAYER'S HAND---- SO THE PLAYER'S MODEL CAN USE A SIMPLE RECGANGULAR TO REPRESENT?
-		Matrix wn1;
-		//  camera should match it
-		Uzi.update("Armature|08 Fire", dt);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
-	// 	w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI / 2), Vec3(-4, 10, 0));
-		//wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), cameraRotation * Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
-		wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
-		animationTextureShad.apply(&dxcore);
-		Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon1);
-		
+		// Static model, SKY Box
+		skyDomeShadG.apply(&dxcore);
+		// set world matrix
+		Matrix skyDomeWorldMatrix = Matrix::worldTrans(Vec3(1, 1, 1), Vec3(0, 0, 0), camera.position);
+		skyDomeShadG.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
+		dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
+		skyDomeShadG.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+
+		// Bind texture (for mixing different G-Buffers, will be normal and depth here)
+	
+		// sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
+		// Draw the model to G-buffer
+		sphere.draw(dxcore);
+
+//			skyDomeShad.apply(&dxcore);
+//	dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
+//	// make sure skybox following camera all time
+////	Matrix skyDomeWorldMatrix = Matrix::translation(camera.position); // get camera position
+//	Matrix skyDomeWorldMatrix = Matrix::worldTrans(Vec3(1,1,1), Vec3(0, 0,0), camera.position); // get camera position
+//	skyDomeShad.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
+//	skyDomeShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+//	Matrix w0;
+//	w0 = Matrix::translation(Vec3(1, -10, -10));
+//	sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
+//	sphere.draw(dxcore);
 
 
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		//enemySolider.update("Talking", dt);
-		////animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
-		//w1 = Matrix::worldTrans(Vec3(0.5, 0.5, 0.5), Vec3(0, 0, 0), Vec3(7, 0, 0));
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuSffer", "W", &w1);
-		//animationTextureShad.apply(&dxcore);
-		//enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManager2);
+
+
+
+
+		textureShadG.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		textureShadG.apply(&dxcore);
+		dxcore.devicecontext->PSSetShaderResources(0, 1, &plane.textures.srv);
+		Matrix w;
+		w = Matrix::scaling(Vec3(50, 50, 50));
+		textureShadG.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
+		plane.draw(&textureShadG, &dxcore);
+
 
 		// TODO MESHES REQUIRES ALPHA TEST: Grass, Trees, etc, Trees for now, also can try grass or stones
 		// generate random trees---Roguelike! it's based on file so map for each time running will be same------can create a complex map generation system in future, seed based
-		textureAlphaShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		textureAlphaShadG.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
+		textureAlphaShadG.apply(&dxcore);
 		for (const Matrix& mat : trees) {
-			pines.updateWorld(mat, textureAlphaShad, dxcore);
-			pines.drawTexture(&dxcore, textureAlphaShad, &textureManager);
-		 }
+			pines.updateWorld(mat, textureAlphaShadG, dxcore);
+			pines.drawTexture(&dxcore, textureAlphaShadG, &textureManager);
+	 }
+ 
+		/////////////////// Animated model
 
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+		Matrix w1;
+		dina.update("Run", dt);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
+		w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.apply(&dxcore);
+		dina.drawTexture(&dxcore, animationTextureShadG, &textureManager);
+
+
+		enemySolider.update("rifle aiming idle", dt);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
+		w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.apply(&dxcore);
+		enemySolider.drawTexture(&dxcore, animationTextureShadG, &textureManagerEnemy);
+
+		Matrix wn1;
+		//  camera should match it
+		Uzi.update("Armature|08 Fire", dt);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
+		wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
+		animationTextureShadG.apply(&dxcore);
+		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManagerWeapon1);
+		
+		// present G-buffer
 		dxcore.Present();
 	}
 }

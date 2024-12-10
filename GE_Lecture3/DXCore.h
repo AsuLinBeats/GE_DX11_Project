@@ -6,7 +6,7 @@
 #pragma comment(lib, "D3D11.lib")
 #pragma comment(lib, "D3DCompiler.lib")
 #pragma comment(lib, "DXGI.lib")
-// TODO THE COMMITMENT IN THIS FILE IS FOR LEARNING DX11 PURPOSE, AND NOT RELATED WITH MY IDEA FOR ASSESSMENT (so just skip them while marking)
+// TODO THE COMMITMENT IN THIS FILE IS ADDED FOR LEARNING DX11 PURPOSE DURING FIRST FEW WEEKS OF MODULE, AND NOT RELATED WITH MY IDEA FOR ASSESSMENT (so just skip them while marking)
 class DXCore {
 public:
 
@@ -27,7 +27,15 @@ public:
 	D3D11_RASTERIZER_DESC rsdesc; // structure to describe the rastizer state, controls how polygons are converted to pixels
 	ID3D11RasterizerState* rasterizerState; // pointer to state/object configuring rasterizer
 
+	// deferred shading related:
+	// texture:
+	ID3D11RenderTargetView* renderTargetView;
+	ID3D11Texture2D* texture;
+	ID3D11ShaderResourceView* srv;
 
+	//ID3D11RenderTargetView* gBufferRTVs[3]; // Albedo, Normals, Depth
+	//ID3D11ShaderResourceView* gBufferSRVs[3]; // Shader Resource Views for G-Buffer
+	// 
 	// initialise dx swapchain, device, and rendering resources: HWND:Handle to window where rendering will take place
 	void init(int width, int height,HWND hwnd, bool window_fullscreen) {
 		// initialise swap chain
@@ -109,6 +117,39 @@ public:
 		device->CreateRasterizerState(&rsdesc, &rasterizerState); // Creates a Rasterizer State object from the description (rsdesc).
 		devicecontext->RSSetState(rasterizerState); // Sets the created rasterizer state to GPU pipeline
 
+		// Deferred shading, G-buffer, from slides
+		// 1 G-buffer for now, which is colour
+		// may try to add normal and depth for normal mapping and shadow mapping but now, just use colour as example on slides
+		D3D11_TEXTURE2D_DESC textureDesc;
+		textureDesc.Width = width;
+		textureDesc.Height = height;
+		textureDesc.MipLevels = 1;
+		textureDesc.ArraySize = 1;
+		textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		textureDesc.SampleDesc.Count = 1;
+		textureDesc.SampleDesc.Quality = 0;
+		textureDesc.Usage = D3D11_USAGE_DEFAULT;
+		textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+		textureDesc.CPUAccessFlags = 0;
+		textureDesc.MiscFlags = 0;
+
+		device->CreateTexture2D(&textureDesc, NULL, &texture);
+		// Create render target view
+		D3D11_RENDER_TARGET_VIEW_DESC renderTargetViewDesc;
+		ZeroMemory(&renderTargetViewDesc, sizeof(renderTargetViewDesc));
+		renderTargetViewDesc.Format = textureDesc.Format;
+		renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+		renderTargetViewDesc.Texture2D.MipSlice = 0;
+
+		device->CreateRenderTargetView(texture, &renderTargetViewDesc, &renderTargetView);
+		// Create shader resource view
+		D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
+		ZeroMemory(&shaderResourceViewDesc, sizeof(shaderResourceViewDesc));
+		shaderResourceViewDesc.Format = textureDesc.Format;
+		shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
+		shaderResourceViewDesc.Texture2D.MipLevels = 1;
+		device->CreateShaderResourceView(texture, &shaderResourceViewDesc, &srv);
 	}
 
 	void Clear() {

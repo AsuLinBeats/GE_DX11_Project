@@ -1,10 +1,10 @@
 #pragma once
+#include"Collider.h"
 #include "GamesEngineeringBase.h"
 #include "GraphicMath.h"
-#include"Collider.h"
 #include"mesh.h"
 #include"anime.h"
-
+#include"camera.h"
 class Bullet {
 public:
 	Vec3 pos;   // Current position of the bullet
@@ -37,10 +37,10 @@ public:
 		if (pos.Length() > 100.0f) {
 			isActive = false;
 		}
-
-		/*if (checkCollision(dinasour.collider, hitDist)) {
-			isActive = false;
-		}*/
+		// the check of collision for bullet will be implemented in enemy class.
+		//if (checkCollision(dinasour.collider, hitDist)) {
+		//	isActive = false;
+		//}
 	}
 
 	bool checkCollision(const AABB& enemyBox, float& hitDist) {
@@ -65,15 +65,16 @@ public:
 	}
 
 
-	void render(shader& bulletShad, DXCore& dxcore, Matrix& vp) {
-		if (!isActive) return;
-		// it looks like texture of bullet is loaded in weapons. here probably render a basic cube to represent bullet.
-		// Render the bullet using its position
-		Matrix worldMatrix = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(0, 0, 0), pos);
-		bulletShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &worldMatrix);
-		bulletShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &vp);
-		bulletShad.apply(&dxcore);
-	}
+	//void render(shader& bulletShad, DXCore& dxcore, Matrix& vp) {
+	//  // Acturally, the bullets don't require model, or just using a simple cube or sphere can represent it
+	//	if (!isActive) return;
+	//	// it looks like texture of bullet is loaded in weapons. here probably render a basic cube to represent bullet.
+	//	// Render the bullet using its position
+	//	Matrix worldMatrix = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(0, 0, 0), pos);
+	//	bulletShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &worldMatrix);
+	//	bulletShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &vp);
+	//	bulletShad.apply(&dxcore);
+	//}
 
 
 };
