@@ -133,6 +133,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shader animationTextureShad;
 	shader textureAlphaShad;
 	shader skyDomeShad; // shader for skyDome to fix the mix buffer bug.
+	shader bulletShad;
 	ConstantBuffer constBuffer;
 	Matrix vp1;
 	Matrix planeWorld;
@@ -165,12 +166,16 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	TextureManager textureManagerWeapon1;
 	FPS fps;
 	std::vector<Matrix> trees;
+	///////////////////////
+	float reloadDuration = 5.f;
+	float moveDistance = 30.f;
+	float bulletSpeed = 100.f;
+	float hitDistance = 5.f;
 	//////////////////////////////////////////GAME OBJECTS/////////////
 	Camera camera(20, 0.1f, 100);
 	Player player(100.f,40,camera.position,camera.rotation, 4,0.1);
 	Enemy dinasour(60);
-
-
+	Bullet bullet(camera.position,camera.position, bulletSpeed,50.f);
 
 
 	GamesEngineeringBase::SoundManager bgms; // try bgms again
@@ -187,6 +192,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	textureAlphaShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
 	animationTextureShad.initAnim("Animation_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d animation texture shader
 	skyDomeShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
+	bulletShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
 	// TODO initialise stuffs in world
 	//tri.init(dxcore); // 2D example
 	sphere.init(dxcore, 30, 30, 80, "SkyDome.png");
@@ -252,7 +258,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		bool moveLeft = win.keys['A'];
 		bool moveRight = win.keys['D'];
 		bool reset = win.keys['T'];
-
+		bool mouseLeftPressed = (GetAsyncKeyState(VK_LBUTTON) & 0x8000);
 		if (win.keys['Q']) break; // put q in here to break the loop, more convenient than put everything in camera class
 		camera.processInput(moveForward, moveBackward, moveLeft, moveRight, reset, speed, dt);
 
@@ -298,6 +304,21 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShad.apply(&dxcore);
 		dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
+		/////////////LOGIC PART///////
+		//player.movePlayer(camera, dt);
+		//player.update(dt,hitDistance);
+
+		//if (mouseLeftPressed) {
+		//	player.shoot(dt, reloadDuration, bulletSpeed);
+		//}
+
+		//dinasour.moveNormal(dt, moveDistance, animationTextureShad, dxcore, resultMatrix, textureManager, player, bullet);
+		//
+		//player.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
+		//for (auto& b : player.bullets) {
+		//	b.render(bulletShad, dxcore, resultMatrix);
+		//}
+		//dinasour.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
 
 
 		enemySolider.update("rifle aiming idle", dt);
