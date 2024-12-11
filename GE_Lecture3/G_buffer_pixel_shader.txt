@@ -10,6 +10,8 @@ struct PS_INPUT {
 
 struct GBUFFER {
     float4 colour : SV_TARGET0;    //colour
+  //  float4 normal : SV_TARGET1;    //normal mapping
+ //   float4 depth : SV_TARGET2;    //shadow
     // Maybe need more channels (like normal for normal mapping, depth for shadow check?)
     ////////////////////////////////////////////TODOTODOTODO////////////////////////////////////
 
@@ -24,10 +26,10 @@ GBUFFER PS(PS_INPUT input) {
     gbuffer.colour = colour;
 
     // for normal mapping, looks like need more channels?
-    //gbuffer.Normal = normalize(input.Normal);
+   // gbuffer.normal = normalize(input.Normal);
 
     // depth
-    // gbuffer.Depth = input.Pos.z;
+   // gbuffer.depth = input.Pos.z;
 
     return gbuffer;
 }

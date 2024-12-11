@@ -33,9 +33,6 @@
     <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -143,6 +140,12 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="G_buffer_pixel_shader_alpha.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="G_buffer_pixel_shader_shadow.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="vertex_shader_shadow.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

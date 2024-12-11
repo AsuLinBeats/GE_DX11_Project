@@ -708,7 +708,7 @@ public:
 		return temp;
 	}
 
-	Matrix PerPro(float height, float width, float radians, float Far, float Near) {
+	Matrix const PerPro(float height, float width, float radians, float Far, float Near) {
 		Matrix PerPro;
 
 		PerPro[0] = 1 / ((tan(radians / 2) * (width / height)));
@@ -728,6 +728,32 @@ public:
 		PerPro[14] = -1;
 		PerPro[15] = 0;
 		return PerPro;
+	}
+
+	Matrix const OrthoPro(float left, float right, float top, float bottom, float Far, float Near) {
+		Matrix OrthoPro;
+
+		OrthoPro[0] = 2 / (right - left);
+		OrthoPro[1] = 0;
+		OrthoPro[2] = 0;
+		OrthoPro[3] = 0;
+
+		OrthoPro[4] = 0;
+		OrthoPro[5] = 2 / (top - bottom);
+		OrthoPro[6] = 0;
+		OrthoPro[7] = 0;
+
+		OrthoPro[8] = 0;
+		OrthoPro[9] = 0;
+		OrthoPro[10] = -2 / (Far - Near);
+		OrthoPro[11] = 0;
+
+		OrthoPro[12] = -(right + left) / (right - left);
+		OrthoPro[13] = -(top + bottom) / (top - bottom);
+		OrthoPro[14] = -(Far + Near) / (Far - Near);
+		OrthoPro[15] = 1;
+
+		return OrthoPro;
 	}
 
 

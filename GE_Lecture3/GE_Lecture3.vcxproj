@@ -129,7 +129,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="mesh.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +161,7 @@
     <Text Include="Collider.txt" />
     <Text Include="G_buffer_pixel_shader.txt" />
     <Text Include="G_buffer_pixel_shader_alpha.txt" />
+    <Text Include="G_buffer_pixel_shader_shadow.txt" />
     <Text Include="G_buffer_vertex_static_shader.txt" />
     <Text Include="pixel_shader.txt" />
     <Text Include="const_buffer.txt" />
@@ -170,6 +170,7 @@
     <Text Include="texture_pixel_shader.txt" />
     <Text Include="texture_pixel_shader_alpha.txt" />
     <Text Include="vertex_shader.txt" />
+    <Text Include="vertex_shader_shadow.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="acacia.gem" />

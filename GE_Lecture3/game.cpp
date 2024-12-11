@@ -138,11 +138,14 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shader animationTextureShadG;
 	shader textureAlphaShadG;
 	shader skyDomeShadG; // shader for skyDome to fix the mix buffer bug.
+	shader shadowShad;
+
 
 	ConstantBuffer constBuffer;
 	Matrix vp1;
 	Matrix planeWorld;
 	Matrix vp;
+	Matrix light;
 	Cube cube;
 	// Cube skyBox;
 	Sphere sphere;  // will use this for now, if grounded is filled, will use hemisphere to improve performance
@@ -197,6 +200,9 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	textureAlphaShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
 	animationTextureShad.initAnim("Animation_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d animation texture shader
 	skyDomeShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
+
+	//NOT WORKING SHADOW MAP
+	//shadowShad.initAnim("vertex_shader_shadow.txt", "G_buffer_pixel_shader_shadow.txt", &dxcore); 
 	// bulletShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
 	// 
 	
@@ -276,6 +282,15 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		Matrix lookAt = camera.getViewMatrix();
 		Matrix proj = camera.getProjectionMatrix(1);
 		Matrix resultMatrix = lookAt * proj;
+
+		// consider parallel light.
+		Matrix l;
+		Matrix o;
+		light = l.lookAt(from, object ,up) * o.OrthoPro(-10.0f, 10.0f, 10.0f, -10.0f, 100.0f, 0.1f);
+		
+		//Matrix lookAtLight = Matrix::lookAt(from, object,up);
+		//Matrix projLight = Matrix::PerPro(1,1,M_PI/4, 0.1f, 100.f);
+		//Matrix resultMatrixLight = lookAtLight * projLight;
 
 		// tester
 		//std::ostringstream logStream;
@@ -434,7 +449,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		for (const Matrix& mat : trees) {
 			pines.updateWorld(mat, textureAlphaShadG, dxcore);
 			pines.drawTexture(&dxcore, textureAlphaShadG, &textureManager);
-	 }
+		 }
  
 		/////////////////// Animated model
 
@@ -467,6 +482,37 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		animationTextureShadG.apply(&dxcore);
 		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManagerWeapon1);
 		
+
+		//// shadow mapping and light
+
+		//dxcore.devicecontext->OMSetRenderTargets(0, nullptr, dxcore.depthStencilView);
+		//dxcore.devicecontext->ClearDepthStencilView(dxcore.depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		//shadowShad.apply(&dxcore);
+		//shadowShad.updateConstantVS(" staticMeshBuffer","staticMeshBuffer", "LightVP", &light);
+		//// draw shadow
+		//for (const Matrix& mat : trees) {
+		//	pines.updateWorld(mat, shadowShad, dxcore);
+		//	pines.drawTexture(&dxcore, shadowShad, &textureManager);
+		//}
+
+		//dina.drawTexture(&dxcore, shadowShad, &textureManager);
+
+		//enemySolider.drawTexture(&dxcore, shadowShad, &textureManagerEnemy);
+
+		//Uzi.drawTexture(&dxcore, shadowShad, &textureManagerWeapon1);
+		// render all model using shadow shader to get their shadow
+		
+		//dxcore.devicecontext->OMSetRenderTargets(1, &dxcore.backbufferRenderTargetView, dxcore.depthStencilView);
+
+		//// Bind G-buffer and shadow map
+		//dxcore.devicecontext->PSSetShaderResources(0, 1, &dxcore.srv);
+		//dxcore.devicecontext->PSSetShaderResources(1, 1, &dxcore.normalSRV);
+		//dxcore.devicecontext->PSSetShaderResources(2, 1, &dxcore.shadowSRV);
+
+		//// Full-screen quad rendering
+		//shadowShad.updateConstantPS("LightData", "lightBuffer", "lightViewProj", &light);
+		//shadowShad.apply(&dxcore);
+		//dxcore.devicecontext->Draw(3, 0);
 		// present G-buffer
 		dxcore.Present();
 	}

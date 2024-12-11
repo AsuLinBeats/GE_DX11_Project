@@ -30,8 +30,14 @@ public:
 	// deferred shading related:
 	// texture:
 	ID3D11RenderTargetView* renderTargetView;
+	ID3D11RenderTargetView* shadowRTV;
+	ID3D11RenderTargetView* normalRTV;
 	ID3D11Texture2D* texture;
+	ID3D11Texture2D* shadow;
+	ID3D11Texture2D* normal;
 	ID3D11ShaderResourceView* srv;
+	ID3D11ShaderResourceView* shadowSRV;
+	ID3D11ShaderResourceView* normalSRV;
 
 	//ID3D11RenderTargetView* gBufferRTVs[3]; // Albedo, Normals, Depth
 	//ID3D11ShaderResourceView* gBufferSRVs[3]; // Shader Resource Views for G-Buffer
@@ -118,7 +124,7 @@ public:
 		devicecontext->RSSetState(rasterizerState); // Sets the created rasterizer state to GPU pipeline
 
 		// Deferred shading, G-buffer, from slides
-		// 1 G-buffer for now, which is colour
+		// 1 G-buffer for now, which is colour. The slides shows here should be 4 G0buffers
 		// may try to add normal and depth for normal mapping and shadow mapping but now, just use colour as example on slides
 		D3D11_TEXTURE2D_DESC textureDesc;
 		textureDesc.Width = width;
@@ -150,6 +156,73 @@ public:
 		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
 		shaderResourceViewDesc.Texture2D.MipLevels = 1;
 		device->CreateShaderResourceView(texture, &shaderResourceViewDesc, &srv);
+
+		// depth
+		D3D11_TEXTURE2D_DESC shadowDesc = {};
+		shadowDesc.Width = width;
+		shadowDesc.Height = height;
+		shadowDesc.MipLevels = 1;
+		shadowDesc.ArraySize = 1;
+		shadowDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		shadowDesc.SampleDesc.Count = 1;
+		shadowDesc.SampleDesc.Quality = 0;
+		shadowDesc.Usage = D3D11_USAGE_DEFAULT;
+		shadowDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+		shadowDesc.CPUAccessFlags = 0;
+		shadowDesc.MiscFlags = 0;
+
+		device->CreateTexture2D(&shadowDesc, NULL, &shadow);
+		// Depth stencil view
+		D3D11_RENDER_TARGET_VIEW_DESC shadowRTVDesc;
+		ZeroMemory(&renderTargetViewDesc, sizeof(renderTargetViewDesc));
+		shadowRTVDesc.Format = textureDesc.Format;
+		shadowRTVDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+		shadowRTVDesc.Texture2D.MipSlice = 0;
+		device->CreateRenderTargetView(shadow, &shadowRTVDesc, &shadowRTV);
+		
+
+		// Shader resource view
+		D3D11_SHADER_RESOURCE_VIEW_DESC shadowsrvDesc = {};
+		shadowsrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
+		shadowsrvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		shadowsrvDesc.Texture2D.MostDetailedMip = 0;
+		shadowsrvDesc.Texture2D.MipLevels = 1;
+
+		device->CreateShaderResourceView(shadow, &shadowsrvDesc, &shadowSRV);
+
+		// maybe normal?
+
+		D3D11_TEXTURE2D_DESC normalDesc = {};
+		normalDesc.Width = width;
+		normalDesc.Height = height;
+		normalDesc.MipLevels = 1;
+		normalDesc.ArraySize = 1;
+		normalDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		normalDesc.SampleDesc.Count = 1;
+		normalDesc.SampleDesc.Quality = 0;
+		normalDesc.Usage = D3D11_USAGE_DEFAULT;
+		normalDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+		normalDesc.CPUAccessFlags = 0;
+		normalDesc.MiscFlags = 0;
+
+		device->CreateTexture2D(&normalDesc, NULL, &normal);
+		
+		D3D11_RENDER_TARGET_VIEW_DESC normalRTVDesc;
+		ZeroMemory(&renderTargetViewDesc, sizeof(renderTargetViewDesc));
+		normalRTVDesc.Format = textureDesc.Format;
+		normalRTVDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+		normalRTVDesc.Texture2D.MipSlice = 0;
+		device->CreateRenderTargetView(normal, &normalRTVDesc, &normalRTV);
+		
+
+		// Shader resource view
+		D3D11_SHADER_RESOURCE_VIEW_DESC normalsrvDesc = {};
+		normalsrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
+		normalsrvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		normalsrvDesc.Texture2D.MostDetailedMip = 0;
+		normalsrvDesc.Texture2D.MipLevels = 1;
+
+		device->CreateShaderResourceView(normal, &normalsrvDesc, &normalSRV);
 	}
 
 	void Clear() {
