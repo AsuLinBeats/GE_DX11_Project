@@ -5,6 +5,7 @@
 #include"mesh.h"
 #include"anime.h"
 #include"camera.h"
+#include"Support_tools.h"
 class Bullet {
 public:
 	Vec3 pos;   // Current position of the bullet
@@ -37,7 +38,7 @@ public:
 		if (pos.Length() > 100.0f) {
 			isActive = false;
 		}
-		// the check of collision for bullet will be implemented in enemy class.
+		// the check of collision for bullet will be implemented in enemy class to avoid sequence problem
 		//if (checkCollision(dinasour.collider, hitDist)) {
 		//	isActive = false;
 		//}
@@ -64,19 +65,6 @@ public:
 		return false;
 	}
 
-
-	//void render(shader& bulletShad, DXCore& dxcore, Matrix& vp) {
-	//  // Acturally, the bullets don't require model, or just using a simple cube or sphere can represent it
-	//	if (!isActive) return;
-	//	// it looks like texture of bullet is loaded in weapons. here probably render a basic cube to represent bullet.
-	//	// Render the bullet using its position
-	//	Matrix worldMatrix = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(0, 0, 0), pos);
-	//	bulletShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &worldMatrix);
-	//	bulletShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &vp);
-	//	bulletShad.apply(&dxcore);
-	//}
-
-
 };
 
 class Player {
@@ -93,7 +81,7 @@ public:
 	int ammo;
 	int maxAmmo;
 	std::vector<Bullet> bullets;
-	AnimationInstance solider;
+	AnimationInstance Uzi;
 	AABB collider;
 	Player(float _maxblood, float _maxAmmo,Vec3 _position, Vec3 _direction, float _speed, float _attackGap) {
 
@@ -106,7 +94,7 @@ public:
 
 	}
 	void init(DXCore core, TextureManager& textureManager) {
-		solider.initTexture("Soldier1.gem", core, &textureManager);
+		Uzi.initTexture("Soldier1.gem", core, &textureManager);
 		ammo = maxAmmo;
 		blood = maxBlood;
 		isDead = false;
@@ -133,10 +121,53 @@ public:
 		}
 	}
 
+	//void movePlayer(Camera& cam, float dt, const std::vector<Enemy>& enemies) {
+	//	Vec3 oldPosition = position;
+
+	//	// Move according to camera
+	//	position = cam.position;
+	//	direction = cam.rotation;
+	//	collider.update(Vec3(1, 1, 1), Vec3(0.0f, 0.0f, 0.0f), position);
+
+	//	// Check collision with enemies
+	//	for (const auto& enemy : enemies) {
+	//		if (!enemy.isDead && collider.intersects(enemy.collider)) {
+	//			// Collision detected, revert to old position
+	//			position = oldPosition;
+	//			collider.update(Vec3(1, 1, 1), Vec3(0.0f, 0.0f, 0.0f), position);
+
+	//			// Stop processing further collisions since we already reverted
+	//			break;
+	//		}
+	//	}
+	//}
+
+	//void movePlayer(Camera& cam, float dt, Enemy enemy) {
+	//	// a simple example for testing
+	//	Vec3 oldPosition = position;
+
+	//	// Move according to camera
+	//	position = cam.position;
+	//	direction = cam.rotation;
+	//	collider.update(Vec3(1, 1, 1), Vec3(0.0f, 0.0f, 0.0f), position);
+
+	//	// Check collision with enemies
+
+	//	if (!enemy.isDead && collider.intersects(enemy.collider)) {
+	//		// Collision detected, revert to old position
+	//		position = oldPosition;
+	//		collider.update(Vec3(1, 1, 1), Vec3(0.0f, 0.0f, 0.0f), position);
+
+
+	//	}
+	//
+	//}
+
 	void movePlayer(Camera& cam, float dt) {
 		position = cam.position;
 		direction = cam.rotation;
 	}
+
 
 	void reload(float dt, float reloadDuration) {
 		// suppose the reserve ammo is infinite
@@ -149,12 +180,12 @@ public:
 		
 	}
 
-	void Dead(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
+	void Dead(shader animationTextureShadG, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager, Vec3 weaponWorldPos) {
 		if (isDead || blood <= 0) {
 			// TODO use shade code to shade dead animation
-			solider.update("death from the front", dt);
-			draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
-			// TODO Actually, here can change the camera to behind the player and add black/white filter to make it more real.
+			Uzi.update("death from the front", dt);
+			draw("Armature|08 Fire", animationTextureShadG, dt, dxcore, weaponWorldPos, textureManager, resultMatrix);
+			// TODO Actually, here can change the camera to behind the player and render solider and add black/white filter to make it more real.
 			// Game over, break the game
 		}
 	}
@@ -190,31 +221,18 @@ public:
 			[](const Bullet& b) { return !b.isActive; }), // move bullet marked as dead to the end
 			bullets.end());
 	}
-
-	void checkBulletsCollision(Player& player) {
-
-		// If we want enemy to handle it, we can do it here:
-		for (auto& b : player.bullets) {
-			if (b.isActive) {
-				float hitDist;
-				if (b.checkCollision(collider, hitDist)) {
-					Hurt(b.damage);
-					b.isActive = false;
-				}
-			}
-		}
-	}
-
-	void draw(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		solider.update("walking", dt);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", solider.matrices);
+	void draw(std::string name,  shader animationTextureShadG, float dt, DXCore dxcore, Vec3 weaponWorldPos, TextureManager& textureManager, Matrix& resultMatrix) {
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
 		Matrix w1;
-		w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.apply(&dxcore);
-		solider.drawTexture(&dxcore, animationTextureShad, &textureManager);
+		Matrix wn1;
+		Uzi.update(name, dt);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
+		wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI / 2, 0, M_PI / 2), weaponWorldPos);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
+		animationTextureShadG.apply(&dxcore);
+		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManager);
+
 	}
 
 	//void drawAmmo() {
@@ -285,10 +303,9 @@ public:
 			traveledDistance = 0.f;
 			direction = Vec3(-direction.x, direction.y, -direction.z); // make dinasour turn over
 		}
-		collider.update(Vec3(0.9f, 0.9f, 0.9f), Vec3(0, 0, 0), position); // update collider position
-		checkCollider(bullet); // check if collider with bullet 
-		checkColliderWithPlayer(player); // check with player
-		// then followed by shading code
+		collider.update(Vec3(0.9f, 0.9f, 0.9f), Vec3(0, 0, 0), position);
+		checkBulletsCollision(player);
+		checkColliderWithPlayer(player, dt);
 		draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
 	}
 
@@ -302,130 +319,59 @@ public:
 		}
 	}
 
-	void checkCollider(Player& player) {
+	//void checkCollider(Player& player) {
+	//	for (auto& b : player.bullets) {
+	//		// check bullet situation
+	//		if (b.isActive) {
+	//			float hitDist;
+	//			if (b.checkCollision(collider, hitDist)) { // access result of collider from bullet
+	//				Hurt(b.damage);
+	//				b.isActive = false; // for insurance, make sure inactive is false
+
+	//			}
+	//		}
+	//	}
+	//}
+	void checkBulletsCollision(Player& player) {
 		for (auto& b : player.bullets) {
-			// check bullet situation
 			if (b.isActive) {
 				float hitDist;
-				if (b.checkCollision(collider, hitDist)) { // access result of collider from bullet
+				if (b.checkCollision(collider, hitDist)) {
 					Hurt(b.damage);
-					b.isActive = false; // for insurance, make sure inactive is false
+					b.isActive = false;
+					DebugLog("Enemy collided with a bullet!");
 				}
 			}
 		}
 	}
 
-	void checkCollider(Bullet& bullet) {
 
-			// check bullet situation
-			if (bullet.isActive) {
-				float hitDist;
-				if (bullet.checkCollision(collider, hitDist)) { // access result of collider from bullet
-					Hurt(bullet.damage);
-					bullet.isActive = false; // for insurance, make sure inactive is false
-				}
-			}
-		
-	}
-
-
-	void checkColliderWithPlayer(Player& player) {
+	void checkColliderWithPlayer(Player& player, float dt) {
+		damageTimer += dt;
 		// If player's collider intersects with enemy's collider, cause damage once per second
 		if (collider.intersects(player.collider)) {
 			// Only cause damage if damageTimer > 1 second
 			if (damageTimer >= 1.0f) {
 				player.Hurt(5.0f); // Enemy causing damage to player
 				damageTimer = 0.0f; // reset timer
+									
+				std::ostringstream logStream;
+				logStream << "enemy collisionnnnnnnnnnnnnnnnnnnnn with player" << "\n";
+				DebugLog(logStream.str());
 			}
 		}
 	}
 
-	void draw(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+	void draw(shader animationTextureShadG, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
 		Matrix w1;
 		dina.update("Run", dt);
-		//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
 		w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
-		animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShad.apply(&dxcore);
-		dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		animationTextureShadG.apply(&dxcore);
+		dina.drawTexture(&dxcore, animationTextureShadG, &textureManager);
+
 	}
 };
-
-// TODO SPLIT FILES
-//class Bullet {
-//public:
-//    Vec3 pos;   // Current position of the bullet
-//    Vec3 dir;   // Direction the bullet is traveling
-//    float speed; // Speed of the bullet
-//    bool isActive; // Whether the bullet is active (e.g., in flight)
-//    float damage;
-//    Cube bull;
-//    Vec3 prevPos;
-//
-//    Bullet(const Vec3& _pos, const Vec3& _dir, float _spd, float _damage);
-//    Bullet();
-//    void Attack();
-//    void update(float dt, float& hitDist);
-//    bool checkCollision(const AABB& enemyBox, float& hitDist);
-//    void render(shader& bulletShad, DXCore& dxcore, Matrix& vp);
-//};
-//
-//class Player {
-//public:
-//    Vec3 position;
-//    float blood;
-//    float maxBlood;
-//    Vec3 direction;
-//    float speed;
-//    bool isAttacking;
-//    bool isDead;
-//    float attackGap;
-//    float attackCooldown;
-//    int ammo;
-//    int maxAmmo;
-//    std::vector<Bullet> bullets;
-//    AnimationInstance solider;
-//    AABB collider;
-//
-//    Player(float _maxblood, float _maxAmmo, Vec3 _position, Vec3 _direction, float _speed, float _attackGap);
-//    void init(DXCore core, TextureManager& textureManager);
-//    void Hurt(float attack);
-//    void Heal(float amount);
-//    void movePlayer(Camera& cam, float dt);
-//    void reload(float dt, float reloadDuration);
-//    void Dead(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager);
-//    void shoot(float dt, float reloadDuration, float flySpeed);
-//    void update(float dt, float hitDistance);
-//    void checkBulletsCollision(Player& player);
-//    void draw(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager);
-//};
-//
-//class Enemy {
-//public:
-//    Vec3 position;
-//    float blood;
-//    float maxBlood;
-//    Vec3 direction;
-//    float speed;
-//    bool isAttacking;
-//    bool isDead;
-//    float attackGap;
-//    float attackRange;
-//    float damageTimer;
-//    AnimationInstance dina;
-//    AABB collider;
-//
-//    Enemy(float _maxblood);
-//    Enemy();
-//    void init(DXCore core, TextureManager& textureManager);
-//    void Hurt(float attack);
-//    void Heal(float amount);
-//    void moveNormal(float dt, float moveDistance, shader animationTextureShad, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager, Player& player, Bullet& bullet);
-//    void Dead(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager);
-//    void checkCollider(Player& player);
-//    void checkCollider(Bullet& bullet);
-//    void checkColliderWithPlayer(Player& player);
-//    void draw(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager);
-//};

@@ -1,11 +1,12 @@
 #pragma once
 #include "GraphicMath.h"
-
+#include "anime.h"
 class AABB {
 public:
     Vec3 maxDis;
     Vec3 minDis;
-    std::vector<Vec3> vertices;
+    std::vector<ANIMATED_VERTEX> vertices;
+    std::vector<Vec3> verticesStatic;
     AABB() {}
     void reset()
     {
@@ -28,17 +29,23 @@ public:
 
     void update(Vec3 scaling, Vec3 rotating, Vec3 translating) {
         reset();
-        // update position with world coordinates
-        Matrix world;
+        // Compute the transformation matrix once
+        Matrix transform = Matrix::worldTrans(scaling, rotating, translating);
+
         for (auto& vertex : vertices) {
-            // transform all vertices
-            Matrix worldVertex = world.worldTrans(scaling, rotating, translating);
-            homoVec vs(scaling);
-            homoVec vr(rotating);
-            homoVec vt(translating);
-            homoVec v(vertex);
-            Vec3 worldV = (worldVertex * v).ToVec3();
-            extend(worldV); // update new boundary box
+            Vec3 worldV = (transform * homoVec(vertex.pos)).ToVec3();
+            extend(worldV);
+        }
+    }
+
+    void updateStatic(Vec3 scaling, Vec3 rotating, Vec3 translating) {
+        reset();
+        // Compute the transformation matrix once
+        Matrix transform = Matrix::worldTrans(scaling, rotating, translating);
+
+        for (auto& vertex : verticesStatic) {
+            Vec3 worldV = (transform * homoVec(vertex)).ToVec3();
+            extend(worldV);
         }
     }
 };
@@ -67,14 +74,7 @@ public:
     // the ray will apply for bullet and collide with AABB box collider
     bool rayAABB(const AABB& box, float& t)
     {
-        //Vec3 s = (min - r.o) * r.invdir;
-        //Vec3 l = (max - r.o) * r.invdir;
-        //Vec3 s1 = Min(s, l);
-        //Vec3 l1 = Max(s, l);
-        //float ts = max(s1.x, max(s1.y, s1.z));
-        //float tl = min(l1.x, min(l1.y, l1.z));
-        //t = min(ts, tl);
-        //return (ts < tl);
+
         Vec3 tMin = (box.minDis - o) * invdir;
         Vec3 tMax = (box.maxDis - o) * invdir;
 

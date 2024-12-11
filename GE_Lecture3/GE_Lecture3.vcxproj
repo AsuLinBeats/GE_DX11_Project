@@ -128,7 +128,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="NvOpt.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,12 +141,15 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="DXCore.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GamesEngineeringBase.h" />
     <ClInclude Include="GEMLoader.h" />
     <ClInclude Include="geometry.h" />
     <ClInclude Include="GraphicMath.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="NvOpt.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="shader3D.h" />
     <ClInclude Include="ShaderReflection.h" />

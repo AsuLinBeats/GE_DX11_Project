@@ -14,125 +14,21 @@
 #include"camera.h"
 #include"GamesEngineeringBase.h"
 #include"Character.h"
-// TODO THESE SUPPORT FUNCTIONS WILL BE PUT INTO SUPPORT_TOOLS.H AT END
-std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
-	os << "[";
-	for (int i = 0; i < 4; ++i) {
-		os << "[";
-		for (int j = 0; j < 4; ++j) {
-			os << matrix.a[i][j];
-			if (j < 3) os << ", "; // Add commas between elements in a row
-		}
-		os << "]";
-		if (i < 3) os << ",\n "; // Add a newline between rows
-	}
-	os << "]";
-	return os;
-}
-
-std::ostream& operator<<(std::ostream& os, const Vec3& vec) {
-	os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
-	return os;
-}
-
-std::vector<std::string> loadMeshFileNames(const std::string& filePath) {
-	// For testing model purpose, use with Windows powershell command to save name of model into a txt file and load them at once to see what they are
-	std::vector<std::string> meshFiles;
-	std::ifstream file(filePath);
-	if (!file.is_open()) {
-		std::cerr << "Error: Could not open file: " << filePath << std::endl;
-		return meshFiles;
-	}
-
-	std::string line;
-	while (std::getline(file, line)) {
-		if (!line.empty()) {
-			meshFiles.push_back(line);
-		}
-	}
-	file.close();
-	return meshFiles;
-}
-
-void DebugLog(const std::string& message) {
-	OutputDebugStringA(message.c_str()); // Send string to Output window
-}
-
-void RandomCreation(std::vector<Matrix>& matrices, unsigned int count) {
-	matrices.clear(); // clear matrices to avoid some bugs
-	for (unsigned int i = 0; i < count; i++) {
-		float x = static_cast<float>(rand() % 30);
-		float z = static_cast<float>(rand() % 30);
-		Matrix w2;
-		w2 = Matrix::worldTrans(Vec3(0.01, 0.01, 0.01), Vec3(0, 0, 0), Vec3(x, 0, z));
-		matrices.push_back(w2);
-	}
-}
-
-void SaveTrees( std::vector<Matrix>& matrices) {
-	// use fstream to save random tree position into binary file
-	std::ofstream file("world.dat", std::ios::binary);
-	if (!file.is_open()) return;
-
-	size_t count = matrices.size();
-	file.write(reinterpret_cast<const char*>(&count), sizeof(count));
-	file.write(reinterpret_cast<const char*>(matrices.data()), sizeof(Matrix) * count);
-	file.close();
-}
-
-bool LoadTrees(std::vector<Matrix>& matrices, const std::string& filename) {
-	// load file, set it to bool so the game can check if world file exist to decide generate a new one or just load
-	std::ifstream file(filename, std::ios::binary);
-	if (!file.is_open()) return false;
-
-	size_t count;
-	file.read(reinterpret_cast<char*>(&count), sizeof(count));
-	matrices.resize(count);
-	file.read(reinterpret_cast<char*>(matrices.data()), sizeof(Matrix) * count);
-	file.close();
-	return true;
-}
-
-class FPS {
-public:
-	int frame = 0;
-	float elapsed = 0;
-	int fps = 0;
-
-	void update(float dt) {
-		frame++;
-		elapsed += dt;
-
-		if (elapsed >= 1.0f) { // Update every second
-			fps = frame;
-			frame = 0;
-			elapsed = 0.0f;
-		}
-	}
-
-	int getFps() {
-		return fps;
-	}
-
-	void draw() {
-		std::ostringstream logStream;
-		logStream << "FPS: " << fps << "\n";
-		DebugLog(logStream.str());
-	}
-};
-
+//#include"Player.h"
+//#include"Enemy.h"
+#include"Support_tools.h"
 
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
 	Window win;
 	DXCore dxcore;
 	//Triangle tri;
 	Plane plane;
-	shader shad;
-	shader animationShad;
-	shader textureShad;
-	shader animationTextureShad;
-	shader textureAlphaShad;
-	shader skyDomeShad; // shader for skyDome to fix the mix buffer bug.
+	//shader shad;
+	//shader animationShad;
+	//shader textureShad;
+	//shader animationTextureShad;
+	//shader textureAlphaShad;
+	//shader skyDomeShad; // shader for skyDome to fix the mix buffer bug.
 	// Shader for G-buffer
 	shader textureShadG;
 	shader animationTextureShadG;
@@ -174,6 +70,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	TextureManager textureManagerWeapon1;
 	FPS fps;
 	std::vector<Matrix> trees;
+	std::vector<Matrix> dinasours(60);
 	///////////////////////
 	float reloadDuration = 5.f;
 	float moveDistance = 30.f;
@@ -194,12 +91,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	win.init(1024, 1024, "Solider Cadillacs and Dinosaurs"); // Well, salute to FC game Cadillacs and Dinosaurs by capcon!(but this game did not add melee attack :( 
 	dxcore.init(win.width, win.height, win.hwnd, false); // dx tool
 	// initialise once----implement shader and example meshes
-	shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // basic 3d shader
-	animationShad.initAnim("Animation_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // 3d animation non texture shader
-	textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d shader with texture
-	textureAlphaShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
-	animationTextureShad.initAnim("Animation_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d animation texture shader
-	skyDomeShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
+	//shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // basic 3d shader
+	//animationShad.initAnim("Animation_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // 3d animation non texture shader
+	//textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d shader with texture
+	//textureAlphaShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
+	//animationTextureShad.initAnim("Animation_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d animation texture shader
+	//skyDomeShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
 
 	//NOT WORKING SHADOW MAP
 	//shadowShad.initAnim("vertex_shader_shadow.txt", "G_buffer_pixel_shader_shadow.txt", &dxcore); 
@@ -211,8 +108,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	sphere.init(dxcore, 30, 30, 80, "SkyDome.png");
 	enemySolider.initTexture("Soldier1.gem", dxcore, &textureManagerEnemy);
 	Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon1);
+	player.collider.vertices = Uzi.vertices;
 	AC5.initTexture("Automatic_Carbine_5.gem", dxcore, &textureManagerWeapon);
 	dina.initTexture("TRex.gem", dxcore, &textureManager); // vertices and animation for dina
+	dinasour.collider.vertices = dina.vertices;
 	plane.initTexture(dxcore, "riuvL_2K_BaseColor.jpg"); // USE THIS AS PLAYER'S MODEL
 
 	//tree.initWithoutTexture("acacia_003.gem",dxcore);
@@ -249,7 +148,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		SaveTrees(trees);
 	}
 	
-
+	if (!LoadDina(dinasours, "worldEnemy.dat")) {
+		// if there is no file, create one and save
+		// TODO one potential improvement: The previous dat file must be deleted if want to change number of trees, maybe can add a number check
+		RandomCreation(dinasours, 10);
+		SaveDina(dinasours);
+	}
 	// bgms.loadMusic("bgm.wav"); // still not work....
 
 	while (running)
@@ -263,7 +167,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		// camera control
 		float speed = 6.f;
 		fps.update(dt);
-		fps.draw();
+		// TODO REMEMBER TURN FPS DRAW ON AFTER FINISHING
+		// fps.draw();
 
 		////////////////////////////////CAMERA CONTROL RELATED///////////////////////////////////////////////
 		camera.captureInput(win.hwnd, mouseSensitivity);
@@ -277,7 +182,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		bool mouseLeftPressed = (GetAsyncKeyState(VK_LBUTTON) & 0x8000);
 		if (win.keys['Q']) break; // put q in here to break the loop, more convenient than put everything in camera class
 		camera.processInput(moveForward, moveBackward, moveLeft, moveRight, reset, speed, dt);
+		if (mouseLeftPressed) {
+			// generate bullet
 
+			// render and draw fire animation
+		}
 		// Get matrices after updating camera
 		Matrix lookAt = camera.getViewMatrix();
 		Matrix proj = camera.getProjectionMatrix(1);
@@ -300,63 +209,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	//DebugLog(logStream.str());
 		//////////////////////////////////BASIC MODEL//////////////////////////////////////////////////////////
 
-	//	skyDomeShad.apply(&dxcore);
-	//	dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
-	//	// make sure skybox following camera all time
-	////	Matrix skyDomeWorldMatrix = Matrix::translation(camera.position); // get camera position
-	//	Matrix skyDomeWorldMatrix = Matrix::worldTrans(Vec3(1,1,1), Vec3(0, 0,0), camera.position); // get camera position
-	//	skyDomeShad.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
-	//	skyDomeShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-	//	Matrix w0;
-	//	w0 = Matrix::translation(Vec3(1, -10, -10));
-	//	sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
-	//	sphere.draw(dxcore);
-	//	
-	//	// plane
-	//	textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-	//	textureShad.apply(&dxcore);
-	//	dxcore.devicecontext->PSSetShaderResources(0, 1, &plane.textures.srv);
-	//	Matrix w;
-	//	w = Matrix::scaling(Vec3(50, 50, 50));
-	//	textureShad.updateConstantVS("StaticModel", "staticMeshBuffer", "W", &w); // adjust buffer
-	//	plane.draw(&textureShad, &dxcore);
-
-	//	/////////////////////////////////////////////GAME LOGIC///////////////////////////////////////////////////
-	//	// TODO MESHES WITH ANIMATION
-	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-	//	Matrix w1;
-	//	dina.update("Run", dt);
-	//	//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
-	//	w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
-	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-	//	animationTextureShad.apply(&dxcore);
-	//	dina.drawTexture(&dxcore, animationTextureShad, &textureManager);
-	//	/////////////LOGIC PART///////
-	//	//player.movePlayer(camera, dt);
-	//	//player.update(dt,hitDistance);
-
-	//	//if (mouseLeftPressed) {
-	//	//	player.shoot(dt, reloadDuration, bulletSpeed);
-	//	//}
-
-	//	//dinasour.moveNormal(dt, moveDistance, animationTextureShad, dxcore, resultMatrix, textureManager, player, bullet);
-	//	//
-	//	//player.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
-	//	//for (auto& b : player.bullets) {
-	//	//	b.render(bulletShad, dxcore, resultMatrix);
-	//	//}
-	//	//dinasour.draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
-
-
-	//	enemySolider.update("rifle aiming idle", dt);
-	//	//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
-	//	w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
-	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-	//	animationTextureShad.apply(&dxcore);
-	//	enemySolider.drawTexture(&dxcore, animationTextureShad, &textureManagerEnemy);
-
 
 
 		Vec3 weaponOffset = Vec3(0.4f, -0.3f, 0.5f); // Right, Down, Forward
@@ -366,6 +218,27 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 			+ camera.right * weaponOffset.x
 			+ camera.upLocal * weaponOffset.y
 			+ camera.forward * weaponOffset.z;
+
+	//	/////////////////////////////////////////////GAME LOGIC///////////////////////////////////////////////////
+		/////////////LOGIC PART///////
+		// This should be moved to place before control
+		// player.movePlayer(camera, dt, dinasour);
+		player.movePlayer(camera, dt);
+		player.update(dt,hitDistance);
+
+		if (mouseLeftPressed) {
+			player.shoot(dt, reloadDuration, bulletSpeed);
+		}
+
+		dinasour.moveNormal(dt, moveDistance, animationTextureShadG, dxcore, resultMatrix, textureManager, player, bullet);
+		
+		//player.draw("Armature|08 Fire",animationTextureShadG, dt, dxcore, weaponWorldPos, textureManager,resultMatrix);
+
+		//dinasour.draw(animationTextureShadG, dt, dxcore, resultMatrix, textureManager);
+
+
+
+
 
 	//	//Matrix3 cameraRotation = Matrix3(
 	//	//	camera.right.x, camera.upLocal.x, camera.forward.x,
@@ -415,23 +288,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		// sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
 		// Draw the model to G-buffer
 		sphere.draw(dxcore);
-
-//			skyDomeShad.apply(&dxcore);
-//	dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
-//	// make sure skybox following camera all time
-////	Matrix skyDomeWorldMatrix = Matrix::translation(camera.position); // get camera position
-//	Matrix skyDomeWorldMatrix = Matrix::worldTrans(Vec3(1,1,1), Vec3(0, 0,0), camera.position); // get camera position
-//	skyDomeShad.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
-//	skyDomeShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-//	Matrix w0;
-//	w0 = Matrix::translation(Vec3(1, -10, -10));
-//	sphere.updateWorld(skyDomeWorldMatrix, skyDomeShad, dxcore);
-//	sphere.draw(dxcore);
-
-
-
-
-
 
 		textureShadG.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
 		textureShadG.apply(&dxcore);
