@@ -144,7 +144,6 @@ public:
 		GEMLoader::GEMAnimation gemanimation;
 		loader.load(filename, gemmeshes, gemanimation);
 		for (int i = 0; i < gemmeshes.size(); i++) {
-			std::vector<ANIMATED_VERTEX> vertices;
 			for (int j = 0; j < gemmeshes[i].verticesAnimated.size(); j++) {
 				ANIMATED_VERTEX v;
 				memcpy(&v, &gemmeshes[i].verticesAnimated[j], sizeof(ANIMATED_VERTEX));

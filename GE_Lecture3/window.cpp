@@ -46,6 +46,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		window->mouseButtons[0] = false;
 		return 0;
 	}
+	case WM_RBUTTONDOWN:
+	{
+		window->updateMouse(WINDOW_GET_X_LPARAM(lParam), WINDOW_GET_Y_LPARAM(lParam));
+		window->mouseButtons[1] = true; // use -> to tell complier this variable is from window class. when mouse is pressed, make bool to true 
+		return 0;
+	}
+	case WM_RBUTTONUP:
+	{
+		window->updateMouse(WINDOW_GET_X_LPARAM(lParam), WINDOW_GET_Y_LPARAM(lParam));
+		window->mouseButtons[1] = false;
+		return 0;
+	}
 	case WM_MOUSEMOVE:
 	{
 		window->updateMouse(WINDOW_GET_X_LPARAM(lParam), WINDOW_GET_Y_LPARAM(lParam));// update mouse position

@@ -3,72 +3,59 @@
   "WorkspaceRootPath": "C:\\Users\\Davi\\source\\GE_DX11_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\adapter.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\adapter.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\NvOpt.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\NvOpt.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\NvOpt.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\NvOpt.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\Character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\G_buffer_pixel_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\G_buffer_pixel_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\anime.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\anime.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Texture.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\Texture.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\SkyDome_pixel_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\SkyDome_pixel_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Collider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\Collider.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\shaders.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\shaders.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\vertex_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\vertex_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\DXCore.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\DXCore.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\vertex_shader_shadow.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\vertex_shader_shadow.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\3D_vertex_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\3D_vertex_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\G_buffer_pixel_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0F015B28-E645-4CFE-8737-EDD6E8CEA46B}|GE_Lecture3\\GE_Lecture3.vcxproj|solutionrelative:GE_Lecture3\\G_buffer_pixel_shader.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -78,17 +65,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 337,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 5,
               "Title": "camera.h",
               "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\camera.h",
               "RelativeDocumentMoniker": "GE_Lecture3\\camera.h",
               "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\camera.h",
               "RelativeToolTip": "GE_Lecture3\\camera.h",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAADwvx4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-03T11:44:49.707Z",
               "IsPinned": true,
@@ -96,13 +83,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Character.h",
               "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Character.h",
               "RelativeDocumentMoniker": "GE_Lecture3\\Character.h",
               "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Character.h",
               "RelativeToolTip": "GE_Lecture3\\Character.h",
-              "ViewState": "AgIAAJoAAAAAAAAAAAAAwKgAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAM0AAAAAAAAAAADwv+kAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-03T11:57:49.454Z",
               "IsPinned": true,
@@ -110,13 +97,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "game.cpp",
               "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\game.cpp",
               "RelativeDocumentMoniker": "GE_Lecture3\\game.cpp",
               "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\game.cpp",
               "RelativeToolTip": "GE_Lecture3\\game.cpp",
-              "ViewState": "AgIAAM8AAAAAAAAAAAAAAOEAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAPwAAAAAAAAAAAAYwA8BAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-04T15:34:21.865Z",
               "IsPinned": true,
@@ -124,174 +111,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "window.cpp",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.cpp",
-              "RelativeDocumentMoniker": "GE_Lecture3\\window.cpp",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.cpp",
-              "RelativeToolTip": "GE_Lecture3\\window.cpp",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAIwHEAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-05T19:54:13.065Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "SkyDome_pixel_shader.txt",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\SkyDome_pixel_shader.txt",
-              "RelativeDocumentMoniker": "GE_Lecture3\\SkyDome_pixel_shader.txt",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\SkyDome_pixel_shader.txt",
-              "RelativeToolTip": "GE_Lecture3\\SkyDome_pixel_shader.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-12-06T16:33:34.545Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "NvOpt.h",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\NvOpt.h",
-              "RelativeDocumentMoniker": "GE_Lecture3\\NvOpt.h",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\NvOpt.h*",
-              "RelativeToolTip": "GE_Lecture3\\NvOpt.h*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T23:28:18.036Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Player.cpp",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Player.cpp",
-              "RelativeDocumentMoniker": "GE_Lecture3\\Player.cpp",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Player.cpp",
-              "RelativeToolTip": "GE_Lecture3\\Player.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKoAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T23:21:31.708Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NvOpt.cpp",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\NvOpt.cpp",
-              "RelativeDocumentMoniker": "GE_Lecture3\\NvOpt.cpp",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\NvOpt.cpp*",
-              "RelativeToolTip": "GE_Lecture3\\NvOpt.cpp*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T23:29:16.35Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Enemy.cpp",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Enemy.cpp",
-              "RelativeDocumentMoniker": "GE_Lecture3\\Enemy.cpp",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Enemy.cpp",
-              "RelativeToolTip": "GE_Lecture3\\Enemy.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T23:19:32.827Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Player.h",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Player.h",
-              "RelativeDocumentMoniker": "GE_Lecture3\\Player.h",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Player.h",
-              "RelativeToolTip": "GE_Lecture3\\Player.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T23:21:06.686Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Enemy.h",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Enemy.h",
-              "RelativeDocumentMoniker": "GE_Lecture3\\Enemy.h",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Enemy.h",
-              "RelativeToolTip": "GE_Lecture3\\Enemy.h",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Collider.h",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Collider.h",
+              "RelativeDocumentMoniker": "GE_Lecture3\\Collider.h",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Collider.h",
+              "RelativeToolTip": "GE_Lecture3\\Collider.h",
+              "ViewState": "AgIAAA0AAAAAAAAAAADwvx0AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T23:19:36.264Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "G_buffer_pixel_shader.txt",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\G_buffer_pixel_shader.txt",
-              "RelativeDocumentMoniker": "GE_Lecture3\\G_buffer_pixel_shader.txt",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\G_buffer_pixel_shader.txt",
-              "RelativeToolTip": "GE_Lecture3\\G_buffer_pixel_shader.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-12-11T17:39:36.596Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "anime.h",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\anime.h",
-              "RelativeDocumentMoniker": "GE_Lecture3\\anime.h",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\anime.h",
-              "RelativeToolTip": "GE_Lecture3\\anime.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T23:23:18.558Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "mesh.h",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\mesh.h",
-              "RelativeDocumentMoniker": "GE_Lecture3\\mesh.h",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\mesh.h",
-              "RelativeToolTip": "GE_Lecture3\\mesh.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T23:24:23.266Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "adapter.h",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\adapter.h",
-              "RelativeDocumentMoniker": "GE_Lecture3\\adapter.h",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\adapter.h",
-              "RelativeToolTip": "GE_Lecture3\\adapter.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T23:25:15.262Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Texture.h",
-              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Texture.h",
-              "RelativeDocumentMoniker": "GE_Lecture3\\Texture.h",
-              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\Texture.h",
-              "RelativeToolTip": "GE_Lecture3\\Texture.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAUAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T23:30:08.302Z",
+              "WhenOpened": "2024-12-12T22:50:09.381Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -300,13 +129,130 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 3,
+              "Title": "vector",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\include\\vector",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\include\\vector",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\include\\vector",
+              "RelativeToolTip": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\include\\vector",
+              "ViewState": "AgIAAFYHAAAAAAAAAAAnwF8HAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-12-12T22:02:36.129Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "window.cpp",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.cpp",
+              "RelativeDocumentMoniker": "GE_Lecture3\\window.cpp",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.cpp",
+              "RelativeToolTip": "GE_Lecture3\\window.cpp",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T20:57:17.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "3D_vertex_shader.txt",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\3D_vertex_shader.txt",
+              "RelativeDocumentMoniker": "GE_Lecture3\\3D_vertex_shader.txt",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\3D_vertex_shader.txt",
+              "RelativeToolTip": "GE_Lecture3\\3D_vertex_shader.txt",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-12-12T19:41:36.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "vertex_shader_shadow.txt",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\vertex_shader_shadow.txt",
+              "RelativeDocumentMoniker": "GE_Lecture3\\vertex_shader_shadow.txt",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\vertex_shader_shadow.txt",
+              "RelativeToolTip": "GE_Lecture3\\vertex_shader_shadow.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-12-12T19:41:23.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "vertex_shader.txt",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\vertex_shader.txt",
+              "RelativeDocumentMoniker": "GE_Lecture3\\vertex_shader.txt",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\vertex_shader.txt",
+              "RelativeToolTip": "GE_Lecture3\\vertex_shader.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-12-12T19:41:18.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "shaders.h",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\shaders.h",
+              "RelativeDocumentMoniker": "GE_Lecture3\\shaders.h",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\shaders.h",
+              "RelativeToolTip": "GE_Lecture3\\shaders.h",
+              "ViewState": "AgIAAKkAAAAAAAAAAADgv1sAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T19:04:31.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DXCore.h",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\DXCore.h",
+              "RelativeDocumentMoniker": "GE_Lecture3\\DXCore.h",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\DXCore.h",
+              "RelativeToolTip": "GE_Lecture3\\DXCore.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAQBAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T18:19:49.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "G_buffer_pixel_shader.txt",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\G_buffer_pixel_shader.txt",
+              "RelativeDocumentMoniker": "GE_Lecture3\\G_buffer_pixel_shader.txt",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\G_buffer_pixel_shader.txt",
+              "RelativeToolTip": "GE_Lecture3\\G_buffer_pixel_shader.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-12-11T17:39:36.596Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "anime.h",
+              "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\anime.h",
+              "RelativeDocumentMoniker": "GE_Lecture3\\anime.h",
+              "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\anime.h",
+              "RelativeToolTip": "GE_Lecture3\\anime.h",
+              "ViewState": "AgIAAPwAAAAAAAAAAADwvw8BAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-11T23:23:18.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "window.h",
               "DocumentMoniker": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.h",
               "RelativeDocumentMoniker": "GE_Lecture3\\window.h",
               "ToolTip": "C:\\Users\\Davi\\source\\GE_DX11_Project\\GE_Lecture3\\window.h",
               "RelativeToolTip": "GE_Lecture3\\window.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-03T11:29:27.206Z",
               "EditorCaption": ""

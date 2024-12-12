@@ -122,6 +122,7 @@ public:
 	}
 
 	//void movePlayer(Camera& cam, float dt, const std::vector<Enemy>& enemies) {
+	// TODO ADJUST THIS CODE AND INSERT TO ENEMY'S COLLIDER TO MAKE PLAYER UNABLE TO MOVE.
 	//	Vec3 oldPosition = position;
 
 	//	// Move according to camera
@@ -166,6 +167,7 @@ public:
 	void movePlayer(Camera& cam, float dt) {
 		position = cam.position;
 		direction = cam.rotation;
+		collider.update(Vec3(1, 1, 1), Vec3(0.0f, 0.0f, 0.0f), position);
 	}
 
 
@@ -180,15 +182,7 @@ public:
 		
 	}
 
-	void Dead(shader animationTextureShadG, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager, Vec3 weaponWorldPos) {
-		if (isDead || blood <= 0) {
-			// TODO use shade code to shade dead animation
-			Uzi.update("death from the front", dt);
-			draw("Armature|08 Fire", animationTextureShadG, dt, dxcore, weaponWorldPos, textureManager, resultMatrix);
-			// TODO Actually, here can change the camera to behind the player and render solider and add black/white filter to make it more real.
-			// Game over, break the game
-		}
-	}
+
 
 	void shoot(float dt, float reloadDuration, float flySpeed) {
 		if (attackCooldown <= 0.0f && !isDead && ammo > 0) {
@@ -200,10 +194,11 @@ public:
 		if (ammo <= 0) {
 			// reload automatically when no ammos
 			reload(dt, reloadDuration);
+
 		}
 	}
 
-	void update(float dt, float hitDistance) {
+	void update(float dt, float hitDistance, float reloadDuration) {
 		// Update the attack cooldown
 		if (attackCooldown > 0.0f) {
 			attackCooldown -= dt;
@@ -216,19 +211,25 @@ public:
 			b.update(dt,hitDistance);
 		}
 
+		if (ammo <= 0) {
+			// reload automatically when no ammos
+			reload(dt, reloadDuration);
+
+		}
+		// TODO REMEMBER UNCOMMIT WHEN FINISH
+		//std::ostringstream logStream;
+		//logStream << "Ammo: " << ammo << "|" << maxAmmo << "\n";
+		//DebugLog(logStream.str());
+
 		// Remove inactive bullets
 		bullets.erase(std::remove_if(bullets.begin(), bullets.end(), // 
 			[](const Bullet& b) { return !b.isActive; }), // move bullet marked as dead to the end
 			bullets.end());
 	}
-	void draw(std::string name,  shader animationTextureShadG, float dt, DXCore dxcore, Vec3 weaponWorldPos, TextureManager& textureManager, Matrix& resultMatrix) {
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		Matrix w1;
-		Matrix wn1;
-		Uzi.update(name, dt);
-		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+
+	void draw(shader animationTextureShadG, float dt, DXCore dxcore, Vec3 weaponWorldPos, TextureManager& textureManager, Matrix& resultMatrix, bool mouseRightPressed,Vec3 weaponOffset) {
 		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
-		wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI / 2, 0, M_PI / 2), weaponWorldPos);
+		Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(M_PI / 2, 0, M_PI / 2), mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
 		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
 		animationTextureShadG.apply(&dxcore);
 		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManager);
@@ -236,6 +237,7 @@ public:
 	}
 
 	//void drawAmmo() {
+	// TODO CURRENTLY DO NOT CONSIDER DRAW AMMO MODEL
 	//	// ammo amount remainder
 	//	// it will be beautiful if i can render it at the left bottom of the screen
 	//	std::ostringstream logStream;
@@ -295,7 +297,7 @@ public:
 		if (isDead) {
 			return;
 		}
-		dina.update("Run", dt);
+		
 		position += direction * speed * dt;
 		traveledDistance += speed * dt;
 
@@ -304,57 +306,40 @@ public:
 			direction = Vec3(-direction.x, direction.y, -direction.z); // make dinasour turn over
 		}
 		collider.update(Vec3(0.9f, 0.9f, 0.9f), Vec3(0, 0, 0), position);
-		checkBulletsCollision(player);
+		checkCollider(bullet);
 		checkColliderWithPlayer(player, dt);
-		draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
-	}
-
-	void Dead(shader animationTextureShad, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
-		if (isDead || blood <= 0) {
-			// TODO use shade code to shade dead animation
-			dina.update("Dead", dt);
-			draw(animationTextureShad, dt, dxcore, resultMatrix, textureManager);
-			
-
+		if (isDead) {
+			draw("death", animationTextureShad, dt, dxcore, resultMatrix, textureManager);
 		}
+		
+		draw("Run", animationTextureShad, dt, dxcore, resultMatrix, textureManager);
 	}
 
-	//void checkCollider(Player& player) {
-	//	for (auto& b : player.bullets) {
-	//		// check bullet situation
-	//		if (b.isActive) {
-	//			float hitDist;
-	//			if (b.checkCollision(collider, hitDist)) { // access result of collider from bullet
-	//				Hurt(b.damage);
-	//				b.isActive = false; // for insurance, make sure inactive is false
-
-	//			}
-	//		}
-	//	}
-	//}
-	void checkBulletsCollision(Player& player) {
-		for (auto& b : player.bullets) {
-			if (b.isActive) {
-				float hitDist;
-				if (b.checkCollision(collider, hitDist)) {
-					Hurt(b.damage);
-					b.isActive = false;
-					DebugLog("Enemy collided with a bullet!");
-				}
+	void checkCollider(Bullet& bullet) {
+		// collision between enemy and bullet
+		// check bullet situation
+		if (bullet.isActive) {
+			float hitDist;
+			if (bullet.checkCollision(collider, hitDist)) { // access result of collider from bullet
+				Hurt(bullet.damage);
+				bullet.isActive = false; // for insurance, make sure inactive is false
+				std::ostringstream logStream;
+				logStream << "enemy collisionnnnnnnnnnnnnnnnnnnnn with bullet!!!" << "\n";
+				DebugLog(logStream.str());
 			}
 		}
 	}
 
-
 	void checkColliderWithPlayer(Player& player, float dt) {
+		// collision between enemy and player
 		damageTimer += dt;
 		// If player's collider intersects with enemy's collider, cause damage once per second
 		if (collider.intersects(player.collider)) {
 			// Only cause damage if damageTimer > 1 second
 			if (damageTimer >= 1.0f) {
-				player.Hurt(5.0f); // Enemy causing damage to player
+				player.Hurt(15.0f); // Enemy causing damage to player
 				damageTimer = 0.0f; // reset timer
-									
+				Hurt(20.f);
 				std::ostringstream logStream;
 				logStream << "enemy collisionnnnnnnnnnnnnnnnnnnnn with player" << "\n";
 				DebugLog(logStream.str());
@@ -362,10 +347,10 @@ public:
 		}
 	}
 
-	void draw(shader animationTextureShadG, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
+	void draw(std::string name, shader animationTextureShadG, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
+		dina.update(name, dt);
 		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
 		Matrix w1;
-		dina.update("Run", dt);
 		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
 		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
 		w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));

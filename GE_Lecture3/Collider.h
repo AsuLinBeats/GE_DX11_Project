@@ -29,6 +29,10 @@ public:
 
     void update(Vec3 scaling, Vec3 rotating, Vec3 translating) {
         reset();
+        if (vertices.empty()) {
+
+            return;
+        }
         // Compute the transformation matrix once
         Matrix transform = Matrix::worldTrans(scaling, rotating, translating);
 

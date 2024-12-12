@@ -105,20 +105,22 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	
 	// TODO initialise stuffs in world
 	//tri.init(dxcore); // 2D example
+	player.init(dxcore, textureManager);
 	sphere.init(dxcore, 30, 30, 80, "SkyDome.png");
 	enemySolider.initTexture("Soldier1.gem", dxcore, &textureManagerEnemy);
 	Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon1);
+	//player.collider.vertices = player.Uzi.vertices;
 	player.collider.vertices = Uzi.vertices;
-	AC5.initTexture("Automatic_Carbine_5.gem", dxcore, &textureManagerWeapon);
-	dina.initTexture("TRex.gem", dxcore, &textureManager); // vertices and animation for dina
-	dinasour.collider.vertices = dina.vertices;
+	dinasour.init(dxcore, textureManager);
+	// dina.initTexture("TRex.gem", dxcore, &textureManager); // vertices and animation for dina
+	dinasour.collider.vertices = dinasour.dina.vertices;
 	plane.initTexture(dxcore, "riuvL_2K_BaseColor.jpg"); // USE THIS AS PLAYER'S MODEL
 
 	//tree.initWithoutTexture("acacia_003.gem",dxcore);
-	 pines.init("pine.gem", dxcore, &textureManager);
+	pines.init("pine.gem", dxcore, &textureManager);
 
 	//junk.init("teraccgda.gem", dxcore, &textureManager);
-
+	
 	// bamboo.init("bamboo.gem", dxcore, &textureManager);
 	//skyBox.init(dxcore);
 
@@ -172,45 +174,35 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 
 		////////////////////////////////CAMERA CONTROL RELATED///////////////////////////////////////////////
 		camera.captureInput(win.hwnd, mouseSensitivity);
-
+		bool running = false;
+		if (win.keys[VK_SHIFT]) {
+			speed = 10.f;
+			running = true;
+		}
+		else {
+			speed = 6.f;
+			running = false;
+		}
 		// Process keyboard input for movement
 		bool moveForward = win.keys['W'];
 		bool moveBackward = win.keys['S'];
 		bool moveLeft = win.keys['A'];
 		bool moveRight = win.keys['D'];
 		bool reset = win.keys['T'];
-		bool mouseLeftPressed = (GetAsyncKeyState(VK_LBUTTON) & 0x8000);
+		bool reloading = win.keys['R'];
+		bool mouseLeftPressed = win.mouseButtons[0]; // left button
+		bool mouseRightPressed = win.mouseButtons[1]; // right button
+		//bool run = win.keys[VK_LSHIFT]; // lWhy this not work?????
 		if (win.keys['Q']) break; // put q in here to break the loop, more convenient than put everything in camera class
 		camera.processInput(moveForward, moveBackward, moveLeft, moveRight, reset, speed, dt);
-		if (mouseLeftPressed) {
-			// generate bullet
 
-			// render and draw fire animation
-		}
+
 		// Get matrices after updating camera
 		Matrix lookAt = camera.getViewMatrix();
 		Matrix proj = camera.getProjectionMatrix(1);
 		Matrix resultMatrix = lookAt * proj;
 
-		// consider parallel light.
-		Matrix l;
-		Matrix o;
-		light = l.lookAt(from, object ,up) * o.OrthoPro(-10.0f, 10.0f, 10.0f, -10.0f, 100.0f, 0.1f);
-		
-		//Matrix lookAtLight = Matrix::lookAt(from, object,up);
-		//Matrix projLight = Matrix::PerPro(1,1,M_PI/4, 0.1f, 100.f);
-		//Matrix resultMatrixLight = lookAtLight * projLight;
-
-		// tester
-		//std::ostringstream logStream;
-	//logStream << "from: " << from << "\n";
-	//logStream << "object: " << object << "\n";
-	//logStream << "Right: " << right.x << ", " << right.y << ", " << right.z << "\n";
-	//DebugLog(logStream.str());
-		//////////////////////////////////BASIC MODEL//////////////////////////////////////////////////////////
-
-
-
+		// some postition calculation
 		Vec3 weaponOffset = Vec3(0.4f, -0.3f, 0.5f); // Right, Down, Forward
 
 		// Compute world position for weapon based on camera position and orientation
@@ -219,24 +211,116 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 			+ camera.upLocal * weaponOffset.y
 			+ camera.forward * weaponOffset.z;
 
+
+
+		if (mouseRightPressed) {
+
+			// In zoom mode
+			if (mouseLeftPressed) {
+				// Zoom Fire
+				Uzi.update("Armature|13 Zoom Fire", dt);
+			}
+			else if (moveForward || moveBackward || moveLeft || moveRight) {
+				// Zoom Walk
+				Uzi.update("Armature|12 Zoom Walk", dt);
+			}
+			else {
+				// Zoom Idle
+				Uzi.update("Armature|11 Zoom Idle", dt);
+			}
+		}
+		else {
+			// Not zoom 
+			if (mouseLeftPressed) {
+				// Fire
+				Uzi.update("Armature|08 Fire", dt);
+				player.shoot(dt, reloadDuration, bulletSpeed);
+				//if (player.ammo == 0) {
+				//	Uzi.update("Armature|17 Reload", dt);
+				//	std::ostringstream logStream;
+				//	logStream << "reloading!!!!!!!!!!!!!!!!!!!!!!" << "\n";
+				//	DebugLog(logStream.str());
+				//}
+				
+			}
+			else if (reloading) {
+				Uzi.update("Armature|17 Reload", dt); // some bugs
+			}
+			else if ((moveForward || moveBackward || moveLeft || moveRight) && running) {
+				// Run
+				Uzi.update("Armature|07 Run", dt);
+			}
+			else if (moveForward || moveBackward || moveLeft || moveRight) {
+				// Walk
+				Uzi.update("Armature|06 Walk", dt);
+			}
+			else {
+				// Idle
+				Uzi.update("Armature|04 Idle", dt);
+			}
+		}
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
+		Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(M_PI / 2, 0, M_PI / 2), mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
+		animationTextureShadG.apply(&dxcore);
+		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManagerWeapon1);
+
+		// collider needs to catch every change of vertices
+		dinasour.collider.vertices = dinasour.dina.vertices;
+
+		dinasour.moveNormal(dt, moveDistance, animationTextureShadG, dxcore, resultMatrix, textureManager, player, bullet);
+		//player.collider.vertices = player.Uzi.vertices;
+		player.collider.vertices = Uzi.vertices;
+		player.movePlayer(camera, dt);
+		player.update(dt, hitDistance, reloadDuration);
+
+		//player.draw(animationTextureShadG, dt, dxcore, weaponWorldPos, textureManagerWeapon1, resultMatrix, mouseRightPressed, weaponOffset);
+	
+
+
+		// consider parallel light.
+		Matrix l;
+		Matrix o;
+		Vec3 lightDirection = Vec3(-0.5f, -1.0f, -0.5f); // from above-left
+		Vec3 lightColor = Vec3(1.0f, 1.0f, 1.0f);         // white light
+
+		// Normalize the direction
+		Vec3 dirVec = lightDirection.normalise();
+		light = l.lookAt(from, object ,up) * o.OrthoPro(-10.0f, 10.0f, 10.0f, -10.0f, 100.0f, 0.1f);
+
+		//Matrix lookAtLight = Matrix::lookAt(from, object,up);
+		//Matrix projLight = Matrix::PerPro(1,1,M_PI/4, 0.1f, 100.f);
+		//Matrix resultMatrixLight = lookAtLight * projLight;
+
+
+		//////////////////////////////////BASIC MODEL//////////////////////////////////////////////////////////
+
+
+
 	//	/////////////////////////////////////////////GAME LOGIC///////////////////////////////////////////////////
 		/////////////LOGIC PART///////
 		// This should be moved to place before control
 		// player.movePlayer(camera, dt, dinasour);
-		player.movePlayer(camera, dt);
-		player.update(dt,hitDistance);
+		
 
-		if (mouseLeftPressed) {
-			player.shoot(dt, reloadDuration, bulletSpeed);
-		}
+		//if (mouseLeftPressed) {
+		//	player.shoot(dt, reloadDuration, bulletSpeed);
+		//}
 
-		dinasour.moveNormal(dt, moveDistance, animationTextureShadG, dxcore, resultMatrix, textureManager, player, bullet);
 		
 		//player.draw("Armature|08 Fire",animationTextureShadG, dt, dxcore, weaponWorldPos, textureManager,resultMatrix);
 
 		//dinasour.draw(animationTextureShadG, dt, dxcore, resultMatrix, textureManager);
 
-
+		//dina.update("Run", dt);
+		//Matrix w1;
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
+		////animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
+		//w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		//animationTextureShadG.apply(&dxcore);
+		//dina.drawTexture(&dxcore, animationTextureShadG, &textureManager);
 
 
 
@@ -246,28 +330,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	//	//	camera.right.z, camera.upLocal.z, camera.forward.z
 	//	//);
 	//	
-	//	// TODO PLAYER'S HAND---- SO THE PLAYER'S MODEL CAN USE A SIMPLE RECGANGULAR TO REPRESENT?
-	//	Matrix wn1;
-	//	//  camera should match it
-	//	Uzi.update("Armature|08 Fire", dt);
-	//	//animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
-	//// 	w1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI / 2), Vec3(-4, 10, 0));
-	//	//wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), cameraRotation * Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
-	//	wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
-	//	animationTextureShad.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
-	//	animationTextureShad.apply(&dxcore);
-	//	Uzi.drawTexture(&dxcore, animationTextureShad, &textureManagerWeapon1);
-	//	
+	// /////////////////////////////////////////////////////////////////////////////////
 
-	//	// TODO MESHES REQUIRES ALPHA TEST: Grass, Trees, etc, Trees for now, also can try grass or stones
-	//	// generate random trees---Roguelike! it's based on file so map for each time running will be same------can create a complex map generation system in future, seed based
-	//	textureAlphaShad.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-	//	for (const Matrix& mat : trees) {
-	//		pines.updateWorld(mat, textureAlphaShad, dxcore);
-	//		pines.drawTexture(&dxcore, textureAlphaShad, &textureManager);
-	//	 }
 
+		// TODO BELOW IS DRAW PART. THEY ARE NOT COMBINED IN CHARACTER BECAUSE THERE ARE STILL SOME FUNCTIONS TO BE TESTED AND ADDED
 		/////////////////////////////////////////////////////////////////////////////////Deferred shading ///////////////
 		// Implement deferred shading
 		//dxcore.devicecontext->OMSetRenderTargets(1, &dxcore.renderTargetView, dxcore.depthStencilView);
@@ -309,38 +375,25 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
  
 		/////////////////// Animated model
 
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		Matrix w1;
-		dina.update("Run", dt);
-		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
-		w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShadG.apply(&dxcore);
-		dina.drawTexture(&dxcore, animationTextureShadG, &textureManager);
-
 
 		enemySolider.update("rifle aiming idle", dt);
 		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		Matrix w2;
 		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", enemySolider.matrices);
-		w1 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
+		w2 = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(-4, 0, 0));
+		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w2);
 		animationTextureShadG.apply(&dxcore);
 		enemySolider.drawTexture(&dxcore, animationTextureShadG, &textureManagerEnemy);
 
-		Matrix wn1;
-		//  camera should match it
-		Uzi.update("Armature|08 Fire", dt);
-		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
-		wn1 = Matrix::worldTrans(Vec3(0.1, 0.1, 0.1), Vec3(M_PI/2, 0, M_PI/2), weaponWorldPos);
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
-		animationTextureShadG.apply(&dxcore);
-		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManagerWeapon1);
-		
 
 		//// shadow mapping and light
+		// CHANGE FROM COLOUR TO DEPTH G BUFFER
+		//dxcore.devicecontext->OMSetRenderTargets(0, nullptr, dxcore.shadowDSV);
+		//dxcore.devicecontext->ClearDepthStencilView(dxcore.shadowDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
+		
+
+		
 		//dxcore.devicecontext->OMSetRenderTargets(0, nullptr, dxcore.depthStencilView);
 		//dxcore.devicecontext->ClearDepthStencilView(dxcore.depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 		//shadowShad.apply(&dxcore);

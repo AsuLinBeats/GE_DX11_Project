@@ -39,6 +39,7 @@ public:
 	ID3D11ShaderResourceView* shadowSRV;
 	ID3D11ShaderResourceView* normalSRV;
 
+	ID3D11DepthStencilView* shadowDSV = nullptr;
 	//ID3D11RenderTargetView* gBufferRTVs[3]; // Albedo, Normals, Depth
 	//ID3D11ShaderResourceView* gBufferSRVs[3]; // Shader Resource Views for G-Buffer
 	// 
@@ -163,7 +164,7 @@ public:
 		shadowDesc.Height = height;
 		shadowDesc.MipLevels = 1;
 		shadowDesc.ArraySize = 1;
-		shadowDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		shadowDesc.Format = DXGI_FORMAT_R32_TYPELESS; // use float to represent shadow is ok, do not need to use 32bit expression
 		shadowDesc.SampleDesc.Count = 1;
 		shadowDesc.SampleDesc.Quality = 0;
 		shadowDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -171,24 +172,31 @@ public:
 		shadowDesc.CPUAccessFlags = 0;
 		shadowDesc.MiscFlags = 0;
 
-		device->CreateTexture2D(&shadowDesc, NULL, &shadow);
+		ID3D11Texture2D* shadowMapTexture = nullptr;
+		device->CreateTexture2D(&shadowDesc, NULL, &shadowMapTexture);
+
 		// Depth stencil view
-		D3D11_RENDER_TARGET_VIEW_DESC shadowRTVDesc;
-		ZeroMemory(&renderTargetViewDesc, sizeof(renderTargetViewDesc));
-		shadowRTVDesc.Format = textureDesc.Format;
-		shadowRTVDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-		shadowRTVDesc.Texture2D.MipSlice = 0;
-		device->CreateRenderTargetView(shadow, &shadowRTVDesc, &shadowRTV);
+		D3D11_DEPTH_STENCIL_VIEW_DESC shadowDSVDesc = {};
+		shadowDSVDesc.Format = DXGI_FORMAT_D32_FLOAT;
+		shadowDSVDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+		shadowDSVDesc.Texture2D.MipSlice = 0;
 		
 
-		// Shader resource view
-		D3D11_SHADER_RESOURCE_VIEW_DESC shadowsrvDesc = {};
-		shadowsrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
-		shadowsrvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-		shadowsrvDesc.Texture2D.MostDetailedMip = 0;
-		shadowsrvDesc.Texture2D.MipLevels = 1;
+		
+		device->CreateDepthStencilView(shadowMapTexture, &shadowDSVDesc, &shadowDSV);
 
-		device->CreateShaderResourceView(shadow, &shadowsrvDesc, &shadowSRV);
+
+		// Shader resource view
+		D3D11_SHADER_RESOURCE_VIEW_DESC shadowSRVDesc = {};
+		shadowSRVDesc.Format = DXGI_FORMAT_R32_FLOAT;
+		shadowSRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		shadowSRVDesc.Texture2D.MostDetailedMip = 0;
+		shadowSRVDesc.Texture2D.MipLevels = 1;
+
+		ID3D11ShaderResourceView* shadowSRV = nullptr;
+		device->CreateShaderResourceView(shadowMapTexture, &shadowSRVDesc, &shadowSRV);
+
+		//device->CreateShaderResourceView(shadow, &shadowsrvDesc, &shadowSRV);
 
 		// maybe normal?
 
