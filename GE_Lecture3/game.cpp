@@ -69,7 +69,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	TextureManager textureManagerWeapon;
 	TextureManager textureManagerWeapon1;
 	FPS fps;
-	Water water;
+	// Water water;
 	std::vector<Matrix> trees;
 	std::vector<Matrix> dinasours(60);
 	///////////////////////
@@ -91,18 +91,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	GamesEngineeringBase::Timer timer;
 	win.init(1024, 1024, "Solider Cadillacs and Dinosaurs"); // Well, salute to FC game Cadillacs and Dinosaurs by capcon!(but this game did not add melee attack :( 
 	dxcore.init(win.width, win.height, win.hwnd, false); // dx tool
-	// initialise once----implement shader and example meshes
-	//shad.initStatic("3D_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // basic 3d shader
-	//animationShad.initAnim("Animation_vertex_shader.txt", "3D_pixel_shader.txt", &dxcore); // 3d animation non texture shader
-	//textureShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d shader with texture
-	//textureAlphaShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
-	//animationTextureShad.initAnim("Animation_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore); // 3d animation texture shader
-	//skyDomeShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
-
-	//NOT WORKING SHADOW MAP
-	//shadowShad.initAnim("vertex_shader_shadow.txt", "G_buffer_pixel_shader_shadow.txt", &dxcore); 
-	// bulletShad.initStatic("3D_vertex_shader.txt", "texture_pixel_shader.txt", &dxcore);
-	// 
+	
 	
 	// TODO initialise stuffs in world
 	//tri.init(dxcore); // 2D example
@@ -131,7 +120,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	 animationTextureShadG.initAnim("Animation_vertex_shader.txt", "G_buffer_pixel_shader.txt", &dxcore); // 3d animation texture shader
 	 skyDomeShadG.initStatic("3D_vertex_shader.txt", "G_buffer_pixel_shader.txt", &dxcore);
 	 
-	 waterShad.initWater("Water_vertex_shader.txt", "Water_pixel_shader.txt", &dxcore); // just forward shading now
+	// waterShad.initWater("Water_vertex_shader.txt", "Water_pixel_shader.txt", &dxcore); // just forward shading now
 
 	 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	Vec3 from = Vec3(11, 5, 11);
@@ -160,10 +149,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	// bgms.loadMusic("bgm.wav"); // still not work....
 
 	// water param
-	float waveTime;
-	float waveAmplitude;
-	float waveFrequency;
-	float waveSpeed;
+	float waveTime = 1;
+	float waveAmplitude = 0.5f;
+	float waveFrequency = 1.f;
+	float waveSpeed = 1.f;
 
 	while (running)
 	{
@@ -177,7 +166,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		float speed = 6.f;
 		fps.update(dt);
 		// TODO REMEMBER TURN FPS DRAW ON AFTER FINISHING
-		// fps.draw();
+		fps.draw();
 
 		////////////////////////////////CAMERA CONTROL RELATED///////////////////////////////////////////////
 		camera.captureInput(win.hwnd, mouseSensitivity);
@@ -418,18 +407,18 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//dxcore.devicecontext->Draw(3, 0);
 		// present G-buffer
 		// water:
-		Matrix ww;
-		ww = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(10, 0, 0));
-		waterShad.updateConstantVS("StaticModel", "VSConstants", "VP", &resultMatrix);
-		waterShad.updateConstantVS("StaticModel", "VSConstants", "W", &ww);
-		waterShad.updateConstantVS("StaticModel", "VSConstants", "time", &waveTime);
-		waterShad.updateConstantVS("StaticModel", "VSConstants", "waveAmplitude", &waveAmplitude);
-		waterShad.updateConstantVS("StaticModel", "VSConstants", "waveFrequency", &waveFrequency);
-		waterShad.updateConstantVS("StaticModel", "VSConstants", "waveSpeed", &waveSpeed);
+	//	Matrix ww;
+	//	ww = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(10, 0, 0));
+	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "VP", &resultMatrix);
+	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "W", &ww);
+	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "time", &waveTime);
+	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "waveAmplitude", &waveAmplitude);
+	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "waveFrequency", &waveFrequency);
+	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "waveSpeed", &waveSpeed);
 
-		waterShad.apply(&dxcore);
+	////	waterShad.apply(&dxcore);
 
-		water.draw(&waterShad, &dxcore);
+	//	//water.draw(&waterShad, &dxcore);
 
 		dxcore.Present();
 	}

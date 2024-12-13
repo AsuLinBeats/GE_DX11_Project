@@ -216,6 +216,7 @@ public:
 			reload(dt, reloadDuration);
 
 		}
+		//
 		// TODO REMEMBER UNCOMMIT WHEN FINISH
 		//std::ostringstream logStream;
 		//logStream << "Ammo: " << ammo << "|" << maxAmmo << "\n";
@@ -305,9 +306,10 @@ public:
 			traveledDistance = 0.f;
 			direction = Vec3(-direction.x, direction.y, -direction.z); // make dinasour turn over
 		}
-		collider.update(Vec3(0.9f, 0.9f, 0.9f), Vec3(0, 0, 0), position);
-		checkCollider(bullet);
-		checkColliderWithPlayer(player, dt);
+		// check collider here.
+		Collider coll;
+		coll.SetSphere1(position, 15);// set 15 for now
+
 		if (isDead) {
 			draw("death", animationTextureShad, dt, dxcore, resultMatrix, textureManager);
 		}
@@ -315,37 +317,6 @@ public:
 		draw("Run", animationTextureShad, dt, dxcore, resultMatrix, textureManager);
 	}
 
-	void checkCollider(Bullet& bullet) {
-		// collision between enemy and bullet
-		// check bullet situation
-		if (bullet.isActive) {
-			float hitDist;
-			if (bullet.checkCollision(collider, hitDist)) { // access result of collider from bullet
-				Hurt(bullet.damage);
-				bullet.isActive = false; // for insurance, make sure inactive is false
-				std::ostringstream logStream;
-				logStream << "enemy collisionnnnnnnnnnnnnnnnnnnnn with bullet!!!" << "\n";
-				DebugLog(logStream.str());
-			}
-		}
-	}
-
-	void checkColliderWithPlayer(Player& player, float dt) {
-		// collision between enemy and player
-		damageTimer += dt;
-		// If player's collider intersects with enemy's collider, cause damage once per second
-		if (collider.intersects(player.collider)) {
-			// Only cause damage if damageTimer > 1 second
-			if (damageTimer >= 1.0f) {
-				player.Hurt(15.0f); // Enemy causing damage to player
-				damageTimer = 0.0f; // reset timer
-				Hurt(20.f);
-				std::ostringstream logStream;
-				logStream << "enemy collisionnnnnnnnnnnnnnnnnnnnn with player" << "\n";
-				DebugLog(logStream.str());
-			}
-		}
-	}
 
 	void draw(std::string name, shader animationTextureShadG, float dt, DXCore dxcore, Matrix resultMatrix, TextureManager& textureManager) {
 		dina.update(name, dt);

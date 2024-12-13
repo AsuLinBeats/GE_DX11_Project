@@ -115,5 +115,4 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(422,44): warning C4305
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(422,38): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(422,32): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(43,1): warning C4715: 'Vec3::operator/': not all control paths return a value
-     Creating library C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.lib and object C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.exp
   GE_Lecture3.vcxproj -> C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.exe

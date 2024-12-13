@@ -37,6 +37,9 @@ public:
 	Vec3 operator* (const Vec3& v) const {
 		return Vec3(x * v.x, y * v.y, z * v.z);
 	}
+	Vec3 operator* (const float t) const {
+		return Vec3(x * t, y * t, z *t);
+	}
 	Vec3 operator/ (const Vec3& v) const {
 		if (v.x != 0 && v.y != 0 && v.z!= 0)
 		return Vec3(x / v.x, y / v.y, z / v.z);
@@ -113,7 +116,9 @@ public:
 		return length;
 	}
 	
+	float Abs() {
 
+	}
 	float Dot(const Vec3 v) const {
 		return float(x * v.x + y * v.y + z * v.z);
 	}
