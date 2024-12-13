@@ -116,6 +116,9 @@
     <ClInclude Include="NvOpt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -164,6 +167,18 @@
       <Filter>Source Files</Filter>
     </Text>
     <Text Include="vertex_shader_shadow.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Particle_vertex_shader.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Particle_pixel_shader.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Water_vertex_shader.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="Water_pixel_shader.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

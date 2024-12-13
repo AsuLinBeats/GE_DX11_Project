@@ -45,6 +45,9 @@ public:
     void updateStatic(Vec3 scaling, Vec3 rotating, Vec3 translating) {
         reset();
         // Compute the transformation matrix once
+        if (verticesStatic.empty()) {
+            return;
+        }
         Matrix transform = Matrix::worldTrans(scaling, rotating, translating);
 
         for (auto& vertex : verticesStatic) {

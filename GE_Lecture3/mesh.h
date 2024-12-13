@@ -569,48 +569,47 @@ public:
 
 // update constant anhd draw byuffer
 
-class Cylnder {
+class Water {
+	// from plane code
+public:
+	DXCore* core;
+	GamesEngineeringBase::Timer timer;
+	float time = 0.0f;
 
-	void init() {
+	Mesh mesh;
 
+	STATIC_VERTEX addVertex(Vec3 p, Vec3 n, float tu, float tv) {
+		STATIC_VERTEX v;
+		v.pos = p;
+		v.normal = n;
+		v.tangent = Vec3(0, 0, 0);
+		v.tu = tu;
+		v.tv = tv;
+		return v;
+	}
+
+	void init(DXCore& core) {
+
+		std::vector<STATIC_VERTEX> vertices;
+		vertices.push_back(addVertex(Vec3(-1.5f, 0.0f, -1.5f), Vec3(0, 1, 0), 0, 0));
+		vertices.push_back(addVertex(Vec3(1.5f, 0.0f, -1.5f), Vec3(0, 1, 0), 1, 0));
+		vertices.push_back(addVertex(Vec3(-1.5f, 0.0f, 1.5f), Vec3(0, 1, 0), 0, 1));
+		vertices.push_back(addVertex(Vec3(1.5f, 0.0f, 1.5f), Vec3(0, 1, 0), 1, 1));
+
+		std::vector<unsigned int> indices;
+		indices.push_back(2); indices.push_back(1); indices.push_back(0);
+		indices.push_back(1); indices.push_back(2); indices.push_back(3);
+
+		mesh.init(vertices, indices, core);
+		// Wave calculation will be in vertex shader
+	}
+
+	void update(float dt) {
+		time += dt;
+	}
+
+	void draw(shader* shaders, DXCore* core) {
+
+		mesh.draw(*core);
 	}
 };
-
-//class MeshAnimation {
-//public:
-//	ID3D11Buffer* indexBuffer;
-//	ID3D11Buffer* vertexBuffer;
-//	int indicesSize;
-//	UINT strides;
-//
-//	void init(void* vertices, int vertexSizeInBytes, int numVertices, unsigned int* indices, int numIndices, DXCore& device) {
-//		D3D11_BUFFER_DESC bd;
-//		memset(&bd, 0, sizeof(D3D11_BUFFER_DESC));
-//		bd.Usage = D3D11_USAGE_DEFAULT;
-//		bd.ByteWidth = sizeof(unsigned int) * numIndices;
-//		bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-//		D3D11_SUBRESOURCE_DATA data;
-//		memset(&data, 0, sizeof(D3D11_SUBRESOURCE_DATA));
-//		data.pSysMem = indices;
-//		device.device->CreateBuffer(&bd, &data, &indexBuffer);
-//		bd.ByteWidth = vertexSizeInBytes * numVertices;
-//		bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-//		data.pSysMem = vertices;
-//		device.device->CreateBuffer(&bd, &data, &vertexBuffer);
-//		indicesSize = numIndices;
-//		strides = vertexSizeInBytes;
-//	}
-//
-//	void init(std::vector<ANIMATED_VERTEX> vertices, std::vector<unsigned int> indices, DXCore& core)
-//	{
-//		init(&vertices[0], sizeof(ANIMATED_VERTEX), vertices.size(), &indices[0], indices.size(), core);
-//	}
-//
-//	void draw(DXCore& devicecontext) {
-//		UINT offsets = 0;
-//		devicecontext.devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-//		devicecontext.devicecontext->IASetVertexBuffers(0, 1, &vertexBuffer, &strides, &offsets);
-//		devicecontext.devicecontext->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-//		devicecontext.devicecontext->DrawIndexed(indicesSize, 0, 0);
-//	}
-//};

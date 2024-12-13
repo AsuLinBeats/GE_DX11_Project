@@ -148,6 +148,31 @@ public:
 
     }
 
+    void loadWaterVS(DXCore* core, std::string hlsl)
+    {
+        ID3DBlob* compiledVertexShader;
+        ID3DBlob* status;
+        HRESULT hr = D3DCompile(hlsl.c_str(), strlen(hlsl.c_str()), NULL, NULL, NULL, "VS", "vs_5_0", 0, 0, &compiledVertexShader, &status);
+        if (FAILED(hr))
+        {
+            MessageBoxA(NULL, (char*)status->GetBufferPointer(), "Vertex Shader Error", 0);
+            exit(0);
+        }
+        core->device->CreateVertexShader(compiledVertexShader->GetBufferPointer(), compiledVertexShader->GetBufferSize(), NULL, &vertexShader);
+        D3D11_INPUT_ELEMENT_DESC layoutDesc[] =
+        {
+            { "POS", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, 							D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, 							D3D11_INPUT_PER_VERTEX_DATA, 0 },
+           
+            { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, 							D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        };
+        core->device->CreateInputLayout(layoutDesc, 3, compiledVertexShader->GetBufferPointer(), compiledVertexShader->GetBufferSize(), &layout);
+        ConstantBufferReflection reflection;
+        reflection.build(core, compiledVertexShader, vsConstantBuffers, textureBindPointsVS, ShaderStage::VertexShader);
+
+    }
+
+  
 
     void loadPS(DXCore* core, std::string hlsl)
     {
@@ -243,5 +268,17 @@ public:
         std::string psd = LoadShaderFromFile(psdfilenames);
         compileVs(vsd, core);
         compilePs(psd, core);
+    }
+
+
+    void initWater(std::string vsdfilenames, std::string psdfilenames, DXCore* core) {
+
+        std::string vsd = LoadShaderFromFile(vsdfilenames);
+        std::string psd = LoadShaderFromFile(psdfilenames);
+        //compileVs(vsd, core);
+        //compilePs(psd, core);
+        //loadAnimationVS(core, vsd);
+        loadWaterVS(core, vsd);
+        loadPS(core, psd);
     }
 };

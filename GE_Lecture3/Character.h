@@ -94,7 +94,7 @@ public:
 
 	}
 	void init(DXCore core, TextureManager& textureManager) {
-		Uzi.initTexture("Soldier1.gem", core, &textureManager);
+		Uzi.initTexture("Uzi.gem", core, &textureManager);
 		ammo = maxAmmo;
 		blood = maxBlood;
 		isDead = false;
@@ -167,7 +167,7 @@ public:
 	void movePlayer(Camera& cam, float dt) {
 		position = cam.position;
 		direction = cam.rotation;
-		collider.update(Vec3(1, 1, 1), Vec3(0.0f, 0.0f, 0.0f), position);
+		// collider.update(Vec3(1, 1, 1), Vec3(0.0f, 0.0f, 0.0f), position);
 	}
 
 
@@ -227,9 +227,9 @@ public:
 			bullets.end());
 	}
 
-	void draw(shader animationTextureShadG, float dt, DXCore dxcore, Vec3 weaponWorldPos, TextureManager& textureManager, Matrix& resultMatrix, bool mouseRightPressed,Vec3 weaponOffset) {
+	void draw(shader& animationTextureShadG, float& dt, DXCore& dxcore, TextureManager& textureManager, bool& mouseRightPressed, Matrix& wn1) {
 		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
-		Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(M_PI / 2, 0, M_PI / 2), mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
+		
 		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
 		animationTextureShadG.apply(&dxcore);
 		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManager);

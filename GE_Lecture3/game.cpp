@@ -35,7 +35,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	shader textureAlphaShadG;
 	shader skyDomeShadG; // shader for skyDome to fix the mix buffer bug.
 	shader shadowShad;
-
+	shader waterShad;
 
 	ConstantBuffer constBuffer;
 	Matrix vp1;
@@ -69,6 +69,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	TextureManager textureManagerWeapon;
 	TextureManager textureManagerWeapon1;
 	FPS fps;
+	Water water;
 	std::vector<Matrix> trees;
 	std::vector<Matrix> dinasours(60);
 	///////////////////////
@@ -105,12 +106,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	
 	// TODO initialise stuffs in world
 	//tri.init(dxcore); // 2D example
-	player.init(dxcore, textureManager);
+	player.init(dxcore, textureManagerWeapon1);
 	sphere.init(dxcore, 30, 30, 80, "SkyDome.png");
 	enemySolider.initTexture("Soldier1.gem", dxcore, &textureManagerEnemy);
-	Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon1);
+	//Uzi.initTexture("Uzi.gem", dxcore, &textureManagerWeapon1);
 	//player.collider.vertices = player.Uzi.vertices;
-	player.collider.vertices = Uzi.vertices;
+	player.collider.vertices = player.Uzi.vertices;
 	dinasour.init(dxcore, textureManager);
 	// dina.initTexture("TRex.gem", dxcore, &textureManager); // vertices and animation for dina
 	dinasour.collider.vertices = dinasour.dina.vertices;
@@ -129,8 +130,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 	 textureAlphaShadG.initStatic("3D_vertex_shader.txt", "G_buffer_pixel_shader_alpha.txt", &dxcore); // 3d texture shader with alpha test texture
 	 animationTextureShadG.initAnim("Animation_vertex_shader.txt", "G_buffer_pixel_shader.txt", &dxcore); // 3d animation texture shader
 	 skyDomeShadG.initStatic("3D_vertex_shader.txt", "G_buffer_pixel_shader.txt", &dxcore);
-
-
+	 
+	 waterShad.initWater("Water_vertex_shader.txt", "Water_pixel_shader.txt", &dxcore); // just forward shading now
 
 	 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	Vec3 from = Vec3(11, 5, 11);
@@ -157,6 +158,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		SaveDina(dinasours);
 	}
 	// bgms.loadMusic("bgm.wav"); // still not work....
+
+	// water param
+	float waveTime;
+	float waveAmplitude;
+	float waveFrequency;
+	float waveSpeed;
 
 	while (running)
 	{
@@ -195,21 +202,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//bool run = win.keys[VK_LSHIFT]; // lWhy this not work?????
 		if (win.keys['Q']) break; // put q in here to break the loop, more convenient than put everything in camera class
 		camera.processInput(moveForward, moveBackward, moveLeft, moveRight, reset, speed, dt);
+		camera.updateVectors();
 
-
-		// Get matrices after updating camera
-		Matrix lookAt = camera.getViewMatrix();
-		Matrix proj = camera.getProjectionMatrix(1);
-		Matrix resultMatrix = lookAt * proj;
-
-		// some postition calculation
-		Vec3 weaponOffset = Vec3(0.4f, -0.3f, 0.5f); // Right, Down, Forward
-
-		// Compute world position for weapon based on camera position and orientation
-		Vec3 weaponWorldPos = camera.position
-			+ camera.right * weaponOffset.x
-			+ camera.upLocal * weaponOffset.y
-			+ camera.forward * weaponOffset.z;
 
 
 
@@ -218,25 +212,29 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 			// In zoom mode
 			if (mouseLeftPressed) {
 				// Zoom Fire
-				Uzi.update("Armature|13 Zoom Fire", dt);
+				player.Uzi.update("Armature|13 Zoom Fire", dt);
+				//Uzi.update("Armature|13 Zoom Fire", dt);
 			}
 			else if (moveForward || moveBackward || moveLeft || moveRight) {
 				// Zoom Walk
-				Uzi.update("Armature|12 Zoom Walk", dt);
+				player.Uzi.update("Armature|12 Zoom Walk", dt);
+				//Uzi.update("Armature|12 Zoom Walk", dt);
 			}
 			else {
-				// Zoom Idle
-				Uzi.update("Armature|11 Zoom Idle", dt);
+				/// Zoom Idle
+				player.Uzi.update("Armature|11 Zoom Idle", dt);
+				//Uzi.update("Armature|11 Zoom Idle", dt);
 			}
 		}
 		else {
 			// Not zoom 
 			if (mouseLeftPressed) {
 				// Fire
-				Uzi.update("Armature|08 Fire", dt);
+				player.Uzi.update("Armature|08 Fire", dt);
+				//Uzi.update("Armature|08 Fire", dt);
 				player.shoot(dt, reloadDuration, bulletSpeed);
 				//if (player.ammo == 0) {
-				//	Uzi.update("Armature|17 Reload", dt);
+				//	player.Uzi.update("Armature|17 Reload", dt);
 				//	std::ostringstream logStream;
 				//	logStream << "reloading!!!!!!!!!!!!!!!!!!!!!!" << "\n";
 				//	DebugLog(logStream.str());
@@ -244,39 +242,68 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 				
 			}
 			else if (reloading) {
-				Uzi.update("Armature|17 Reload", dt); // some bugs
+				player.Uzi.update("Armature|17 Reload", dt); // some bugs
+				//Uzi.update("Armature|17 Reload", dt); // some bugs
 			}
 			else if ((moveForward || moveBackward || moveLeft || moveRight) && running) {
 				// Run
-				Uzi.update("Armature|07 Run", dt);
+				player.Uzi.update("Armature|07 Run", dt);
+				//Uzi.update("Armature|07 Run", dt);
 			}
 			else if (moveForward || moveBackward || moveLeft || moveRight) {
 				// Walk
-				Uzi.update("Armature|06 Walk", dt);
+				player.Uzi.update("Armature|06 Walk", dt);
+				//Uzi.update("Armature|06 Walk", dt);
 			}
 			else {
 				// Idle
-				Uzi.update("Armature|04 Idle", dt);
+				player.Uzi.update("Armature|04 Idle", dt);
+				//Uzi.update("Armature|04 Idle", dt);
 			}
 		}
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
-		Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(M_PI / 2, 0, M_PI / 2), mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
-		animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
-		animationTextureShadG.apply(&dxcore);
-		Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManagerWeapon1);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", Uzi.matrices);
+		//Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(M_PI / 2, 0, M_PI / 2), mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
+		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &wn1);
+		//animationTextureShadG.apply(&dxcore);
+		//Uzi.drawTexture(&dxcore, animationTextureShadG, &textureManagerWeapon1);
 
 		// collider needs to catch every change of vertices
+		
+		//player.collider.vertices = player.Uzi.vertices;
+		player.movePlayer(camera, dt);
+		player.update(dt, hitDistance, reloadDuration);
+		// Get matrices after updating camera
+		Matrix lookAt = camera.getViewMatrix();
+		Matrix proj = camera.getProjectionMatrix(1);
+		Matrix resultMatrix = lookAt * proj;
+
+		// some postition calculation
+		Vec3 weaponOffset = Vec3(0.4f, -0.3f, 0.5f); // Right, Down, Forward
+		Vec3 zoomOffset = Vec3(0.8f, 0.5f, 1.1f);
+		// Compute world position for weapon based on camera position and orientation
+		Vec3 weaponWorldPos = camera.position
+			+ camera.right * weaponOffset.x
+			+ camera.upLocal * weaponOffset.y
+			+ camera.forward * weaponOffset.z;
+
+
+
+		//player.draw(animationTextureShadG, dt, dxcore, weaponWorldPos, textureManagerWeapon1, resultMatrix, mouseRightPressed, weaponOffset);
+		Vec3 baseRotation = Vec3(M_PI / 2, 0, M_PI / 2);
+		Vec3 finalRotation = player.direction + baseRotation;
+		player.collider.vertices = player.Uzi.vertices;
+		Vec3 finalPosition = mouseRightPressed ? (weaponWorldPos + zoomOffset) : weaponWorldPos;
+
+
+
+		Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(M_PI / 2, 0, M_PI / 2), mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
+		//Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(M_PI / 2, 0, M_PI / 2), finalPosition);
+
+		player.draw(animationTextureShadG, dt, dxcore, textureManagerWeapon1, mouseRightPressed,wn1);
+	
 		dinasour.collider.vertices = dinasour.dina.vertices;
 
 		dinasour.moveNormal(dt, moveDistance, animationTextureShadG, dxcore, resultMatrix, textureManager, player, bullet);
-		//player.collider.vertices = player.Uzi.vertices;
-		player.collider.vertices = Uzi.vertices;
-		player.movePlayer(camera, dt);
-		player.update(dt, hitDistance, reloadDuration);
-
-		//player.draw(animationTextureShadG, dt, dxcore, weaponWorldPos, textureManagerWeapon1, resultMatrix, mouseRightPressed, weaponOffset);
-	
-
 
 		// consider parallel light.
 		Matrix l;
@@ -297,32 +324,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 
 
 
-	//	/////////////////////////////////////////////GAME LOGIC///////////////////////////////////////////////////
-		/////////////LOGIC PART///////
-		// This should be moved to place before control
-		// player.movePlayer(camera, dt, dinasour);
-		
-
-		//if (mouseLeftPressed) {
-		//	player.shoot(dt, reloadDuration, bulletSpeed);
-		//}
-
-		
-		//player.draw("Armature|08 Fire",animationTextureShadG, dt, dxcore, weaponWorldPos, textureManager,resultMatrix);
-
-		//dinasour.draw(animationTextureShadG, dt, dxcore, resultMatrix, textureManager);
-
-		//dina.update("Run", dt);
-		//Matrix w1;
-		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "VP", &resultMatrix);
-		////animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "bones", dina.matrices);
-		//w1 = Matrix::worldTrans(Vec3(0.9, 0.9, 0.9), Vec3(0, 0, 0), Vec3(-10, 0, 0));
-		//animationTextureShadG.updateConstantVS("Animated", "animatedMeshBuffer", "W", &w1);
-		//animationTextureShadG.apply(&dxcore);
-		//dina.drawTexture(&dxcore, animationTextureShadG, &textureManager);
-
-
 
 	//	//Matrix3 cameraRotation = Matrix3(
 	//	//	camera.right.x, camera.upLocal.x, camera.forward.x,
@@ -336,11 +337,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		// TODO BELOW IS DRAW PART. THEY ARE NOT COMBINED IN CHARACTER BECAUSE THERE ARE STILL SOME FUNCTIONS TO BE TESTED AND ADDED
 		/////////////////////////////////////////////////////////////////////////////////Deferred shading ///////////////
 		// Implement deferred shading
-		//dxcore.devicecontext->OMSetRenderTargets(1, &dxcore.renderTargetView, dxcore.depthStencilView);
-		//const float clearColour[1] = { 0.0f}; // Clear to black with full alpha
-		//dxcore.devicecontext->ClearRenderTargetView(dxcore.renderTargetView, clearColour);
-		//dxcore.devicecontext->ClearDepthStencilView(dxcore.depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-		
+
 		// Static model, SKY Box
 		skyDomeShadG.apply(&dxcore);
 		// set world matrix
@@ -391,9 +388,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//dxcore.devicecontext->OMSetRenderTargets(0, nullptr, dxcore.shadowDSV);
 		//dxcore.devicecontext->ClearDepthStencilView(dxcore.shadowDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-		
-
-		
 		//dxcore.devicecontext->OMSetRenderTargets(0, nullptr, dxcore.depthStencilView);
 		//dxcore.devicecontext->ClearDepthStencilView(dxcore.depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 		//shadowShad.apply(&dxcore);
@@ -423,6 +417,20 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		//shadowShad.apply(&dxcore);
 		//dxcore.devicecontext->Draw(3, 0);
 		// present G-buffer
+		// water:
+		Matrix ww;
+		ww = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(10, 0, 0));
+		waterShad.updateConstantVS("StaticModel", "VSConstants", "VP", &resultMatrix);
+		waterShad.updateConstantVS("StaticModel", "VSConstants", "W", &ww);
+		waterShad.updateConstantVS("StaticModel", "VSConstants", "time", &waveTime);
+		waterShad.updateConstantVS("StaticModel", "VSConstants", "waveAmplitude", &waveAmplitude);
+		waterShad.updateConstantVS("StaticModel", "VSConstants", "waveFrequency", &waveFrequency);
+		waterShad.updateConstantVS("StaticModel", "VSConstants", "waveSpeed", &waveSpeed);
+
+		waterShad.apply(&dxcore);
+
+		water.draw(&waterShad, &dxcore);
+
 		dxcore.Present();
 	}
 }

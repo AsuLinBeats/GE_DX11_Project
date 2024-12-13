@@ -149,6 +149,7 @@
     <ClInclude Include="GraphicMath.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="NvOpt.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="shader3D.h" />
@@ -169,6 +170,8 @@
     <Text Include="G_buffer_pixel_shader_alpha.txt" />
     <Text Include="G_buffer_pixel_shader_shadow.txt" />
     <Text Include="G_buffer_vertex_static_shader.txt" />
+    <Text Include="Particle_pixel_shader.txt" />
+    <Text Include="Particle_vertex_shader.txt" />
     <Text Include="pixel_shader.txt" />
     <Text Include="const_buffer.txt" />
     <Text Include="SkyDome_pixel_shader.txt" />
@@ -177,6 +180,8 @@
     <Text Include="texture_pixel_shader_alpha.txt" />
     <Text Include="vertex_shader.txt" />
     <Text Include="vertex_shader_shadow.txt" />
+    <Text Include="Water_pixel_shader.txt" />
+    <Text Include="Water_vertex_shader.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="acacia.gem" />
