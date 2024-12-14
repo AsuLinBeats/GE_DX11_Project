@@ -206,7 +206,7 @@ public:
 				vertices.push_back(v);
 			}
 			textureFilenames.push_back(gemmeshes[i].material.find("diffuse").getValue());
-			textureFilenames.push_back(gemmeshes[i].material.find("normal").getValue()); // normal mapping
+			textureFilenames.push_back(gemmeshes[i].material.find("normal").getValue()); // simple normal texture mapping without deferred shading
 			textures->load(&core, gemmeshes[i].material.find("diffuse").getValue());
 			mesh.init(vertices, gemmeshes[i].indices, core);
 			meshes.push_back(mesh); // load vertices to mesh

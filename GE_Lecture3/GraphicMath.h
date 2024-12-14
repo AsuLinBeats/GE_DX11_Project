@@ -530,6 +530,18 @@ public:
 		return mat;
 	}
 
+	static Matrix rotation(const float Thetax, const float Thetay, const float Thetaz) {
+		// case when rotation in 3 different angle
+		Matrix matx;
+		Matrix maty;
+		Matrix matz;
+		matx.rotationX(Thetax);
+		maty.rotationY(Thetay);
+		matz.rotationZ(Thetaz);
+		Matrix mat = matx * maty * matz;
+		return mat;
+	}
+
 	static Matrix RotationAxis(const Vec3& axis, float angle) {
 		Matrix R;
 		float c = cosf(angle), s = sinf(angle);

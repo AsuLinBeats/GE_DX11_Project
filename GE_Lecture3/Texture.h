@@ -114,7 +114,6 @@ public:
         // shad.apply(core);#
         // run everytime when change texture!!!
         shad.updateShaderPS(core, name, srv);
-       
         // t0 in shader related with 0 here. 
 
     }
@@ -134,18 +133,6 @@ public:
         free();
     }
 };
-
-
-//class TextManager {
-//public:
-//    std::map<std::string, Texture> textfilenames;
-//
-//
-//    ID3D11ShaderResourceView* find(std::string name) {
-//        return textfilenames[name].srv;
-//    }
-//
-//};
 
 class TextureManager
 {
@@ -181,103 +168,3 @@ public:
         }
     }
 };
-
-class MRTS {
-    // deferred shading
-    ID3D11RenderTargetView* renderTargetView;
-    ID3D11Texture2D* texture;
-    ID3D11ShaderResourceView* srv;
-
-    void init(DXCore* core, int renderTargetWidth, int renderTargetHeight) {
-        D3D11_TEXTURE2D_DESC textureDesc;
-        textureDesc.Width = renderTargetWidth;
-        textureDesc.Height = renderTargetHeight;
-        textureDesc.MipLevels = 1;
-        textureDesc.ArraySize = 1;
-        textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-        textureDesc.SampleDesc.Count = 1;
-        textureDesc.SampleDesc.Quality = 0;
-        textureDesc.Usage = D3D11_USAGE_DEFAULT;
-        textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-        textureDesc.CPUAccessFlags = 0;
-        textureDesc.MiscFlags = 0;
-
-        core->device->CreateTexture2D(&textureDesc, NULL, &texture);
-
-        D3D11_RENDER_TARGET_VIEW_DESC renderTargetViewDesc;
-        ZeroMemory(&renderTargetViewDesc, sizeof(renderTargetViewDesc));
-        renderTargetViewDesc.Format = textureDesc.Format;
-        renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-        renderTargetViewDesc.Texture2D.MipSlice = 0;
-
-        core->device->CreateRenderTargetView(texture, &renderTargetViewDesc,&renderTargetView);
-
-        D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
-        ZeroMemory(&shaderResourceViewDesc, sizeof(shaderResourceViewDesc));
-        shaderResourceViewDesc.Format = textureDesc.Format;
-        shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-        shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
-        shaderResourceViewDesc.Texture2D.MipLevels = 1;
-        core->device->CreateShaderResourceView(texture, &shaderResourceViewDesc, &srv);
-
-    }
-
-    void draw(DXCore *core) {
-        core->devicecontext->OMSetRenderTargets(1, &renderTargetView, core->depthStencilView);
-        core->devicecontext->OMSetRenderTargets(1, &core->backbufferRenderTargetView, core->depthStencilView);
-    }
-
-
-    void free() {
-        if (srv != nullptr) {
-            srv->Release();
-        }
-        if (texture != nullptr) {
-            texture->Release();
-        }       
-        if (renderTargetView != nullptr) {
-            renderTargetView->Release();
-        }
-
-    }
-    ~MRTS(){
-        // release memory
-        free();
-    }
-};
-
-//
-//class MRTSManager
-//{
-//public:
-//    std::map<std::string, Texture*> textures;
-//
-//    void load(DXCore* core, std::string filename)
-//    {
-//        std::map<std::string, Texture*>::iterator it = textures.find(filename);
-//        if (it != textures.end())
-//        {
-//            return;
-//        }
-//        MRTS* texture = new MRTS();
-//        texture->load(core, filename);
-//        textures.insert({ filename, texture });
-//    }
-//    ID3D11ShaderResourceView* find(std::string name)
-//    {
-//        return textures[name]->srv;
-//    }
-//    void unload(std::string name)
-//    {
-//        textures[name]->free();
-//        textures.erase(name);
-//    }
-//    ~MRTSManager()
-//    {
-//        for (auto it = textures.cbegin(); it != textures.cend(); )
-//        {
-//            it->second->free();
-//            textures.erase(it++);
-//        }
-//    }
-//};

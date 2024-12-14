@@ -91,7 +91,7 @@ public:
 
     // set AABB to one object:
     void SetAABB() {
-        
+        // its  a bit hard when detecting collision with Ray(deal with parallel) so leave it for now
     }
     // set Sphere to one object:
     void SetSphere1(Vec3 _centre, float _radius) {
@@ -112,7 +112,7 @@ public:
             (aabb1.minDis.z <= aabb2.maxDis.z && aabb1.maxDis.z >= aabb2.minDis.z);
     };
 
-    bool SphereS(SphereBound& sp1, SphereBound& sp2){
+    bool SphereS(){
         // case for two sphere
         // the distance between two centre
         Vec3 diff = sp1.centre - sp2.centre;
@@ -128,7 +128,7 @@ public:
         } else { return false; }
     };
 
-    bool AABBSphere(SphereBound& sp1, AABB& aabb1){
+    bool AABBSphere(){
         // case for AABB and sphere
         float px = max(aabb1.minDis.x, min(sp1.centre.x, aabb1.maxDis.x));
         float py = max(aabb1.minDis.y, min(sp1.centre.y, aabb1.maxDis.y));
@@ -145,36 +145,7 @@ public:
 
     };
 
-    //bool RayAABB(Ray& ray, AABB& aabb1){
-    //    //case for AABB and ray
-    //    auto checkAxis = [&](float start, float dir, float minVal, float maxVal) {
-    //        if (std::fabs(dir)) {
-    //            // TODO NEED TO SOLVE PARALLEL SITUATION
-    //        }
-    //        else {
-    //            float ood = 1.0f / dir;
-    //            float t1 = (minVal - start) * ood;
-    //            float t2 = (maxVal - start) * ood;
-    //            if (t1 > t2) std::swap(t1, t2);
-
-    //            if (t1 > aabb1.tMin) tMin = t1;
-    //            if (t2 < aabb1.tMax) tMax = t2;
-
-    //            if (tMin > tMax) return false;
-    //        }
-    //        return true;
-    //        };
-
-    //    if (!checkAxis(r.origin.x, r.direction.x, box.minDis.x, box.maxDis.x)) return false;
-    //    if (!checkAxis(r.origin.y, r.direction.y, box.minDis.y, box.maxDis.y)) return false;
-    //    if (!checkAxis(r.origin.z, r.direction.z, box.minDis.z, box.maxDis.z)) return false;
-
-    //    // Check if intersection interval is in front of the ray
-    //    if (tMax < 0.0f) return false;
-
-    //    return true;
-    //};
-    bool RaySphere(Ray& ray, SphereBound& sp1){
+    bool RaySphere(){
         // case for Sphere and Ray
         Vec3 oc = ray.o - sp1.centre;
         float a = ray.dir.Dot(ray.dir);
