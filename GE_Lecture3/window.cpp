@@ -126,22 +126,3 @@ void Window::processMessages() {
 	ScreenToClient(hwnd, &mousePos); // Convert to client space
 }
 
-
-/*
-Global Flow:
-The program sets up a window with Window::init().
-The WndProc function handles user input (keyboard and mouse) and system events.
-The Window::processMessages() ensures the application processes user inputs and keeps running.
-Event Handling:
-Keyboard and mouse events are processed, updating the Window instance's state (e.g., keys, mouseButtons).
-Closing the Application:
-When the user presses close (X), WM_CLOSE or WM_DESTROY ends the application.
-
-*/
-
-//void Window::updateMouse() {
-//	mouseDiffx = mousex - mousedx;
-//	mouseDiffy = mousey - mousedy;
-//	mousedx = mousex;
-//	mousedy = mousey;
-//}

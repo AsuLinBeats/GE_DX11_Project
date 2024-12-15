@@ -21,9 +21,6 @@ public:
 	POINT currentMousePos;
 	POINT lastMousePos;
 	bool firstMouseCapture = true;
-	void init() {
-		
-	}
 
 	Camera(float _fov, float _nearPlane, float _farPlane) {
 		fov = _fov;
@@ -143,12 +140,8 @@ public:
 		return lookAtMatrix;
 	}
 
-
-
 	Matrix updateProjectionMat() {
 		Matrix perspProjMatrix = pp.PerPro(1.f, 1.f, fov, farPlane, nearPlane);
 		return perspProjMatrix;
 	}
-
-
 };

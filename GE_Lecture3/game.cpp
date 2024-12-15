@@ -96,12 +96,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		SaveTrees(trees);
 	}
 	
-	if (!LoadDina(dinasours, "worldEnemy.dat")) {
-		// if there is no file, create one and save
-		// TODO one potential improvement: The previous dat file must be deleted if want to change number of trees, maybe can add a number check
-		RandomCreation(dinasours, 10);
-		SaveDina(dinasours);
-	}
+	//if (!LoadDina(dinasours, "worldEnemy.dat")) {
+	//	// if there is no file, create one and save
+	//	// TODO one potential improvement: The previous dat file must be deleted if want to change number of trees, maybe can add a number check
+	//	RandomCreation(dinasours, 10);
+	//	SaveDina(dinasours);
+	//}
 	// bgms.loadMusic("bgm.wav"); // still not work....
 	// water param
 	float waveTime = 1;
@@ -120,11 +120,11 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		// camera control
 		float speed = 6.f;
 		fps.update(dt);
-		// TODO REMEMBER TURN FPS DRAW ON AFTER FINISHING
-		//fps.draw();
+		fps.draw();
 
 		////////////////////////////////CAMERA CONTROL RELATED///////////////////////////////////////////////
 		camera.captureInput(win.hwnd, mouseSensitivity);
+		
 		bool running = false;
 		if (win.keys[VK_SHIFT]) {
 			speed = 10.f;
@@ -147,6 +147,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		if (win.keys['Q']) break; // put q in here to break the loop, more convenient than put everything in camera class
 		camera.processInput(moveForward, moveBackward, moveLeft, moveRight, reset, speed, dt);
 		camera.updateVectors();
+		win.ClipCursorToWindow(win.hwnd);
+		// win.CenterCursor(win.hwnd);
 
 		if (mouseRightPressed) {
 
@@ -215,7 +217,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		Vec3 finalRotation = player.direction + baseRotation;
 		Vec3 finalPosition = mouseRightPressed ? (weaponWorldPos + zoomOffset) : weaponWorldPos;
 
-		Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), Vec3(finalRotation), mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
+		Matrix wn1 = Matrix::worldTrans(Vec3(0.1f, 0.1f, 0.1f), baseRotation, mouseRightPressed ? (weaponWorldPos + weaponOffset) : weaponWorldPos);
 		player.draw(animationTextureShadG, dt, dxcore, textureManagerWeapon1, mouseRightPressed,wn1);
 		dinasour.moveNormal(dt, moveDistance, animationTextureShadG, dxcore, resultMatrix, textureManager); // this is equivalent with update
 		
@@ -230,7 +232,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		skyDomeShadG.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
 		dxcore.devicecontext->PSSetShaderResources(0, 1, &sphere.text.srv);
 		skyDomeShadG.updateConstantVS("StaticModel", "staticMeshBuffer", "VP", &resultMatrix);
-	
 		// Draw the model to G-buffer
 		sphere.draw(dxcore);
 

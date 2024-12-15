@@ -104,11 +104,41 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\Character.h(148,14): warning C4
   (compiling source file 'game.cpp')
   
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(43,64): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(214,46): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(214,33): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(258,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(258,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(258,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(216,46): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(216,33): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(259,44): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(259,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(259,32): warning C4305: 'argument': truncation from 'double' to 'float'
+  window.cpp
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(5,9): warning C4005: 'max': macro redefinition
+  (compiling source file 'window.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(193,9):
+      see previous definition of 'max'
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(6,9): warning C4005: 'min': macro redefinition
+  (compiling source file 'window.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(197,9):
+      see previous definition of 'min'
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(635,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(641,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(693,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(779,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(780,33): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(782,34): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+  Generating Code...
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(46,1): warning C4715: 'Vec3::operator/': not all control paths return a value
      Creating library C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.lib and object C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.exp
   GE_Lecture3.vcxproj -> C:\Users\Davi\source\GE_DX11_Project\x64\Debug\GE_DX11_project.exe
