@@ -10,12 +10,9 @@ struct STATIC_VERTEX
 	// texture coordinate
 	float tu;
 	float tv;
-
-
 };
 
 class Mesh {
-
 public:
 	ID3D11Buffer* indexBuffer;
 	ID3D11Buffer* vertexBuffer;

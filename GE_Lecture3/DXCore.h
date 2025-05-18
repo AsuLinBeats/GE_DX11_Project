@@ -66,7 +66,7 @@ public:
 		D3D_FEATURE_LEVEL fl;
 		fl = D3D_FEATURE_LEVEL_11_0;
 
-		Adapter adapter;
+		Adapter adapter; // set adapter
 		adapter.FindAdapter();
 		// Remember: Initialise != create
 		// create Direct3D device, swap chain
