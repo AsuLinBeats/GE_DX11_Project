@@ -52,3 +52,59 @@
 - StackOverflow
 - RenderDoc
 - Output & Console
+
+# English
+# Software Rasterizer Based on DX11
+
+![Language](https://img.shields.io/badge/language-c++-brightgreen)
+![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-yellow)
+
+## Overview
+This project is a software rasterization rendering framework implemented using DirectX 11. It integrates features such as deferred rendering, a basic animation system, skybox rendering, simple enemy AI, first-person camera control, and basic combat logic.
+
+## Features
+- First-person view control and player movement based on Windows window input
+- Deferred rendering framework implemented with G-buffer
+- Basic animation system: reload animation, firing animation, enemy movement animation, etc.
+- Alpha-tested transparent models (e.g., tree leaves)
+- Skybox rendering
+- Bullet-enemy collision detection based on raycasting
+- Simple vertex and pixel buffer handling implemented in HLSL
+
+## Structure
+- `main.cpp`: Main project entry, contains initialization logic, main loop, and rendering pipeline
+
+- `DXCore.h/cpp`: DirectX 11 initialization and resource management
+
+- `window.h`: Window creation and input handling
+
+- `mesh.h`, `character.h`, `player.h`: Model loading and character logic
+
+- `shaders.h`: Vertex/pixel shader management
+
+- `Texture.h`, `TextureManager`: Texture loading and caching
+
+- `camera.h`: Camera input and view matrix generation
+
+- `anime.h`: Skeletal animation playback system
+
+## Features To Be Implemented
+- Water rendering  
+- Multi-pass deferred shading
+
+## Tech Stack
+- C++14  
+- HLSL  
+- DirectX 11
+
+External Libraries Used:
+- [GamesEngineeringBase](https://github.com/MSCGamesTom/GamesEngineeringBase)
+- [GEM](https://github.com/MSCGamesTom/GEM)
+- [Stb Image](https://github.com/nothings/stb)
+- Some base code provided by the instructor
+
+## Debugging Tools
+- StackOverflow  
+- RenderDoc  
+- Output & Console
