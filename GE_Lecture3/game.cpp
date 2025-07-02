@@ -147,8 +147,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		if (win.keys['Q']) break; // put q in here to break the loop, more convenient than put everything in camera class
 		camera.processInput(moveForward, moveBackward, moveLeft, moveRight, reset, speed, dt);
 		camera.updateVectors();
-		win.ClipCursorToWindow(win.hwnd);
-		// win.CenterCursor(win.hwnd);
 
 		if (mouseRightPressed) {
 
@@ -226,7 +224,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		// TODO BELOW IS DRAW PART. THEY ARE NOT COMBINED IN CHARACTER BECAUSE THERE ARE STILL SOME FUNCTIONS TO BE TESTED AND ADDED
 		/////////////////////////////////////////////////////////////////////////////////Deferred shading ///////////////
 		// Implement deferred shading
-		// Static model, SKY Box
 		skyDomeShadG.apply(&dxcore);
 		Matrix skyDomeWorldMatrix = Matrix::worldTrans(Vec3(1, 1, 1), Vec3(0, 0, 0), camera.position);
 		skyDomeShadG.updateConstantVS("SkyDome", "staticMeshBuffer", "W", &skyDomeWorldMatrix);
@@ -274,49 +271,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nC
 		Vec3 dirVec = lightDirection.normalise();
 		light = l.lookAt(from, object, up) * o.OrthoPro(-10.0f, 10.0f, 10.0f, -10.0f, 100.0f, 0.1f);
 
-		// CHANGE FROM COLOUR TO DEPTH G BUFFER
-		//dxcore.devicecontext->OMSetRenderTargets(0, nullptr, dxcore.shadowDSV);
-		//dxcore.devicecontext->ClearDepthStencilView(dxcore.shadowDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		// TODO G-BUFFER
 
-		//dxcore.devicecontext->OMSetRenderTargets(0, nullptr, dxcore.depthStencilView);
-		//dxcore.devicecontext->ClearDepthStencilView(dxcore.depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-		//shadowShad.apply(&dxcore);
-		//shadowShad.updateConstantVS(" staticMeshBuffer","staticMeshBuffer", "LightVP", &light);
-		//// draw shadow
-		//for (const Matrix& mat : trees) {
-		//	pines.updateWorld(mat, shadowShad, dxcore);
-		//	pines.drawTexture(&dxcore, shadowShad, &textureManager);
-		//}
 
-		//dina.drawTexture(&dxcore, shadowShad, &textureManager);
-
-		//enemySolider.drawTexture(&dxcore, shadowShad, &textureManagerEnemy);
-
-		//Uzi.drawTexture(&dxcore, shadowShad, &textureManagerWeapon1);
-		// render all model using shadow shader to get their shadow
-		
-		//dxcore.devicecontext->OMSetRenderTargets(1, &dxcore.backbufferRenderTargetView, dxcore.depthStencilView);
-
-		//// Bind G-buffer and shadow map
-		//dxcore.devicecontext->PSSetShaderResources(0, 1, &dxcore.srv);
-		//dxcore.devicecontext->PSSetShaderResources(1, 1, &dxcore.normalSRV);
-		//dxcore.devicecontext->PSSetShaderResources(2, 1, &dxcore.shadowSRV);
-
-		// present G-buffer
-		// water:
-	//	Matrix ww;
-	//	ww = Matrix::worldTrans(Vec3(0.02, 0.02, 0.02), Vec3(0, 0, 0), Vec3(10, 0, 0));
-	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "VP", &resultMatrix);
-	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "W", &ww);
-	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "time", &waveTime);
-	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "waveAmplitude", &waveAmplitude);
-	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "waveFrequency", &waveFrequency);
-	//	waterShad.updateConstantVS("StaticModel", "VSConstants", "waveSpeed", &waveSpeed);
-
-	////	waterShad.apply(&dxcore);
-
-	//	//water.draw(&waterShad, &dxcore);
-
+		// TODO WATER SHADING
 		dxcore.Present();
 	}
 }

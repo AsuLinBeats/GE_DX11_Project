@@ -53,30 +53,33 @@ public:
 	}
 
 	void captureInput(HWND hwnd, float mouseSensitivity) {
-		GetCursorPos(&currentMousePos);
-		ScreenToClient(hwnd, &currentMousePos);
+		// 获取当前鼠标位置
+		POINT center;
+		RECT clientRect;
+		GetClientRect(hwnd, &clientRect);
+		center.x = (clientRect.right - clientRect.left) / 2;
+		center.y = (clientRect.bottom - clientRect.top) / 2;
+		ClientToScreen(hwnd, &center);
+
+		POINT mousePos;
+		GetCursorPos(&mousePos);
 
 		float mouseDX = 0.0f;
 		float mouseDY = 0.0f;
-
 		if (!firstMouseCapture) {
-			mouseDX = (float)(currentMousePos.x - lastMousePos.x);
-			mouseDY = (float)(currentMousePos.y - lastMousePos.y);
-		}
-		else {
+			mouseDX = (float)(mousePos.x - center.x);
+			mouseDY = (float)(mousePos.y - center.y);
+		} else {
 			firstMouseCapture = false;
 		}
 
-		lastMousePos = currentMousePos;
-
-		// Use the camera's processMouse method to adjust pitch and yaw
+		// 用偏移量驱动摄像机旋转
 		if (mouseDX != 0.0f || mouseDY != 0.0f) {
 			processMouse(mouseDX, mouseDY, mouseSensitivity);
 		}
 
-		// centre cursor
-		// CenterCursor(hwnd);
-		// ClipCursorToWindow(hwnd);
+		// 每帧将鼠标重置到窗口中心
+		SetCursorPos(center.x, center.y);
 	}
 
 	void updateVectors() {

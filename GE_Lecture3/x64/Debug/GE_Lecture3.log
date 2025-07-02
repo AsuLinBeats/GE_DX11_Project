@@ -28,7 +28,10 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(780,33): warning 
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(782,34): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\adapter.h(38,34): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\camera.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
+  (compiling source file 'game.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\adapter.h(43,34): warning C4018: '>': signed/unsigned mismatch
   (compiling source file 'game.cpp')
   
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\ShaderReflection.h(47,26): warning C4101: 'data': unreferenced local variable
@@ -104,11 +107,11 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\Character.h(148,14): warning C4
   (compiling source file 'game.cpp')
   
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(43,64): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(216,46): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(216,33): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(259,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(259,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(259,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(214,46): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(214,33): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(256,44): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(256,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\game.cpp(256,32): warning C4305: 'argument': truncation from 'double' to 'float'
   window.cpp
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(5,9): warning C4005: 'max': macro redefinition
   (compiling source file 'window.cpp')
@@ -136,6 +139,9 @@ C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(780,33): warning 
   (compiling source file 'window.cpp')
   
 C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\GraphicMath.h(782,34): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  (compiling source file 'window.cpp')
+  
+C:\Users\Davi\source\GE_DX11_Project\GE_Lecture3\camera.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
   (compiling source file 'window.cpp')
   
   Generating Code...
